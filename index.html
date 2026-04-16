@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +49,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -132,7 +133,7 @@
         .hero-content h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .hero-content p {
@@ -169,14 +170,14 @@
             border-radius: 8px;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #eee;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             border-color: var(--primary-green);
         }
 
@@ -235,7 +236,7 @@
             color: #ccc;
             font-size: 1.1rem;
         }
-        
+
         .footer-contact {
             margin: 20px 0;
             display: flex;
@@ -248,7 +249,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             display: inline-block;
             padding: 10px 20px;
             border-radius: 5px;
@@ -256,10 +257,24 @@
         }
 
         @media (max-width: 768px) {
-            .search-bar { display: none; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .eco-banner { flex-direction: column; text-align: center; gap: 20px; }
-            .footer-contact { flex-direction: column; gap: 10px; }
+            .search-bar {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .eco-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .footer-contact {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         /* Chatbot Styles */
@@ -281,9 +296,11 @@
             z-index: 9999;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .chatbot-btn:hover {
             transform: scale(1.1) rotate(10deg);
         }
+
         .chatbot-window {
             position: fixed;
             bottom: 100px;
@@ -293,7 +310,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             z-index: 9998;
             display: flex;
@@ -302,13 +319,15 @@
             pointer-events: none;
             transform: translateY(20px) scale(0.95);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
+
         .chatbot-window.active {
             opacity: 1;
             pointer-events: all;
             transform: translateY(0) scale(1);
         }
+
         .chat-header {
             background: linear-gradient(135deg, var(--tech-dark), #2c3e50);
             color: white;
@@ -318,6 +337,7 @@
             gap: 15px;
             position: relative;
         }
+
         .chat-header img {
             width: 45px;
             height: 45px;
@@ -325,13 +345,23 @@
             border: 2px solid var(--primary-green);
             object-fit: cover;
         }
-        .chat-header-info h4 { margin: 0; font-size: 1.1rem; }
-        .chat-header-info p { margin: 0; font-size: 0.8rem; color: #ccc; }
+
+        .chat-header-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chat-header-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
         .close-chat {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: white;
             width: 30px;
@@ -340,7 +370,11 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        .close-chat:hover { background: rgba(255,255,255,0.3); }
+
+        .close-chat:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
         .chat-body {
             height: 350px;
             padding: 20px;
@@ -350,6 +384,7 @@
             gap: 15px;
             background: #f8f9fa;
         }
+
         .chat-bubble {
             max-width: 80%;
             padding: 12px 16px;
@@ -359,13 +394,15 @@
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             word-wrap: break-word;
         }
+
         .chat-bot {
             background: white;
             color: var(--text-dark);
             align-self: flex-start;
             border-bottom-left-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
+
         .chat-user {
             background: var(--primary-green);
             color: white;
@@ -373,6 +410,7 @@
             border-bottom-right-radius: 4px;
             box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
         }
+
         .chat-footer {
             padding: 15px;
             background: white;
@@ -380,6 +418,7 @@
             display: flex;
             gap: 10px;
         }
+
         .chat-input {
             flex-grow: 1;
             border: 1px solid #ddd;
@@ -389,7 +428,11 @@
             font-size: 0.95rem;
             transition: border-color 0.3s;
         }
-        .chat-input:focus { border-color: var(--primary-green); }
+
+        .chat-input:focus {
+            border-color: var(--primary-green);
+        }
+
         .chat-send {
             background: var(--primary-green);
             color: white;
@@ -403,9 +446,16 @@
             justify-content: center;
             transition: background 0.3s;
         }
-        .chat-send:hover { background: var(--dark-green); }
-        .chat-send:disabled { background: #ccc; cursor: not-allowed; }
-        
+
+        .chat-send:hover {
+            background: var(--dark-green);
+        }
+
+        .chat-send:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
         .chat-rating {
             display: flex;
             justify-content: center;
@@ -413,6 +463,7 @@
             margin-top: 10px;
             align-self: center;
         }
+
         .rating-btn {
             background: none;
             border: none;
@@ -421,32 +472,60 @@
             transition: transform 0.2s;
             filter: grayscale(100%);
         }
-        .rating-btn:hover { transform: scale(1.2); filter: grayscale(0%); }
-        .rating-btn.selected { transform: scale(1.2); filter: grayscale(0%); }
+
+        .rating-btn:hover {
+            transform: scale(1.2);
+            filter: grayscale(0%);
+        }
+
+        .rating-btn.selected {
+            transform: scale(1.2);
+            filter: grayscale(0%);
+        }
 
         @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
+
         /* Custom Scrollbar for chat */
-        .chat-body::-webkit-scrollbar { width: 6px; }
-        .chat-body::-webkit-scrollbar-track { background: transparent; }
-        .chat-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .chat-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-body::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="top-banner">
-        <i class="fas fa-tools"></i> Filtro de Calidad: Diagnóstico de Consolas, PCs, Impresoras y Movilidad Eléctrica por solo $200.00 MXN. ¡Asegura una reparación profesional!
+        <i class="fas fa-tools"></i> Filtro de Calidad: Diagnóstico de Consolas, PCs, Impresoras y Movilidad Eléctrica
+        por solo $200.00 MXN. ¡Asegura una reparación profesional!
     </div>
 
     <nav class="navbar">
         <a href="#" class="logo">
             <i class="fas fa-leaf"></i> Eco-Electronic<span>Solutions</span>
         </a>
-        
+
         <div class="search-bar">
-            <input type="text" placeholder="¿Qué necesitas reparar o comprar hoy? Ej. Aspas de licuadora, Pantalla LED...">
+            <input type="text"
+                placeholder="¿Qué necesitas reparar o comprar hoy? Ej. Aspas de licuadora, Pantalla LED...">
             <button><i class="fas fa-search"></i></button>
         </div>
 
@@ -460,8 +539,10 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Expertos en Reparación. Aliados del Medio Ambiente.</h1>
-            <p>Desde el microondas de tu cocina hasta la tarjeta madre de tu PC. Nuestro equipo de especialistas revive tus aparatos y maximiza su vida útil en San Andrés Cholula.</p>
-            <a href="https://wa.me/522223167820" class="btn-whatsapp" style="display: inline-flex; font-size: 1.2rem; padding: 15px 30px;">
+            <p>Desde el microondas de tu cocina hasta la tarjeta madre de tu PC. Nuestro equipo de especialistas revive
+                tus aparatos y maximiza su vida útil en San Andrés Cholula.</p>
+            <a href="https://wa.me/522223167820" class="btn-whatsapp"
+                style="display: inline-flex; font-size: 1.2rem; padding: 15px 30px;">
                 <i class="fas fa-bolt"></i> Iniciar Diagnóstico Ahora
             </a>
         </div>
@@ -496,10 +577,13 @@
     <div class="eco-banner">
         <div class="eco-banner-text">
             <h2><i class="fas fa-recycle"></i> Programa Eco-Canje</h2>
-            <p style="font-size: 1.1rem; line-height: 1.6;">¿Tu equipo viejo ya no tiene arreglo o no lo quieres? No lo tires. <br> Tráelo a nuestro taller, nosotros lo reciclamos correctamente y tú te llevas <strong>cupones de descuento</strong> para reparaciones o compra de accesorios.</p>
+            <p style="font-size: 1.1rem; line-height: 1.6;">¿Tu equipo viejo ya no tiene arreglo o no lo quieres? No lo
+                tires. <br> Tráelo a nuestro taller, nosotros lo reciclamos correctamente y tú te llevas <strong>cupones
+                    de descuento</strong> para reparaciones o compra de accesorios.</p>
         </div>
         <div>
-            <a href="https://wa.me/522223167820" class="btn-whatsapp" style="background-color: white; color: var(--tech-dark); font-size: 1.1rem;" target="_blank">
+            <a href="https://wa.me/522223167820" class="btn-whatsapp"
+                style="background-color: white; color: var(--tech-dark); font-size: 1.1rem;" target="_blank">
                 Canjear Equipo
             </a>
         </div>
@@ -529,19 +613,20 @@
     <footer class="footer">
         <h3>Eco-Electronic Solutions</h3>
         <p>Expertos en electrónica, comprometidos con el planeta.</p>
-        
+
         <div class="footer-contact">
             <p><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp: <strong>222 316 7820</strong></p>
-            <p><i class="fas fa-phone-alt" style="color: var(--accent-orange);"></i> Teléfono: <strong>222 989 8801</strong></p>
+            <p><i class="fas fa-phone-alt" style="color: var(--accent-orange);"></i> Teléfono: <strong>222 989
+                    8801</strong></p>
         </div>
-        
+
         <div class="market-location">
-            <i class="fas fa-map-marker-alt" style="color: var(--primary-green);"></i> 
-            Ubicados a unos pasos del Mercado Municipal de San Andrés Cholula
+            <i class="fas fa-map-marker-alt" style="color: var(--primary-green);"></i>
+            Ubicados a unos pasos del Mercado Malintzi Municipal de San Andrés Cholula
         </div>
-        
+
         <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">
-            &copy; 2026 Eco-Electronic Solutions. Todos los derechos reservados.
+            &copy; 2026-2027 Eco-Electronic Solutions. Todos los derechos reservados.
         </p>
     </footer>
 
@@ -552,7 +637,8 @@
 
     <div class="chatbot-window" id="chatbot-window">
         <div class="chat-header">
-            <img src="https://ui-avatars.com/api/?name=Daniela&background=2ecc71&color=fff&size=150" alt="Asesora Daniela">
+            <img src="https://ui-avatars.com/api/?name=Daniela&background=2ecc71&color=fff&size=150"
+                alt="Asesora Daniela">
             <div class="chat-header-info">
                 <h4>Daniela</h4>
                 <p>Asesor Eco-Electronic</p>
@@ -578,29 +664,40 @@
             const chatSendBtn = document.getElementById('chat-send');
 
             let isOpen = false;
-            let currentStep = 0;
-            let userData = {};
             let isTyping = false;
-
-            const chatFlow = [
-                { bot: "¡Buenos días bienvenido a Eco-Electronic Solutions!<br><br>¿Con quien tengo el gusto?", key: "nombre" },
-                { bot: "¿Puede indicarnos su apellido?", key: "apellido" },
-                { bot: "¿Podemos enviarle un correo electrónico?", key: "permitir_correo" },
-                { bot: "Mucho gusto ¿En qué servicio estas interesado?", key: "servicio" },
-                { bot: "¿Qué producto o servicio deseas que te ayudemos a cotizar?", key: "cotizacion" },
-                { bot: "Excelente, para brindarte una atención me puedes apoyar con los siguientes datos, por favor.<br><br>¿Cuál es tu número de teléfono?", key: "telefono" },
-                { bot: "¿Cuál es tu correo electrónico?", key: "correo" },
-                { bot: "Gracias por contactarnos, en breve un asesor te brindará una respuesta.", key: "end" }
+            
+            // Historial de conversación
+            let messagesState = [
+                { role: "system", content: "Eres Daniela, la asesora virtual de la empresa de reparación Eco-Electronic Solutions en Cholula, respondes dudas de forma profesional, clara y concisa en español." }
             ];
+
+            function appendMessage(msg, type, id = null) {
+                let bubble = null;
+                if (id) bubble = document.getElementById(id);
+                
+                if (!bubble) {
+                    bubble = document.createElement('div');
+                    if (id) bubble.id = id;
+                    bubble.className = `chat-bubble chat-${type}`;
+                    chatBody.appendChild(bubble);
+                }
+                
+                bubble.innerHTML = msg.replace(/\n/g, '<br/>');
+                chatBody.scrollTop = chatBody.scrollHeight;
+                return bubble;
+            }
+
+            // Mensaje de bienvenida inicial visual
+            if (chatBody.children.length === 0) {
+                appendMessage("¡Hola! Soy Daniela tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy con tus equipos electrónicos?", 'bot');
+            }
 
             toggleBtn.addEventListener('click', () => {
                 isOpen = !isOpen;
                 if (isOpen) {
                     chatWindow.classList.add('active');
                     toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
-                    if (currentStep === 0 && chatBody.children.length === 0) {
-                        nextBotMessage();
-                    }
+                    setTimeout(() => chatInput.focus(), 300);
                 } else {
                     closeChat();
                 }
@@ -614,86 +711,77 @@
                 toggleBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
             }
 
-            function appendMessage(msg, type) {
-                const bubble = document.createElement('div');
-                bubble.className = `chat-bubble chat-${type}`;
-                bubble.innerHTML = msg;
-                chatBody.appendChild(bubble);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-
-            function nextBotMessage() {
-                if (currentStep < chatFlow.length) {
-                    isTyping = true;
-                    // Simulate bot typing delay
-                    const step = chatFlow[currentStep];
-                    setTimeout(() => {
-                        appendMessage(step.bot, 'bot');
-                        isTyping = false;
-                        if (step.key === "end") {
-                            endConversation();
-                        } else {
-                            chatInput.focus();
-                        }
-                    }, 600);
-                }
-            }
-
-            function handleUserInput() {
+            async function handleUserInput() {
                 const text = chatInput.value.trim();
-                if (!text || isTyping || currentStep >= chatFlow.length - 1) return;
-                
-                // Save user response
-                const currentKey = chatFlow[currentStep].key;
-                userData[currentKey] = text;
-                
+                if (!text || isTyping) return;
+
                 appendMessage(text, 'user');
                 chatInput.value = '';
-                
-                currentStep++;
-                nextBotMessage();
-            }
-
-            function endConversation() {
+                isTyping = true;
                 chatInput.disabled = true;
                 chatSendBtn.disabled = true;
-                chatInput.placeholder = "Chat finalizado";
 
-                // Add rating UI
-                setTimeout(() => {
-                    const ratingDiv = document.createElement('div');
-                    ratingDiv.className = 'chat-rating';
-                    ratingDiv.innerHTML = `
-                        <button class="rating-btn" data-val="Triste">😞</button>
-                        <button class="rating-btn" data-val="Neutral">😐</button>
-                        <button class="rating-btn" data-val="Feliz">😄</button>
-                    `;
-                    chatBody.appendChild(ratingDiv);
-                    chatBody.scrollTop = chatBody.scrollHeight;
+                messagesState.push({ role: 'user', content: text });
 
-                    ratingDiv.querySelectorAll('.rating-btn').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            userData.valoracion = this.getAttribute('data-val');
-                            ratingDiv.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
-                            this.classList.add('selected');
-                            appendMessage("¡Gracias por tu valoración!", 'bot');
-                            sendDataToServer();
-                        });
+                const botMsgId = "msg-" + Date.now();
+                appendMessage("<i>Generando respuesta...</i>", 'bot', botMsgId);
+
+                try {
+                    // Peticion hacia el Cloudflare Tunnel expuesto
+                    const response = await fetch('https://ai.ecoelectronicsolutions.com.mx/v1/chat/completions', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: "phi-3.5-mini", 
+                            messages: messagesState,
+                            stream: true,
+                            temperature: 0.7
+                        })
                     });
-                }, 800);
-            }
 
-            function sendDataToServer() {
-                console.log("Enviando datos al servidor (Data Final):", userData);
-                // Si tienes workers en tu dominio en el futuro esto puede ser:
-                /*
-                fetch('https://tu-api.ecoelectronicsolutions.com.mx/webhook', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData)
-                }).then(res => console.log('Lead enviado con éxito'))
-                  .catch(err => console.error(err));
-                */
+                    if (!response.ok) throw new Error("Error HTTP de servidor " + response.status);
+
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder("utf-8");
+                    let fullBotResponse = "";
+
+                    while (true) {
+                        const { value, done } = await reader.read();
+                        if (done) break;
+                        
+                        const chunk = decoder.decode(value, { stream: true });
+                        const lines = chunk.split('\n');
+                        
+                        for (const line of lines) {
+                            if (line.startsWith('data: ')) {
+                                const dataStr = line.replace('data: ', '').trim();
+                                if (dataStr === '[DONE]') break;
+                                if (!dataStr) continue;
+
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
+                                        fullBotResponse += data.choices[0].delta.content;
+                                        appendMessage(fullBotResponse, 'bot', botMsgId);
+                                    }
+                                } catch (e) {
+                                  // omitir chunks ruidosos
+                                }
+                            }
+                        }
+                    }
+                    
+                    messagesState.push({ role: 'assistant', content: fullBotResponse });
+
+                } catch (error) {
+                    console.error("AI Error:", error);
+                    appendMessage("⚠️ Ha ocurrido un error al conectar con nuestro servidor de AI. Por favor, intenta enviando un WhatsApp usando los botones de arriba.", 'bot', botMsgId);
+                } finally {
+                    isTyping = false;
+                    chatInput.disabled = false;
+                    chatSendBtn.disabled = false;
+                    setTimeout(() => chatInput.focus(), 100);
+                }
             }
 
             chatSendBtn.addEventListener('click', handleUserInput);
@@ -703,4 +791,5 @@
         });
     </script>
 </body>
+
 </html>
