@@ -322,6 +322,25 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
+        /* Mobile specific chatbot layout */
+        @media (max-width: 600px) {
+            .chatbot-window {
+                bottom: 0;
+                right: 0;
+                width: 100vw;
+                max-width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                border: none;
+                transform: translateY(100%);
+            }
+
+            .chat-body {
+                flex-grow: 1;
+                height: auto;
+            }
+        }
+
         .chatbot-window.active {
             opacity: 1;
             pointer-events: all;
@@ -626,7 +645,8 @@
         </div>
 
         <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">
-            &copy; 2026-2027 Eco-Electronic Solutions. Todos los derechos reservados.
+            &copy; 2026-2027 Eco-Electronic Solution Todos los derechos reservados.<br>
+            Web creada por Eco-Networks Solutions, una subdivisión de Eco-Electronic Solutions.
         </p>
     </footer>
 
@@ -732,7 +752,7 @@
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            model: "phimini-3.5-",
+                            model: "default",
                             messages: messagesState,
                             stream: true,
                             temperature: 0.7
