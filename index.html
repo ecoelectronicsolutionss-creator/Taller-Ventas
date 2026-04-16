@@ -750,7 +750,7 @@
                 isOpen = !isOpen;
                 if (isOpen) {
                     chatWindow.classList.add('active');
-                    toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    toggleBtn.style.display = 'none'; // Ocultar el boton flotante para que no estorbe en celulares
                     setTimeout(() => chatInput.focus(), 300);
                 } else {
                     closeChat();
@@ -762,6 +762,7 @@
             function closeChat() {
                 isOpen = false;
                 chatWindow.classList.remove('active');
+                toggleBtn.style.display = 'flex'; // Restaurar boton flotante
                 toggleBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
             }
 
