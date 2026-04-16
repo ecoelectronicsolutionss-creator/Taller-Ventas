@@ -665,7 +665,7 @@
 
             let isOpen = false;
             let isTyping = false;
-            
+
             // Historial de conversación
             let messagesState = [
                 { role: "system", content: "Eres Daniela, la asesora virtual de la empresa de reparación Eco-Electronic Solutions en Cholula, respondes dudas de forma profesional, clara y concisa en español." }
@@ -674,14 +674,14 @@
             function appendMessage(msg, type, id = null) {
                 let bubble = null;
                 if (id) bubble = document.getElementById(id);
-                
+
                 if (!bubble) {
                     bubble = document.createElement('div');
                     if (id) bubble.id = id;
                     bubble.className = `chat-bubble chat-${type}`;
                     chatBody.appendChild(bubble);
                 }
-                
+
                 bubble.innerHTML = msg.replace(/\n/g, '<br/>');
                 chatBody.scrollTop = chatBody.scrollHeight;
                 return bubble;
@@ -727,12 +727,12 @@
                 appendMessage("<i>Generando respuesta...</i>", 'bot', botMsgId);
 
                 try {
-                    // Peticion hacia el Cloudflare Tunnel expuesto
-                    const response = await fetch('https://ai.ecoelectronicsolutions.com.mx/v1/chat/completions', {
+                    // Peticion hacia el Cloudflare Quick Tunnel expuesto para prueba inmediata
+                    const response = await fetch('https://corporation-house-andrew-wines.trycloudflare.com/v1/chat/completions', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            model: "phi-3.5-mini", 
+                            model: "phimini-3.5-",
                             messages: messagesState,
                             stream: true,
                             temperature: 0.7
@@ -748,10 +748,10 @@
                     while (true) {
                         const { value, done } = await reader.read();
                         if (done) break;
-                        
+
                         const chunk = decoder.decode(value, { stream: true });
                         const lines = chunk.split('\n');
-                        
+
                         for (const line of lines) {
                             if (line.startsWith('data: ')) {
                                 const dataStr = line.replace('data: ', '').trim();
@@ -765,12 +765,12 @@
                                         appendMessage(fullBotResponse, 'bot', botMsgId);
                                     }
                                 } catch (e) {
-                                  // omitir chunks ruidosos
+                                    // omitir chunks ruidosos
                                 }
                             }
                         }
                     }
-                    
+
                     messagesState.push({ role: 'assistant', content: fullBotResponse });
 
                 } catch (error) {
