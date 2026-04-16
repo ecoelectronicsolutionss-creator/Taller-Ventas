@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Electronic Solutions | Reparación y Refacciones en Cholula</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --tech-dark: #1a1a2e;
+            --accent-orange: #f39c12;
+            --bg-light: #f4f6f7;
+            --text-dark: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Top Banner - Urgency & Clarity */
+        .top-banner {
+            background-color: var(--accent-orange);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* E-commerce Style Navigation */
+        .navbar {
+            background-color: var(--tech-dark);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 40px;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: var(--primary-green);
+            color: var(--tech-dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: var(--dark-green);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section - Neuromarketing (Forest + Tech) */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(46, 204, 113, 0.6)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid Sections (MercadoLibre/Amazon Style) */
+        .section-container {
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--tech-dark);
+            border-left: 5px solid var(--primary-green);
+            padding-left: 15px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-green);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Eco-Canje Banner */
+        .eco-banner {
+            background: linear-gradient(135deg, var(--tech-dark), #2c3e50);
+            color: white;
+            margin: 40px 5%;
+            border-radius: 10px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
+            border-left: 8px solid var(--primary-green);
+        }
+
+        .eco-banner-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--tech-dark);
+            color: white;
+            padding: 50px 5%;
+            text-align: center;
+            border-top: 5px solid var(--primary-green);
+        }
+
+        .footer h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+        
+        .footer-contact {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .market-location {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .eco-banner { flex-direction: column; text-align: center; gap: 20px; }
+            .footer-contact { flex-direction: column; gap: 10px; }
+        }
+
+        /* Chatbot Styles */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+            z-index: 9999;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chatbot-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            max-width: calc(100vw - 40px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .chatbot-window.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0) scale(1);
+        }
+        .chat-header {
+            background: linear-gradient(135deg, var(--tech-dark), #2c3e50);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+        .chat-header img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-green);
+            object-fit: cover;
+        }
+        .chat-header-info h4 { margin: 0; font-size: 1.1rem; }
+        .chat-header-info p { margin: 0; font-size: 0.8rem; color: #ccc; }
+        .close-chat {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .close-chat:hover { background: rgba(255,255,255,0.3); }
+        .chat-body {
+            height: 350px;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #f8f9fa;
+        }
+        .chat-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            word-wrap: break-word;
+        }
+        .chat-bot {
+            background: white;
+            color: var(--text-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .chat-user {
+            background: var(--primary-green);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
+        }
+        .chat-footer {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input {
+            flex-grow: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 15px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+        .chat-input:focus { border-color: var(--primary-green); }
+        .chat-send {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .chat-send:hover { background: var(--dark-green); }
+        .chat-send:disabled { background: #ccc; cursor: not-allowed; }
+        
+        .chat-rating {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            align-self: center;
+        }
+        .rating-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            filter: grayscale(100%);
+        }
+        .rating-btn:hover { transform: scale(1.2); filter: grayscale(0%); }
+        .rating-btn.selected { transform: scale(1.2); filter: grayscale(0%); }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        /* Custom Scrollbar for chat */
+        .chat-body::-webkit-scrollbar { width: 6px; }
+        .chat-body::-webkit-scrollbar-track { background: transparent; }
+        .chat-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">
+        <i class="fas fa-tools"></i> Filtro de Calidad: Diagnóstico de Consolas, PCs, Impresoras y Movilidad Eléctrica por solo $200.00 MXN. ¡Asegura una reparación profesional!
+    </div>
+
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-leaf"></i> Eco-Electronic<span>Solutions</span>
+        </a>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="¿Qué necesitas reparar o comprar hoy? Ej. Aspas de licuadora, Pantalla LED...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-actions">
+            <a href="https://wa.me/522223167820" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Cotiza en Taller
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Expertos en Reparación. Aliados del Medio Ambiente.</h1>
+            <p>Desde el microondas de tu cocina hasta la tarjeta madre de tu PC. Nuestro equipo de especialistas revive tus aparatos y maximiza su vida útil en San Andrés Cholula.</p>
+            <a href="https://wa.me/522223167820" class="btn-whatsapp" style="display: inline-flex; font-size: 1.2rem; padding: 15px 30px;">
+                <i class="fas fa-bolt"></i> Iniciar Diagnóstico Ahora
+            </a>
+        </div>
+    </section>
+
+    <section class="section-container">
+        <h2 class="section-title">Soluciones de Reparación</h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fas fa-blender"></i>
+                <h3>Hogar y Cocina</h3>
+                <p>Licuadoras, planchas, microondas y ollas exprés. Las dejamos como nuevas.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tv"></i>
+                <h3>Audio y Video</h3>
+                <p>Pantallas LED, bocinas Bluetooth y equipos de sonido de alta fidelidad.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Geek y Cómputo</h3>
+                <p>Consolas, controles, PCs y Laptops. (Costo de diagnóstico especializado: $200.00).</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-motorcycle"></i>
+                <h3>Movilidad Eléctrica</h3>
+                <p>Patines y motos eléctricas. Impresoras. (Costo de diagnóstico especializado: $200.00).</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="eco-banner">
+        <div class="eco-banner-text">
+            <h2><i class="fas fa-recycle"></i> Programa Eco-Canje</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6;">¿Tu equipo viejo ya no tiene arreglo o no lo quieres? No lo tires. <br> Tráelo a nuestro taller, nosotros lo reciclamos correctamente y tú te llevas <strong>cupones de descuento</strong> para reparaciones o compra de accesorios.</p>
+        </div>
+        <div>
+            <a href="https://wa.me/522223167820" class="btn-whatsapp" style="background-color: white; color: var(--tech-dark); font-size: 1.1rem;" target="_blank">
+                Canjear Equipo
+            </a>
+        </div>
+    </div>
+
+    <section class="section-container" style="background-color: white; padding-top: 40px; padding-bottom: 60px;">
+        <h2 class="section-title">Refacciones y Accesorios en Venta</h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fas fa-battery-full"></i>
+                <h3>Energía y Carga</h3>
+                <p>Cargadores originales y genéricos, baterías para múltiples dispositivos.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-cogs"></i>
+                <h3>Refacciones de Electrodomésticos</h3>
+                <p>Aspas, vasos de licuadora, empaques para olla exprés y más.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <h3>Componentes Electrónicos</h3>
+                <p>Cables de audio, video, y componentes para tus propios proyectos.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h3>Eco-Electronic Solutions</h3>
+        <p>Expertos en electrónica, comprometidos con el planeta.</p>
+        
+        <div class="footer-contact">
+            <p><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp: <strong>222 316 7820</strong></p>
+            <p><i class="fas fa-phone-alt" style="color: var(--accent-orange);"></i> Teléfono: <strong>222 989 8801</strong></p>
+        </div>
+        
+        <div class="market-location">
+            <i class="fas fa-map-marker-alt" style="color: var(--primary-green);"></i> 
+            Ubicados a unos pasos del Mercado Municipal de San Andrés Cholula
+        </div>
+        
+        <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">
+            &copy; 2026 Eco-Electronic Solutions. Todos los derechos reservados.
+        </p>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-btn" id="chatbot-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <div class="chatbot-window" id="chatbot-window">
+        <div class="chat-header">
+            <img src="https://ui-avatars.com/api/?name=Daniela&background=2ecc71&color=fff&size=150" alt="Asesora Daniela">
+            <div class="chat-header-info">
+                <h4>Daniela</h4>
+                <p>Asesor Eco-Electronic</p>
+            </div>
+            <button class="close-chat" id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <!-- Messages go here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Escribe aquí..." autocomplete="off">
+            <button id="chat-send" class="chat-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('chatbot-toggle');
+            const chatWindow = document.getElementById('chatbot-window');
+            const closeBtn = document.getElementById('close-chat');
+            const chatBody = document.getElementById('chat-body');
+            const chatInput = document.getElementById('chat-input');
+            const chatSendBtn = document.getElementById('chat-send');
+
+            let isOpen = false;
+            let currentStep = 0;
+            let userData = {};
+            let isTyping = false;
+
+            const chatFlow = [
+                { bot: "¡Buenos días bienvenido a Eco-Electronic Solutions!<br><br>¿Con quien tengo el gusto?", key: "nombre" },
+                { bot: "¿Puede indicarnos su apellido?", key: "apellido" },
+                { bot: "¿Podemos enviarle un correo electrónico?", key: "permitir_correo" },
+                { bot: "Mucho gusto ¿En qué servicio estas interesado?", key: "servicio" },
+                { bot: "¿Qué producto o servicio deseas que te ayudemos a cotizar?", key: "cotizacion" },
+                { bot: "Excelente, para brindarte una atención me puedes apoyar con los siguientes datos, por favor.<br><br>¿Cuál es tu número de teléfono?", key: "telefono" },
+                { bot: "¿Cuál es tu correo electrónico?", key: "correo" },
+                { bot: "Gracias por contactarnos, en breve un asesor te brindará una respuesta.", key: "end" }
+            ];
+
+            toggleBtn.addEventListener('click', () => {
+                isOpen = !isOpen;
+                if (isOpen) {
+                    chatWindow.classList.add('active');
+                    toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    if (currentStep === 0 && chatBody.children.length === 0) {
+                        nextBotMessage();
+                    }
+                } else {
+                    closeChat();
+                }
+            });
+
+            closeBtn.addEventListener('click', closeChat);
+
+            function closeChat() {
+                isOpen = false;
+                chatWindow.classList.remove('active');
+                toggleBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
+            }
+
+            function appendMessage(msg, type) {
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble chat-${type}`;
+                bubble.innerHTML = msg;
+                chatBody.appendChild(bubble);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            function nextBotMessage() {
+                if (currentStep < chatFlow.length) {
+                    isTyping = true;
+                    // Simulate bot typing delay
+                    const step = chatFlow[currentStep];
+                    setTimeout(() => {
+                        appendMessage(step.bot, 'bot');
+                        isTyping = false;
+                        if (step.key === "end") {
+                            endConversation();
+                        } else {
+                            chatInput.focus();
+                        }
+                    }, 600);
+                }
+            }
+
+            function handleUserInput() {
+                const text = chatInput.value.trim();
+                if (!text || isTyping || currentStep >= chatFlow.length - 1) return;
+                
+                // Save user response
+                const currentKey = chatFlow[currentStep].key;
+                userData[currentKey] = text;
+                
+                appendMessage(text, 'user');
+                chatInput.value = '';
+                
+                currentStep++;
+                nextBotMessage();
+            }
+
+            function endConversation() {
+                chatInput.disabled = true;
+                chatSendBtn.disabled = true;
+                chatInput.placeholder = "Chat finalizado";
+
+                // Add rating UI
+                setTimeout(() => {
+                    const ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'chat-rating';
+                    ratingDiv.innerHTML = `
+                        <button class="rating-btn" data-val="Triste">😞</button>
+                        <button class="rating-btn" data-val="Neutral">😐</button>
+                        <button class="rating-btn" data-val="Feliz">😄</button>
+                    `;
+                    chatBody.appendChild(ratingDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+
+                    ratingDiv.querySelectorAll('.rating-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            userData.valoracion = this.getAttribute('data-val');
+                            ratingDiv.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                            this.classList.add('selected');
+                            appendMessage("¡Gracias por tu valoración!", 'bot');
+                            sendDataToServer();
+                        });
+                    });
+                }, 800);
+            }
+
+            function sendDataToServer() {
+                console.log("Enviando datos al servidor (Data Final):", userData);
+                // Si tienes workers en tu dominio en el futuro esto puede ser:
+                /*
+                fetch('https://tu-api.ecoelectronicsolutions.com.mx/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                }).then(res => console.log('Lead enviado con éxito'))
+                  .catch(err => console.error(err));
+                */
+            }
+
+            chatSendBtn.addEventListener('click', handleUserInput);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleUserInput();
+            });
+        });
+    </script>
+</body>
+</html>
