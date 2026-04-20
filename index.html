@@ -32,7 +32,7 @@
         "postalCode": "72823",
         "addressCountry": "MX"
       },
-      "openingHours": "Mo-Sa 09:00-19:00",
+      "openingHours": ["Mo-Fr 10:00-20:00", "Sa 10:00-18:00", "Su 10:00-16:00"],
       "sameAs": ["https://wa.me/522223167820"]
     }
     </script>
@@ -82,8 +82,8 @@
             --glass-border: rgba(255,255,255,0.3);
             --glass-blur: 20px;
 
-            /* Spacing */
-            --section-padding: 80px 5%;
+            /* Spacing — usa padding seguro con min() para evitar overflow */
+            --section-padding: 80px clamp(16px, 5%, 80px);
             --container-max: 1300px;
 
             /* Transition */
@@ -127,6 +127,8 @@
 
         html {
             scroll-behavior: smooth;
+            /* Prevenir overflow horizontal en TODOS los dispositivos */
+            overflow-x: hidden;
         }
 
         body {
@@ -136,6 +138,13 @@
             line-height: 1.6;
             transition: background-color 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
+            /* Asegurar que el body no exceda el ancho del viewport */
+            max-width: 100vw;
+        }
+
+        /* Prevenir que CUALQUIER elemento cause overflow horizontal */
+        *, *::before, *::after {
+            max-width: 100%;
         }
 
         a {
@@ -178,6 +187,7 @@
             letter-spacing: 0.3px;
             position: relative;
             z-index: 1001;
+            line-height: 1.3;
         }
         .top-banner i { margin-right: 6px; }
 
@@ -435,20 +445,144 @@
         }
 
         /* ============================================
+           TERMS & CONDITIONS MODAL
+           ============================================ */
+        .terms-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .terms-overlay.active { opacity: 1; pointer-events: all; }
+
+        .terms-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 90%;
+            max-width: 680px;
+            max-height: 85vh;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s var(--ease-out);
+        }
+        .terms-modal.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .terms-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .terms-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+        .terms-header h2 i { color: var(--primary); }
+        .terms-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.6rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s, color 0.2s;
+        }
+        .terms-close:hover { background: rgba(0,0,0,0.08); color: var(--text-primary); }
+        [data-theme="dark"] .terms-close:hover { background: rgba(255,255,255,0.08); }
+
+        .terms-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+            line-height: 1.7;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+        .terms-body h3 {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 22px 0 8px;
+        }
+        .terms-body h3:first-of-type { margin-top: 0; }
+        .terms-body p { margin-bottom: 10px; }
+        .terms-body ul {
+            margin: 8px 0 14px 20px;
+            list-style: disc;
+        }
+        .terms-body ul li { margin-bottom: 6px; }
+        .terms-body a { color: var(--primary); font-weight: 600; }
+        .terms-body a:hover { text-decoration: underline; }
+        .terms-updated {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 600px) {
+            .terms-modal {
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                height: 100dvh;
+                border-radius: 0;
+                top: 0; left: 0;
+                transform: translateY(100%);
+            }
+            .terms-modal.active { transform: translateY(0); }
+            .terms-header { padding: 16px 18px; }
+            .terms-body { padding: 18px; }
+        }
+
+        /* ============================================
            HERO
            ============================================ */
         .hero {
             background: linear-gradient(160deg, rgba(15,15,26,0.92), rgba(46,204,113,0.4)),
-                        url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+                        url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            /* NOTA: se removió 'fixed' — causa bug crítico de rendering en iOS Safari */
+            background-attachment: scroll;
             min-height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding: 60px 20px;
+            padding: 60px clamp(16px, 5%, 80px);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         .hero::after {
             content: '';
@@ -503,6 +637,8 @@
             box-shadow: 0 6px 25px rgba(46,204,113,0.4);
             position: relative;
             overflow: hidden;
+            max-width: 360px;
+            width: auto;
         }
         .hero-cta::before {
             content: '';
@@ -548,7 +684,8 @@
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            /* Fluido: 4 cols en desktop, 2 en tablet, 2 en móvil — sin overflow */
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 20px;
             max-width: var(--container-max);
             margin: 0 auto;
@@ -577,6 +714,11 @@
             padding: var(--section-padding);
             max-width: var(--container-max);
             margin: 0 auto;
+            /* Garantizar padding mínimo horizontal en cualquier pantalla */
+            padding-left: max(16px, min(5%, 80px));
+            padding-right: max(16px, min(5%, 80px));
+            box-sizing: border-box;
+            width: 100%;
         }
         .section-alt {
             background: var(--bg-surface);
@@ -625,7 +767,8 @@
            ============================================ */
         .grid-services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            /* minmax con clamp: en móvil pequeño cae a 1 col, tablet 2 col, desktop 3-4 col */
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
             gap: 24px;
         }
         .service-card {
@@ -1178,6 +1321,8 @@
             animation: popIn 0.4s var(--ease-bounce) forwards;
             line-height: 1.4;
             cursor: pointer;
+            /* No interferir con el contenido: solo visible sobre el botón del chat */
+            pointer-events: auto;
         }
         .chat-proactive-bubble::after {
             content: '';
@@ -1447,96 +1592,164 @@
             transition: opacity 0.4s;
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        /* ============================================
-           RESPONSIVE MOBILE-FIRST
-           ============================================ */
-        @media (max-width: 900px) {
+        /* ============================================================
+           RESPONSIVE — COBERTURA COMPLETA MOBILE-FIRST
+           Breakpoints: 1024 / 768 / 600 / 480 / 380
+           ============================================================ */
+
+        /* ── Tablet grande / Laptop pequeña ─────────────────────── */
+        @media (max-width: 1024px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .form-row { grid-template-columns: 1fr; }
             .grid-services { grid-template-columns: repeat(2, 1fr); }
-            .rag-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
         }
 
+        /* ── Tablet ──────────────────────────────────────────────── */
         @media (max-width: 768px) {
+            /* Navbar */
             .search-bar { display: none; }
             .btn-whatsapp-nav span { display: none; }
             .btn-whatsapp-nav { padding: 9px 12px; }
             .hamburger { display: flex; }
-
-            .logo { font-size: 1.2rem; }
+            .logo { font-size: 1.15rem; }
             .logo span { display: none; }
+            .navbar { padding: 0 16px; height: 60px; }
 
-            .hero { min-height: 60vh; padding: 40px 15px; }
-            .hero h1 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
-            .hero p { font-size: 0.95rem; }
+            /* Top banner */
+            .top-banner { font-size: 0.78rem; padding: 8px 12px; line-height: 1.4; }
 
-            .section { padding: 40px 16px; }
+            /* Hero */
+            .hero {
+                min-height: 55vh;
+                padding: 50px 20px;
+                background-attachment: scroll;
+            }
+            .hero-content h1 { font-size: clamp(1.7rem, 6vw, 2.5rem); }
+            .hero-content p  { font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: 25px; }
+            .hero-cta { padding: 13px 28px; font-size: 1rem; }
 
+            /* Sections */
+            .section {
+                padding-top: 50px;
+                padding-bottom: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .section-header { margin-bottom: 30px; }
+            .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+            .section-subtitle { font-size: 0.9rem; }
+
+            /* Stats */
+            .stats-bar { padding: 30px 20px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .stat-number { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+
+            /* Services */
+            .grid-services { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .service-card { padding: 22px 16px; }
+            .service-icon { width: 56px; height: 56px; font-size: 1.5rem; }
+
+            /* Eco-banner */
             .eco-banner {
                 flex-direction: column;
                 text-align: center;
-                margin: 0 15px;
-                padding: 30px 20px;
-                gap: 20px;
+                margin: 0 20px;
+                padding: 28px 20px;
+                gap: 18px;
             }
             .btn-eco-canje { width: 100%; text-align: center; }
 
-            .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
-
-            /* Quote form compacto en móvil */
-            .quote-form { padding: 0 4px; }
-            .quote-container { padding: 0 16px; }
+            /* Quote form */
+            .quote-section .section { padding-left: 16px; padding-right: 16px; }
+            .form-row { grid-template-columns: 1fr; }
 
             /* Testimonials */
-            .testimonial-card { padding: 24px 18px; }
-            .testimonial-card::before { font-size: 3.5rem; }
+            .testimonial-card { padding: 22px 16px; }
+            .testimonial-card::before { font-size: 3rem; }
 
             /* Footer */
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 24px; }
             .footer-col .contact-line { justify-content: center; }
             .footer-map iframe { height: 200px; }
 
-            /* Stats */
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
-            /* Proactive bubble ajustado */
-            .chat-proactive-bubble { max-width: 180px; font-size: 0.8rem; right: 18px; bottom: 108px; }
+            /* Chat bubble proactiva */
+            .chat-proactive-bubble { max-width: 180px; font-size: 0.8rem; right: 16px; bottom: 108px; }
         }
 
+        /* ── Móvil mediano ───────────────────────────────────────── */
         @media (max-width: 600px) {
-            /* Servicios en 1 col en móvil pequeño */
-            .grid-services { grid-template-columns: 1fr; }
+            /* Servicios: 1 columna */
+            .grid-services { grid-template-columns: 1fr; gap: 12px; }
 
-            /* Chat fullscreen en móvil */
+            /* Parts grid: 2 cols apretadas o 1 */
+            .parts-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+
+            /* Stats: 2 cols */
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .stat-number { font-size: 1.8rem; }
+            .stat-item { padding: 14px 6px; }
+
+            /* Hero */
+            .hero { min-height: 50vh; padding: 40px 16px; }
+            .hero-content h1 { font-size: clamp(1.5rem, 7vw, 2rem); }
+
+            /* Sections más compactas */
+            .section { padding: 36px 16px; }
+            .section-header { margin-bottom: 22px; }
+
+            /* Chat fullscreen */
             .chatbot-window {
                 top: 0; bottom: 0; left: 0; right: 0;
                 width: 100vw; max-width: 100vw;
-                height: 100%;
+                height: 100dvh;
                 border-radius: 0;
                 border: none;
                 transform: translateY(100%);
             }
             .chatbot-window.active { transform: translateY(0); }
-            .chatbot-btn {
-                bottom: 18px; right: 18px;
-                width: 62px; height: 62px;
-                font-size: 1.6rem;
-            }
-            .chat-body { flex-grow: 1; height: auto; }
-            .back-to-top { bottom: 90px; right: 18px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .stat-number { font-size: 1.8rem; }
+            .chat-body { flex-grow: 1; height: auto; min-height: 0; }
 
-            /* Top banner más pequeño */
-            .top-banner { font-size: 0.78rem; padding: 8px 12px; }
+            /* Chatbot button */
+            .chatbot-btn { bottom: 16px; right: 16px; width: 62px; height: 62px; font-size: 1.55rem; }
+            .chat-proactive-bubble { bottom: 96px; right: 14px; max-width: 170px; }
+
+            /* Back to top */
+            .back-to-top { bottom: 88px; right: 16px; width: 40px; height: 40px; font-size: 1rem; }
+
+            /* Eco-banner */
+            .eco-banner { margin: 0 12px; padding: 22px 16px; }
+
+            /* Service card padding */
+            .service-card { padding: 18px 14px; }
+            .service-icon { width: 50px; height: 50px; font-size: 1.3rem; margin-bottom: 12px; }
+            .service-card h3 { font-size: 1rem; }
+            .service-card p { font-size: 0.82rem; }
+
+            /* Testimonial */
+            .testimonial-card { padding: 18px 14px; }
+
+            /* Footer */
+            .footer { padding: 40px 16px 20px; }
         }
 
+        /* ── Móvil pequeño (iPhone SE, Galaxy A) ─────────────────── */
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .parts-grid { grid-template-columns: 1fr !important; }
+            .grid-services { grid-template-columns: 1fr; }
+            .hero-cta { width: 100%; justify-content: center; padding: 13px 20px; }
+            .eco-banner { margin: 0 8px; }
+            .section { padding: 30px 14px; }
+            .navbar { padding: 0 12px; }
+        }
+
+        /* ── Móvil muy pequeño (< 380px) ─────────────────────────── */
         @media (max-width: 380px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .chatbot-btn { width: 58px; height: 58px; font-size: 1.4rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .chatbot-btn { width: 56px; height: 56px; font-size: 1.35rem; }
+            .hero-content h1 { font-size: 1.4rem; }
+            .logo { font-size: 1rem; }
+            .section { padding: 24px 12px; }
         }
     </style>
 </head>
@@ -1595,6 +1808,75 @@
         <a href="#contacto" class="drawer-link"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
         <a href="https://wa.me/522223167820" class="drawer-link" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         <a href="tel:+522229898801" class="drawer-link"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <div class="drawer-divider"></div>
+        <a href="#" class="drawer-link" id="open-terms-drawer"><i class="fas fa-shield-alt"></i> Términos y Condiciones</a>
+    </div>
+
+    <!-- Modal: Términos y Condiciones -->
+    <div class="terms-overlay" id="terms-overlay"></div>
+    <div class="terms-modal" id="terms-modal">
+        <div class="terms-header">
+            <h2><i class="fas fa-shield-alt"></i> Términos y Condiciones</h2>
+            <button class="terms-close" id="terms-close" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="terms-body">
+            <p class="terms-updated"><i class="fas fa-calendar-alt"></i> Última actualización: Abril 2026</p>
+
+            <h3>1. Información General</h3>
+            <p>Eco-Electronic Solutions es un taller de reparación de electrónicos ubicado en San Andrés Cholula, Puebla, México. Al utilizar nuestros servicios, el cliente acepta los siguientes términos.</p>
+
+            <h3>2. Horarios de Atención</h3>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 10:00 AM – 8:00 PM</li>
+                <li><strong>Sábados:</strong> 10:00 AM – 6:00 PM</li>
+                <li><strong>Domingos:</strong> 10:00 AM – 4:00 PM</li>
+                <li><strong>Días festivos:</strong> Cerrado</li>
+            </ul>
+
+            <h3>3. Diagnóstico y Cotización</h3>
+            <p>El diagnóstico tiene un costo de <strong>$200.00 MXN</strong>, aplicable al costo total de la reparación si el cliente acepta el presupuesto. El diagnóstico no es reembolsable si el cliente rechaza la reparación.</p>
+
+            <h3>4. Garantía de Reparaciones</h3>
+            <ul>
+                <li>Las reparaciones tienen garantía de <strong>30 días naturales</strong> a partir de la entrega.</li>
+                <li>La garantía cubre defectos en el trabajo realizado, <strong>no daños posteriores</strong> causados por mal uso, líquidos, golpes o descargas eléctricas.</li>
+                <li>Para hacer válida la garantía, se requiere presentar la nota de servicio original.</li>
+            </ul>
+
+            <h3>5. Refacciones</h3>
+            <ul>
+                <li>Las refacciones utilizadas pueden ser originales o compatibles de alta calidad, según disponibilidad.</li>
+                <li>La garantía de refacciones es de <strong>15 días naturales</strong>.</li>
+                <li>Las refacciones especiales que requieran pedido tienen un tiempo de entrega de 3 a 10 días hábiles.</li>
+            </ul>
+
+            <h3>6. Equipos en Taller</h3>
+            <ul>
+                <li>El equipo no reclamado en un plazo de <strong>60 días naturales</strong> después de la notificación de que está listo, será considerado abandonado.</li>
+                <li>Eco-Electronic Solutions no se responsabiliza por datos almacenados en los equipos. Se recomienda al cliente realizar respaldo previo.</li>
+            </ul>
+
+            <h3>7. Pagos y Facturación</h3>
+            <ul>
+                <li>Aceptamos efectivo, transferencia bancaria y pagos por WhatsApp.</li>
+                <li>El pago total se realiza al momento de la entrega del equipo reparado.</li>
+                <li>Para reparaciones mayores a $2,000 MXN, se requiere un anticipo del 50%.</li>
+            </ul>
+
+            <h3>8. Programa Eco-Canje</h3>
+            <p>El programa de intercambio de aparatos electrónicos usados está sujeto a evaluación del técnico. Los valores de canje son determinados por Eco-Electronic Solutions y no son negociables.</p>
+
+            <h3>9. Uso del Chatbot AI (Daniela)</h3>
+            <p>El asistente virtual Daniela proporciona información orientativa. Las cotizaciones finales deben ser confirmadas directamente con un técnico. Las respuestas de la IA no constituyen un compromiso contractual.</p>
+
+            <h3>10. Privacidad y Datos</h3>
+            <p>Los datos proporcionados por el formulario de cotización y WhatsApp son utilizados exclusivamente para brindar el servicio solicitado. No compartimos información con terceros.</p>
+
+            <h3>11. Contacto</h3>
+            <p>Para cualquier duda sobre estos términos:<br>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/522223167820" target="_blank">222 316 7820</a><br>
+            <strong>Teléfono:</strong> <a href="tel:+522229898801">222 989 8801</a></p>
+        </div>
     </div>
 
     <!-- Hero -->
@@ -2030,7 +2312,7 @@
                 </div>
                 <div class="contact-line">
                     <i class="fas fa-clock"></i>
-                    <span>Lun - Sáb: 9:00 - 19:00</span>
+                    <span>L-V: 10:00-20:00 · S: 10:00-18:00 · D: 10:00-16:00</span>
                 </div>
             </div>
             <div class="footer-col">
@@ -2194,29 +2476,73 @@
         function updateStatus() {
             const badge = document.getElementById('status-badge');
             const now = new Date();
-            const day = now.getDay(); // 0=domingo
+            const day = now.getDay(); // 0=domingo, 1=lunes...6=sábado
             const hour = now.getHours();
             const minute = now.getMinutes();
-            const timeDecimal = hour + minute / 60;
+            const t = hour + minute / 60;
 
-            // Lunes(1) a Sábado(6), 9:00 - 19:00
-            const isOpen = day >= 1 && day <= 6 && timeDecimal >= 9 && timeDecimal < 19;
+            // Horario actualizado:
+            // L-V (1-5): 10:00 - 20:00
+            // S   (6):   10:00 - 18:00
+            // D   (0):   10:00 - 16:00
+            // Festivos: cerrado (se ajusta manualmenre si aplica)
+            let isOpen = false;
+            if (day >= 1 && day <= 5) isOpen = t >= 10 && t < 20;       // L-V
+            else if (day === 6)       isOpen = t >= 10 && t < 18;       // Sábado
+            else if (day === 0)       isOpen = t >= 10 && t < 16;       // Domingo
 
             if (isOpen) {
                 badge.className = 'status-badge open';
                 badge.innerHTML = '<span class="status-dot"></span> ABIERTO';
             } else {
                 badge.className = 'status-badge closed';
-                let nextOpen = 'Lun 9:00 AM';
-                if (day >= 1 && day <= 5 && timeDecimal >= 19) nextOpen = 'Mañana 9:00 AM';
-                else if (day >= 1 && day <= 5 && timeDecimal < 9) nextOpen = 'Hoy 9:00 AM';
-                else if (day === 6 && timeDecimal >= 19) nextOpen = 'Lun 9:00 AM';
-                else if (day === 6 && timeDecimal < 9) nextOpen = 'Hoy 9:00 AM';
+                let nextOpen = '';
+                // Calcular cuándo abre
+                if (day >= 1 && day <= 5) {
+                    // L-V
+                    nextOpen = t >= 20 ? 'Mañana 10:00 AM' : 'Hoy 10:00 AM';
+                } else if (day === 6) {
+                    // Sábado
+                    nextOpen = t >= 18 ? 'Dom 10:00 AM' : 'Hoy 10:00 AM';
+                } else {
+                    // Domingo
+                    nextOpen = t >= 16 ? 'Lun 10:00 AM' : 'Hoy 10:00 AM';
+                }
                 badge.innerHTML = `<span class="status-dot"></span> CERRADO — Abre ${nextOpen}`;
             }
         }
         updateStatus();
         setInterval(updateStatus, 60000);
+
+        // =============================================
+        // TÉRMINOS Y CONDICIONES — Modal
+        // =============================================
+        const termsModal = document.getElementById('terms-modal');
+        const termsOverlay = document.getElementById('terms-overlay');
+        const termsClose = document.getElementById('terms-close');
+        const openTermsDrawer = document.getElementById('open-terms-drawer');
+
+        function openTerms(e) {
+            if (e) e.preventDefault();
+            termsModal.classList.add('active');
+            termsOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Cerrar drawer si está abierto
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer) drawer.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+        }
+
+        function closeTerms() {
+            termsModal.classList.remove('active');
+            termsOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (openTermsDrawer) openTermsDrawer.addEventListener('click', openTerms);
+        if (termsClose) termsClose.addEventListener('click', closeTerms);
+        if (termsOverlay) termsOverlay.addEventListener('click', closeTerms);
 
         // =============================================
         // 6. SEARCH FUNCTIONALITY
