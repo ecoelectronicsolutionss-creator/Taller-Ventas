@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Electronic Solutions | Reparación y Refacciones en Cholula</title>
+    <title>Eco-Electronic Solutions | Reparación y Refacciones en San Andres Cholula</title>
 
     <!-- SEO: Meta Description y Robots -->
     <meta name="description" content="Taller de reparación de electrónicos en San Andrés Cholula, Puebla. Reparamos microondas, laptops, consolas, impresoras y más. Refacciones originales. WhatsApp: 222 316 7820.">
@@ -2903,7 +2903,9 @@
             } catch(e) {}
         }
 
-        // Desbloquear audio al primer gesto del usuario (touch, click o scroll)
+        // Intentar desbloquear audio al cargar (funciona en desktop)
+        unlockAudio();
+        // + desbloquear al primer gesto del usuario (requerido en móvil)
         ['touchstart', 'click', 'scroll'].forEach(evt => {
             document.addEventListener(evt, unlockAudio, { once: false, passive: true });
         });
@@ -2946,8 +2948,12 @@
             '💬 Te puedo dar una cotización al instante. ¡Escríbeme!',
             '🔧 ¿Tu laptop, consola o microondas falló? ¡Puedo ayudarte!',
             '⚡ Diagnóstico desde $200 MXN. ¿Te interesa?',
-            '📱 ¡Hola! Soy Dalia, la asesora AI. ¿En qué te ayudo?',
+            '📱 ¡Hola! Soy Dalia, tu asesora AI. ¿En qué te ayudo?',
             '🛠️ Reparamos laptops, pantallas, consolas y más. ¡Pregúntame!',
+            '🖥️ ¿Tu PC va lenta o no enciende? Tenemos la solución.',
+            '🎮 Xbox, PlayStation, Nintendo… ¡las reparamos todas!',
+            '🔌 Microondas, licuadoras, pantallas LED — todo tipo de equipo.',
+            '💡 ¿Sabías que ofrecemos garantía de 60 a 90 días? ¡Pregúntame!',
         ];
         let _proactiveMsgIndex = 0;
 
@@ -2956,8 +2962,8 @@
         function showProactiveBubble() {
             // No mostrar si ya está abierto el chat
             if (isChatOpen) return;
-            // Si ya cerró 3+ veces, dejar de insistir
-            if (_bubbleDismissCount >= 3) return;
+            // Si ya cerró 5+ veces, dejar de insistir
+            if (_bubbleDismissCount >= 5) return;
             // Remover burbuja anterior si existe
             if (proactiveBubble) { proactiveBubble.remove(); proactiveBubble = null; }
 
@@ -3030,13 +3036,13 @@
             });
         }
 
-        // Primera burbuja a los 4 segundos, luego insistir cada 25s (hasta 3 dismisses)
+        // Primera burbuja a los 4 segundos, luego insistir cada 10s (hasta 5 dismisses)
         setTimeout(showProactiveBubble, 4000);
         setInterval(() => {
-            if (!isChatOpen && !proactiveBubble && _bubbleDismissCount < 3) {
+            if (!isChatOpen && !proactiveBubble && _bubbleDismissCount < 5) {
                 showProactiveBubble();
             }
-        }, 25000);
+        }, 10000);
 
         // Ocultar burbuja al abrir el chat
         function removeBubbleIfOpen() {
