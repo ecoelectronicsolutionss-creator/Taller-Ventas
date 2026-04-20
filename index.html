@@ -2907,7 +2907,7 @@
         // Intentar desbloquear audio al cargar (funciona en desktop)
         unlockAudio();
         // + desbloquear al primer gesto del usuario (requerido en móvil)
-        ['touchstart', 'click', 'scroll'].forEach(evt => {
+        ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(evt => {
             document.addEventListener(evt, unlockAudio, { once: false, passive: true });
         });
 
