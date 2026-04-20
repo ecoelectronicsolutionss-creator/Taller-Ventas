@@ -1313,15 +1313,14 @@
             color: var(--text-primary);
             border: 1px solid var(--border-color);
             border-radius: 18px 18px 4px 18px;
-            padding: 12px 16px;
-            font-size: 0.85rem;
-            max-width: 220px;
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            max-width: 270px;
             box-shadow: var(--shadow-md);
             z-index: 9998;
             animation: popIn 0.4s var(--ease-bounce) forwards;
-            line-height: 1.4;
+            line-height: 1.45;
             cursor: pointer;
-            /* No interferir con el contenido: solo visible sobre el botón del chat */
             pointer-events: auto;
         }
         .chat-proactive-bubble::after {
@@ -1688,7 +1687,7 @@
             .footer-map iframe { height: 200px; }
 
             /* Chat bubble proactiva */
-            .chat-proactive-bubble { max-width: 180px; font-size: 0.8rem; right: 16px; bottom: 108px; }
+            .chat-proactive-bubble { max-width: 230px; font-size: 0.88rem; right: 16px; bottom: 108px; }
         }
 
         /* ── Móvil mediano ───────────────────────────────────────── */
@@ -1726,7 +1725,7 @@
 
             /* Chatbot button */
             .chatbot-btn { bottom: 16px; right: 16px; width: 62px; height: 62px; font-size: 1.55rem; }
-            .chat-proactive-bubble { bottom: 96px; right: 14px; max-width: 170px; }
+            .chat-proactive-bubble { bottom: 96px; right: 14px; max-width: 210px; font-size: 0.88rem; }
 
             /* Back to top */
             .back-to-top { bottom: 88px; right: 16px; width: 40px; height: 40px; font-size: 1rem; }
@@ -2848,8 +2847,9 @@
 
         // ── Detección de servidor AI + carga de nombre ──
         let _assistantName = 'Dalia'; // fallback
-        let _aiServerOnline = false;
-        let _bubbleDismissCount = 0;  // cuántas veces el usuario cerró la burbuja
+        let _aiServerOnline = true;   // ✅ OPTIMISTA: asumir online hasta que el health check diga lo contrario
+        let _bubbleDismissCount = 0;
+        let _healthCheckDone = false;
 
         async function checkAIServer() {
             try {
@@ -2871,6 +2871,7 @@
                     }
                 } else { _aiServerOnline = false; }
             } catch { _aiServerOnline = false; }
+            _healthCheckDone = true;
         }
         // Check al cargar
         checkAIServer();
@@ -2911,30 +2912,24 @@
         });
 
         function playNotificationChime() {
-            if (!_audioCtx || !_audioUnlocked) return;
+            if (!_audioCtx) unlockAudio();
+            if (!_audioCtx) return;
             try {
                 if (_audioCtx.state === 'suspended') _audioCtx.resume();
                 const now = _audioCtx.currentTime;
-                // Nota 1: tono suave
-                const osc1 = _audioCtx.createOscillator();
-                const gain1 = _audioCtx.createGain();
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(830, now);
-                gain1.gain.setValueAtTime(0.12, now);
-                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                osc1.connect(gain1).connect(_audioCtx.destination);
-                osc1.start(now);
-                osc1.stop(now + 0.4);
-                // Nota 2: armónico
-                const osc2 = _audioCtx.createOscillator();
-                const gain2 = _audioCtx.createGain();
-                osc2.type = 'sine';
-                osc2.frequency.setValueAtTime(1100, now + 0.12);
-                gain2.gain.setValueAtTime(0.07, now + 0.12);
-                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-                osc2.connect(gain2).connect(_audioCtx.destination);
-                osc2.start(now + 0.12);
-                osc2.stop(now + 0.5);
+                // 🎵 Chime de 3 notas tipo "mensaje recibido" (Do-Mi-Sol)
+                const notes = [523, 659, 784]; // C5, E5, G5 — acorde mayor
+                notes.forEach((freq, i) => {
+                    const osc = _audioCtx.createOscillator();
+                    const gain = _audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.1);
+                    gain.gain.setValueAtTime(0.14, now + i * 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.35);
+                    osc.connect(gain).connect(_audioCtx.destination);
+                    osc.start(now + i * 0.1);
+                    osc.stop(now + i * 0.1 + 0.35);
+                });
             } catch(e) {}
         }
 
@@ -2967,8 +2962,8 @@
             // Remover burbuja anterior si existe
             if (proactiveBubble) { proactiveBubble.remove(); proactiveBubble = null; }
 
-            // Si el servidor está offline → burbuja de mantenimiento
-            if (!_aiServerOnline) {
+            // ✅ Solo mostrar mantenimiento si el health check YA terminó y confirmó offline
+            if (_healthCheckDone && !_aiServerOnline) {
                 proactiveBubble = document.createElement('div');
                 proactiveBubble.className = 'chat-proactive-bubble maintenance';
                 proactiveBubble.innerHTML = `
@@ -3036,10 +3031,15 @@
             });
         }
 
-        // Primera burbuja a los 4 segundos, luego insistir cada 10s (hasta 5 dismisses)
+        // Primera burbuja a los 4 segundos, luego rotar cada 10s
         setTimeout(showProactiveBubble, 4000);
         setInterval(() => {
-            if (!isChatOpen && !proactiveBubble && _bubbleDismissCount < 5) {
+            // Auto-dismiss: si la burbuja lleva 8s+ visible, quitarla para que rote
+            if (proactiveBubble) {
+                proactiveBubble.remove();
+                proactiveBubble = null;
+            }
+            if (!isChatOpen && _bubbleDismissCount < 5) {
                 showProactiveBubble();
             }
         }, 10000);
