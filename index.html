@@ -3031,8 +3031,15 @@
             });
         }
 
-        // Primera burbuja a los 4 segundos, luego rotar cada 10s
-        setTimeout(showProactiveBubble, 4000);
+        // ✅ Primera burbuja: esperar a que el health check termine (evita race condition en móviles lentos)
+        function waitForHealthCheckThenShow() {
+            if (_healthCheckDone) {
+                showProactiveBubble();
+            } else {
+                setTimeout(waitForHealthCheckThenShow, 500); // reintentar cada 500ms
+            }
+        }
+        setTimeout(waitForHealthCheckThenShow, 4000);
         setInterval(() => {
             // Auto-dismiss: si la burbuja lleva 8s+ visible, quitarla para que rote
             if (proactiveBubble) {
