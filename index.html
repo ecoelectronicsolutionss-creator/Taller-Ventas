@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Electronic Solutions | Reparación y Refacciones en San Andres Cholula</title>
+    <title>Eco-Electronic Solutions | Reparación y Refacciones en Cholula</title>
 
     <!-- SEO: Meta Description y Robots -->
     <meta name="description" content="Taller de reparación de electrónicos en San Andrés Cholula, Puebla. Reparamos microondas, laptops, consolas, impresoras y más. Refacciones originales. WhatsApp: 222 316 7820.">
@@ -2883,39 +2883,61 @@
             showQuickReplies();
         }
 
-        // ── Sonido sutil de notificación (Web Audio API — no requiere archivo externo) ──
-        function playNotificationChime() {
+        // ── Audio + Vibración (desbloqueado al primer toque del usuario) ──
+        let _audioCtx = null;
+        let _audioUnlocked = false;
+
+        function unlockAudio() {
+            if (_audioUnlocked) return;
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const now = ctx.currentTime;
-                // Nota 1: tono suave agudo
-                const osc1 = ctx.createOscillator();
-                const gain1 = ctx.createGain();
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(830, now);
-                gain1.gain.setValueAtTime(0.08, now);
-                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                osc1.connect(gain1).connect(ctx.destination);
-                osc1.start(now);
-                osc1.stop(now + 0.4);
-                // Nota 2: armónico sutil (un poco más agudo)
-                const osc2 = ctx.createOscillator();
-                const gain2 = ctx.createGain();
-                osc2.type = 'sine';
-                osc2.frequency.setValueAtTime(1100, now + 0.12);
-                gain2.gain.setValueAtTime(0.05, now + 0.12);
-                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
-                osc2.connect(gain2).connect(ctx.destination);
-                osc2.start(now + 0.12);
-                osc2.stop(now + 0.5);
-                // Cerrar contexto después
-                setTimeout(() => ctx.close(), 600);
-            } catch(e) { /* Audio API no disponible — silencioso */ }
+                _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                // Reproducir silencio para desbloquear en iOS/Android
+                const buf = _audioCtx.createBuffer(1, 1, 22050);
+                const src = _audioCtx.createBufferSource();
+                src.buffer = buf;
+                src.connect(_audioCtx.destination);
+                src.start(0);
+                _audioUnlocked = true;
+                // Resumir si está suspendido (Chrome autoplay policy)
+                if (_audioCtx.state === 'suspended') _audioCtx.resume();
+            } catch(e) {}
         }
 
-        // ── Vibración sutil (solo móviles) ──
+        // Desbloquear audio al primer gesto del usuario (touch, click o scroll)
+        ['touchstart', 'click', 'scroll'].forEach(evt => {
+            document.addEventListener(evt, unlockAudio, { once: false, passive: true });
+        });
+
+        function playNotificationChime() {
+            if (!_audioCtx || !_audioUnlocked) return;
+            try {
+                if (_audioCtx.state === 'suspended') _audioCtx.resume();
+                const now = _audioCtx.currentTime;
+                // Nota 1: tono suave
+                const osc1 = _audioCtx.createOscillator();
+                const gain1 = _audioCtx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(830, now);
+                gain1.gain.setValueAtTime(0.12, now);
+                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                osc1.connect(gain1).connect(_audioCtx.destination);
+                osc1.start(now);
+                osc1.stop(now + 0.4);
+                // Nota 2: armónico
+                const osc2 = _audioCtx.createOscillator();
+                const gain2 = _audioCtx.createGain();
+                osc2.type = 'sine';
+                osc2.frequency.setValueAtTime(1100, now + 0.12);
+                gain2.gain.setValueAtTime(0.07, now + 0.12);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                osc2.connect(gain2).connect(_audioCtx.destination);
+                osc2.start(now + 0.12);
+                osc2.stop(now + 0.5);
+            } catch(e) {}
+        }
+
         function vibrateSubtle() {
-            try { if (navigator.vibrate) navigator.vibrate(80); } catch {}
+            try { if (navigator.vibrate) navigator.vibrate([50, 30, 50]); } catch {}
         }
 
         // ── Burbuja proactiva insistente con rotación de mensajes ──
