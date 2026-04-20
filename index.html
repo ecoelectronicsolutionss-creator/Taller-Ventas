@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Electronic Solutions | Reparación y Refacciones en Cholula</title>
+    <title>Eco-Electronic Solutions | Reparación y Refacciones en San Andres Cholula</title>
 
     <!-- SEO: Meta Description y Robots -->
     <meta name="description" content="Taller de reparación de electrónicos en San Andrés Cholula, Puebla. Reparamos microondas, laptops, consolas, impresoras y más. Refacciones originales. WhatsApp: 222 316 7820.">
@@ -1866,8 +1866,8 @@
             <h3>8. Programa Eco-Canje</h3>
             <p>El programa de intercambio de aparatos electrónicos usados está sujeto a evaluación del técnico. Los valores de canje son determinados por Eco-Electronic Solutions y no son negociables.</p>
 
-            <h3>9. Uso del Chatbot AI (Daniela)</h3>
-            <p>El asistente virtual Daniela proporciona información orientativa. Las cotizaciones finales deben ser confirmadas directamente con un técnico. Las respuestas de la IA no constituyen un compromiso contractual.</p>
+            <h3>9. Uso del Chatbot AI (Dalia)</h3>
+            <p>El asistente virtual Dalia proporciona información orientativa. Las cotizaciones finales deben ser confirmadas directamente con un técnico. Las respuestas de la IA no constituyen un compromiso contractual.</p>
 
             <h3>10. Privacidad y Datos</h3>
             <p>Los datos proporcionados por el formulario de cotización y WhatsApp son utilizados exclusivamente para brindar el servicio solicitado. No compartimos información con terceros.</p>
@@ -2353,10 +2353,10 @@
     <div class="chatbot-window" id="chatbot-window">
         <div class="chat-header">
             <div class="chat-header-avatar">
-                <img src="https://ui-avatars.com/api/?name=Daniela&background=2ecc71&color=fff&size=150" alt="Asesora Daniela">
+                <img src="https://ui-avatars.com/api/?name=Dalia&background=2ecc71&color=fff&size=150" alt="Asesora Dalia">
             </div>
             <div class="chat-header-info">
-                <h4>Daniela</h4>
+                <h4>Dalia</h4>
                 <p>Asesora AI de Eco-Electronic</p>
             </div>
             <button class="close-chat" id="close-chat" aria-label="Cerrar chat"><i class="fas fa-times"></i></button>
@@ -2831,9 +2831,28 @@
             if (indicator) indicator.remove();
         }
 
+        // ── Cargar nombre del asistente dinámicamente desde la API
+        let _assistantName = 'Dalia'; // fallback
+        fetch('/v1/admin/assistant_name')
+          .then(r => r.json())
+          .then(d => {
+            if (d.assistant_name) {
+              _assistantName = d.assistant_name;
+              // Actualizar header del chat
+              const headerName = document.querySelector('.chat-header-info h4');
+              if (headerName) headerName.textContent = _assistantName;
+              const headerAvatar = document.querySelector('.chat-header-avatar img');
+              if (headerAvatar) {
+                headerAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(_assistantName)}&background=2ecc71&color=fff&size=150`;
+                headerAvatar.alt = `Asesora ${_assistantName}`;
+              }
+            }
+          })
+          .catch(() => {});
+
         // ── Mensaje inicial en el chat (siempre)
         if (chatBody.children.length === 0) {
-            appendMessage("¡Hola! 👋 Soy <strong>Daniela</strong>, tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy?", 'bot');
+            appendMessage(`¡Hola! 👋 Soy <strong>${_assistantName}</strong>, tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy?`, 'bot');
             showQuickReplies();
         }
 
