@@ -2752,6 +2752,11 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
+        // ── Móvil: iniciar en la parte inferior (mapa + info del taller) ──
+        if (window.innerWidth <= 768) {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
         // =============================================
         // 10. HERO PARTICLES
         // =============================================
