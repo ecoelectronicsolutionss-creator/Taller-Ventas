@@ -2846,39 +2846,66 @@
         }
 
         // ── Detección de servidor AI + carga de nombre ──
+        // ✅ FIX v6: Usa /v1/health (público) en vez de /v1/admin/assistant_name (requería API key → 403 siempre)
         let _assistantName = 'Dalia'; // fallback
-        let _aiServerOnline = true;   // ✅ OPTIMISTA: asumir online hasta que el health check diga lo contrario
+        let _aiServerOnline = true;   // OPTIMISTA: asumir online hasta que el health check diga lo contrario
+        let _flowiseOnline = false;   // ✅ NEW: Track Flowise status para skip inteligente
         let _bubbleDismissCount = 0;
         let _healthCheckDone = false;
+
+        // FIX BUG-04: abortTimer guardado para limpiarlo en exito
+        // FIX BUG-05: backoff exponencial cuando el servidor está offline
+        let _healthCheckFailCount = 0;
+        let _healthCheckInterval = null;
 
         async function checkAIServer() {
             try {
                 const ctrl = new AbortController();
-                setTimeout(() => ctrl.abort(), 5000);
-                const r = await fetch('https://ai.ecoelectronicsolutions.com.mx/v1/admin/assistant_name', { signal: ctrl.signal });
+                const abortTimer = setTimeout(() => ctrl.abort(), 5000); // FIX BUG-04
+                const r = await fetch('https://ai.ecoelectronicsolutions.com.mx/v1/health', { signal: ctrl.signal });
+                clearTimeout(abortTimer); // FIX BUG-04: limpiar timer si fetch termina antes
                 if (r.ok) {
                     const d = await r.json();
                     _aiServerOnline = true;
+                    _flowiseOnline = !!d.flowise_online;
+                    _healthCheckFailCount = 0; // FIX BUG-05: reset contador al volver online
                     if (d.assistant_name) {
                         _assistantName = d.assistant_name;
                         const headerName = document.querySelector('.chat-header-info h4');
                         if (headerName) headerName.textContent = _assistantName;
+                        // FIX BUG-01: actualizar también el saludo inicial si ya está renderizado
+                        const welcomeMsg = chatBody.querySelector('.chat-bot');
+                        if (welcomeMsg && welcomeMsg.innerHTML.includes('Soy <strong>')) {
+                            welcomeMsg.innerHTML = `¡Hola! 👋 Soy <strong>${_assistantName}</strong>, tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy?`;
+                        }
                         const headerAvatar = document.querySelector('.chat-header-avatar img');
                         if (headerAvatar) {
                             headerAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(_assistantName)}&background=2ecc71&color=fff&size=150`;
                             headerAvatar.alt = `Asesora ${_assistantName}`;
                         }
                     }
-                } else { _aiServerOnline = false; }
-            } catch { _aiServerOnline = false; }
+                } else {
+                    _aiServerOnline = false; _flowiseOnline = false;
+                    _healthCheckFailCount++;
+                }
+            } catch {
+                _aiServerOnline = false; _flowiseOnline = false;
+                _healthCheckFailCount++;
+            }
             _healthCheckDone = true;
+
+            // FIX BUG-05: backoff exponencial — cuanto más tiempo offline, menos batería gasta
+            if (_healthCheckInterval) clearInterval(_healthCheckInterval);
+            const nextCheck = _healthCheckFailCount === 0 ? 30000
+                            : _healthCheckFailCount < 3   ? 45000
+                            : _healthCheckFailCount < 6   ? 90000
+                            : 180000; // máximo 3 min entre checks si lleva mucho tiempo offline
+            _healthCheckInterval = setInterval(checkAIServer, nextCheck);
         }
         // Check al cargar
         checkAIServer();
-        // Re-check cada 30s (por si el servidor vuelve)
-        setInterval(checkAIServer, 30000);
 
-        // ── Mensaje inicial en el chat (siempre)
+        // ── Mensaje inicial en el chat
         if (chatBody.children.length === 0) {
             appendMessage(`¡Hola! 👋 Soy <strong>${_assistantName}</strong>, tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy?`, 'bot');
             showQuickReplies();
@@ -3022,13 +3049,8 @@
                 toggleBtn.click();
             });
 
-            // Cerrar solo con el X
-            document.getElementById('bubble-close-btn')?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                proactiveBubble.remove();
-                proactiveBubble = null;
-                _bubbleDismissCount++;
-            });
+            // FIX BUG-03: listener de X ya está manejado dentro del click de la burbuja
+            // No se añade un segundo listener para evitar que _bubbleDismissCount se duplique
         }
 
         // ✅ Primera burbuja: esperar a que el health check termine (evita race condition en móviles lentos)
@@ -3040,13 +3062,18 @@
             }
         }
         setTimeout(waitForHealthCheckThenShow, 4000);
-        setInterval(() => {
-            // Auto-dismiss: si la burbuja lleva 8s+ visible, quitarla para que rote
+        // FIX ENT-04: guardar ID del interval para poder cancelarlo cuando el usuario ya cerró 5 veces
+        const _bubbleInterval = setInterval(() => {
+            // Auto-dismiss: si la burbuja lleva 10s visible, quitarla para que rote
             if (proactiveBubble) {
                 proactiveBubble.remove();
                 proactiveBubble = null;
             }
-            if (!isChatOpen && _bubbleDismissCount < 5) {
+            if (_bubbleDismissCount >= 5) {
+                clearInterval(_bubbleInterval); // FIX ENT-04: dejar de correr si el usuario ya no quiere burbujas
+                return;
+            }
+            if (!isChatOpen) {
                 showProactiveBubble();
             }
         }, 10000);
@@ -3087,6 +3114,16 @@
             const qr = document.getElementById('quick-replies');
             if (qr) qr.remove();
 
+            // FIX BUG-02: si el servidor está offline, responder inmediatamente sin hacer fetch
+            if (_healthCheckDone && !_aiServerOnline) {
+                appendMessage(
+                    '⚠️ Dalia está en mantenimiento en este momento. ' +
+                    'Contáctanos directamente por <a href="https://wa.me/522223167820" target="_blank" style="color:#25D366;font-weight:600;">WhatsApp</a> y te atendemos al instante.',
+                    'bot'
+                );
+                return;
+            }
+
             appendMessage(text, 'user');
             chatInput.value = '';
             isTyping = true;
@@ -3094,6 +3131,8 @@
             chatSendBtn.disabled = true;
 
             messagesState.push({ role: 'user', content: text });
+            // FIX BUG-06: evitar que messagesState crezca sin límite en sesiones largas
+            if (messagesState.length > 30) messagesState = messagesState.slice(-30);
 
             const botMsgId = "msg-" + Date.now();
             showTypingIndicator();
@@ -3103,97 +3142,143 @@
                 window._chatSessionId = 'web-' + Math.random().toString(36).slice(2, 10) + '-' + Date.now();
             }
 
-            // ── Endpoint de Flowise (mismo que usa el Dashboard) ──
+            // ── Endpoints ──
             const FLOWISE_URL     = 'https://ai.ecoelectronicsolutions.com.mx';
             const CHATFLOW_ID     = 'c427317f-dbfb-4a48-903e-4cbdf74c50a3';
             const FLOWISE_API     = `${FLOWISE_URL}/api/v1/prediction/${CHATFLOW_ID}`;
             const FALLBACK_API    = `${FLOWISE_URL}/v1/chat/completions`;
 
-            try {
-                // ── Intentar Flowise primero ──
-                const res = await fetch(FLOWISE_API, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        question: text,
-                        sessionId: window._chatSessionId,
-                        history: messagesState.slice(-7, -1).map(m => ({
-                            role: m.role === 'assistant' ? 'apiMessage' : 'userMessage',
-                            content: m.content
-                        }))
-                    }),
-                    signal: AbortSignal.timeout(30000)
-                });
-
+            // ── Safety timeout: desbloquear chat si ALGO sale mal después de 45s ──
+            const safetyTimer = setTimeout(() => {
+                console.warn('[Chat] Safety timeout — desbloqueando chat');
                 hideTypingIndicator();
-
-                if (res.ok) {
-                    const data = await res.json();
-                    // Flowise devuelve { text: "..." } o { answer: "..." }
-                    const reply = data.text || data.answer || data.message || '(sin respuesta)';
-                    appendMessage(reply, 'bot', botMsgId);
-                    messagesState.push({ role: 'assistant', content: reply });
-                    playNotificationChime();
-                    return;
+                if (isTyping) {
+                    isTyping = false;
+                    chatInput.disabled = false;
+                    chatSendBtn.disabled = false;
+                    if (!document.getElementById(botMsgId)) {
+                        appendMessage('⏱️ La respuesta está tardando demasiado. Intenta de nuevo o contáctanos por WhatsApp.', 'bot', botMsgId);
+                    }
                 }
+            }, 45000);
 
-                // Flowise devolvió error → fallback al backend directo
-                throw new Error('Flowise HTTP ' + res.status);
+            try {
+                let responded = false;
 
-            } catch (flowiseError) {
-                console.warn('[Chat] Flowise no disponible, usando backend directo:', flowiseError.message);
-                // ── Fallback: backend FastAPI con streaming ──
-                try {
-                    const response = await fetch(FALLBACK_API, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            model: "default",
-                            messages: messagesState,
-                            stream: true,
-                            temperature: 0.7
-                        }),
-                        signal: AbortSignal.timeout(30000)
-                    });
+                // ── PASO 1: Intentar Flowise (solo si health check dice que está online) ──
+                if (_flowiseOnline) {
+                    try {
+                        const res = await fetch(FLOWISE_API, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                question: text,
+                                sessionId: window._chatSessionId,
+                                history: messagesState.slice(-7, -1).map(m => ({
+                                    role: m.role === 'assistant' ? 'apiMessage' : 'userMessage',
+                                    content: m.content
+                                }))
+                            }),
+                            signal: AbortSignal.timeout(12000) // ✅ 12s max (antes 30s)
+                        });
 
-                    if (!response.ok) throw new Error("Error HTTP " + response.status);
-
-                    hideTypingIndicator();
-
-                    const reader = response.body.getReader();
-                    const decoder = new TextDecoder("utf-8");
-                    let fullBotResponse = "";
-
-                    while (true) {
-                        const { value, done } = await reader.read();
-                        if (done) break;
-                        const chunk = decoder.decode(value, { stream: true });
-                        for (const line of chunk.split('\n')) {
-                            if (line.startsWith('data: ')) {
-                                const dataStr = line.slice(6).trim();
-                                if (dataStr === '[DONE]') break;
-                                if (!dataStr) continue;
-                                try {
-                                    const d = JSON.parse(dataStr);
-                                    if (d.choices?.[0]?.delta?.content) {
-                                        fullBotResponse += d.choices[0].delta.content;
-                                        appendMessage(fullBotResponse, 'bot', botMsgId);
-                                    }
-                                } catch {}
-                            }
+                        if (res.ok) {
+                            hideTypingIndicator();
+                            const data = await res.json();
+                            const reply = data.text || data.answer || data.message || '(sin respuesta)';
+                            appendMessage(reply, 'bot', botMsgId);
+                            messagesState.push({ role: 'assistant', content: reply });
+                            playNotificationChime();
+                            responded = true;
+                        } else {
+                            console.warn('[Chat] Flowise HTTP', res.status, '— usando fallback');
+                        }
+                    } catch (flowiseErr) {
+                        console.warn('[Chat] Flowise error:', flowiseErr.message, '— usando fallback');
+                        // FIX BUG-07: no marcar offline permanente al primer fallo
+                        // Solo se marca offline tras 2 fallos consecutivos
+                        if (!window._flowiseFailCount) window._flowiseFailCount = 0;
+                        window._flowiseFailCount++;
+                        if (window._flowiseFailCount >= 2) {
+                            _flowiseOnline = false;
+                            window._flowiseFailCount = 0;
                         }
                     }
-                    messagesState.push({ role: 'assistant', content: fullBotResponse });
-                    playNotificationChime();
-
-                } catch (fallbackError) {
-                    console.error("AI Error:", fallbackError);
-                    hideTypingIndicator();
-                    appendMessage("⚠️ No pude conectar con el servidor de AI. Por favor, intenta enviando un WhatsApp usando los botones de arriba.", 'bot', botMsgId);
+                } else {
+                    console.info('[Chat] Flowise offline — saltando directo a fallback');
                 }
+
+                // ── PASO 2: Fallback al backend directo (streaming) ──
+                if (!responded) {
+                    try {
+                        const response = await fetch(FALLBACK_API, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                model: "default",
+                                messages: messagesState,
+                                stream: true,
+                                temperature: 0.7
+                            }),
+                            signal: AbortSignal.timeout(20000) // ✅ 20s max (antes 30s)
+                        });
+
+                        if (!response.ok) throw new Error('HTTP ' + response.status);
+
+                        hideTypingIndicator();
+
+                        const reader = response.body.getReader();
+                        const decoder = new TextDecoder('utf-8');
+                        let fullBotResponse = '';
+
+                        while (true) {
+                            const { value, done } = await reader.read();
+                            if (done) break;
+                            const chunk = decoder.decode(value, { stream: true });
+                            for (const line of chunk.split('\n')) {
+                                if (line.startsWith('data: ')) {
+                                    const dataStr = line.slice(6).trim();
+                                    if (dataStr === '[DONE]') break;
+                                    if (!dataStr) continue;
+                                    try {
+                                        const d = JSON.parse(dataStr);
+                                        if (d.choices?.[0]?.delta?.content) {
+                                            fullBotResponse += d.choices[0].delta.content;
+                                            appendMessage(fullBotResponse, 'bot', botMsgId);
+                                        }
+                                    } catch {}
+                                }
+                            }
+                        }
+
+                        if (fullBotResponse) {
+                            messagesState.push({ role: 'assistant', content: fullBotResponse });
+                            playNotificationChime();
+                            responded = true;
+                        }
+                    } catch (fallbackErr) {
+                        console.error('[Chat] Fallback error:', fallbackErr);
+                    }
+                }
+
+                // ── PASO 3: Si nada funcionó, mostrar mensaje de error ──
+                if (!responded) {
+                    hideTypingIndicator();
+                    appendMessage(
+                        '⚠️ No pude conectar con el servidor de AI en este momento. ' +
+                        'Por favor, intenta en unos minutos o contáctanos por ' +
+                        '<a href="https://wa.me/522223167820" target="_blank" style="color:#25D366;font-weight:600;">WhatsApp</a>.',
+                        'bot', botMsgId
+                    );
+                }
+
+            } catch (fatalError) {
+                // Catch-all: NUNCA dejar el chat bloqueado
+                console.error('[Chat] Error fatal:', fatalError);
+                hideTypingIndicator();
+                appendMessage('⚠️ Ocurrió un error inesperado. Intenta de nuevo.', 'bot', botMsgId);
             } finally {
+                clearTimeout(safetyTimer);
                 isTyping = false;
                 chatInput.disabled = false;
                 chatSendBtn.disabled = false;
