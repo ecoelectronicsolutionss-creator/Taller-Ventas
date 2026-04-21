@@ -2933,11 +2933,10 @@
             } catch(e) {}
         }
 
-        // Intentar desbloquear audio al cargar (funciona en desktop)
-        unlockAudio();
-        // + desbloquear al primer gesto del usuario (requerido en móvil)
+        // Desbloquear audio al primer gesto real del usuario (once: true para no repetir)
+        // NO se intenta al cargar la página — los navegadores bloquean eso en móvil
         ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(evt => {
-            document.addEventListener(evt, unlockAudio, { once: false, passive: true });
+            document.addEventListener(evt, unlockAudio, { once: true, passive: true });
         });
 
         function playNotificationChime() {
@@ -2991,40 +2990,12 @@
             // Remover burbuja anterior si existe
             if (proactiveBubble) { proactiveBubble.remove(); proactiveBubble = null; }
 
-            // ✅ Solo mostrar mantenimiento si el health check YA terminó y confirmó offline
-            if (_healthCheckDone && !_aiServerOnline) {
-                proactiveBubble = document.createElement('div');
-                proactiveBubble.className = 'chat-proactive-bubble maintenance';
-                proactiveBubble.innerHTML = `
-                    <span class="bubble-close" id="bubble-close-btn" aria-label="Cerrar">&times;</span>
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-                        <span style="font-size:20px">⚠️</span>
-                        <strong style="color:#f59e0b">Mantenimiento Programado</strong>
-                    </div>
-                    <span style="font-size:13px;line-height:1.4">Nuestros ingenieros están dando mantenimiento a nuestra IA. Te recomendamos contactarnos por WhatsApp:</span>
-                    <a href="https://wa.me/522223167820?text=${encodeURIComponent('Hola, quisiera información sobre un servicio de reparación.')}"
-                       target="_blank" rel="noopener"
-                       style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;margin-top:8px;transition:transform .2s">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.75.75 0 00.917.918l4.458-1.495A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.393 0-4.602-.794-6.378-2.134l-.446-.345-2.898.972.97-2.898-.345-.447A9.963 9.963 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-                        Enviar WhatsApp
-                    </a>
-                `;
-                document.body.appendChild(proactiveBubble);
-                // FIX BUG: guard si el chat ya está abierto, no mostrar ninguna burbuja
-                if (isChatOpen) return;
+            // ✅ Si el servidor está offline: NO mostrar burbuja de mantenimiento molesta.
+            // El usuario verá el mensaje de error cuando intente chatear directamente.
+            if (_healthCheckDone && !_aiServerOnline) return;
 
-                // FIX BUG-03 mantenimiento: cerrar con el mismo delegado de click (no listener separado)
-                proactiveBubble.addEventListener('click', (e) => {
-                    if (e.target.id === 'bubble-close-btn') {
-                        e.stopPropagation();
-                        proactiveBubble.remove();
-                        proactiveBubble = null;
-                        _bubbleDismissCount++;
-                        _saveDismissCount();
-                    }
-                });
-                return;
-            }
+            // Si el health check aún no terminó, tampoco mostrar nada todavía
+            if (!_healthCheckDone) return;
 
             // Servidor online → burbuja normal rotativa
             const text = proactiveMsgs[_proactiveMsgIndex % proactiveMsgs.length];
@@ -3038,9 +3009,9 @@
             `;
             document.body.appendChild(proactiveBubble);
 
-            // 🔔 Notificar al usuario
+            // 🔔 Notificar al usuario — solo si el audio ya fue desbloqueado por un gesto
             vibrateSubtle();
-            playNotificationChime();
+            if (_audioUnlocked) playNotificationChime();
 
             // Abrir chat al hacer clic en la burbuja
             proactiveBubble.addEventListener('click', (e) => {
@@ -3048,36 +3019,37 @@
                     proactiveBubble.remove();
                     proactiveBubble = null;
                     _bubbleDismissCount++;
-                    _saveDismissCount(); // FIX BUG-09: persistir
+                    _saveDismissCount();
                     return;
                 }
                 proactiveBubble.remove();
                 proactiveBubble = null;
                 toggleBtn.click();
             });
-
-            // FIX BUG-03: listener de X ya está manejado dentro del click de la burbuja
-            // No se añade un segundo listener para evitar que _bubbleDismissCount se duplique
         }
 
         // ✅ Primera burbuja: esperar a que el health check termine (evita race condition en móviles lentos)
+        // + esperar 4s extra para que el usuario ya haya interactuado (desbloquea el audio)
         function waitForHealthCheckThenShow() {
             if (_healthCheckDone) {
                 showProactiveBubble();
             } else {
-                setTimeout(waitForHealthCheckThenShow, 500); // reintentar cada 500ms
+                setTimeout(waitForHealthCheckThenShow, 500);
             }
         }
         setTimeout(waitForHealthCheckThenShow, 4000);
-        // FIX ENT-04: guardar ID del interval para poder cancelarlo cuando el usuario ya cerró 5 veces
+
+        // Rotación de mensajes proactivos: cada 10s rota al siguiente
+        // Cuando el servidor está offline, no hace nada (guard dentro de showProactiveBubble)
         const _bubbleInterval = setInterval(() => {
-            // Auto-dismiss: si la burbuja lleva 10s visible, quitarla para que rote
+            // Auto-dismiss la burbuja anterior para rotar al siguiente mensaje
             if (proactiveBubble) {
                 proactiveBubble.remove();
                 proactiveBubble = null;
             }
+            // Dejar de insistir si el usuario ya cerró 5 veces
             if (_bubbleDismissCount >= 5) {
-                clearInterval(_bubbleInterval); // FIX ENT-04: dejar de correr si el usuario ya no quiere burbujas
+                clearInterval(_bubbleInterval);
                 return;
             }
             if (!isChatOpen) {
