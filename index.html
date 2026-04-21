@@ -2850,7 +2850,9 @@
         let _assistantName = 'Dalia'; // fallback
         let _aiServerOnline = true;   // OPTIMISTA: asumir online hasta que el health check diga lo contrario
         let _flowiseOnline = false;   // ✅ NEW: Track Flowise status para skip inteligente
-        let _bubbleDismissCount = 0;
+        // FIX BUG-09: persistir el contador de cierres en localStorage
+        let _bubbleDismissCount = parseInt(localStorage.getItem('_bubbleDismiss') || '0', 10);
+        const _saveDismissCount = () => localStorage.setItem('_bubbleDismiss', _bubbleDismissCount);
         let _healthCheckDone = false;
 
         // FIX BUG-04: abortTimer guardado para limpiarlo en exito
@@ -3008,14 +3010,18 @@
                     </a>
                 `;
                 document.body.appendChild(proactiveBubble);
-                vibrateSubtle();
-                playNotificationChime();
-                // Cerrar con X
-                document.getElementById('bubble-close-btn')?.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    proactiveBubble.remove();
-                    proactiveBubble = null;
-                    _bubbleDismissCount++;
+                // FIX BUG: guard si el chat ya está abierto, no mostrar ninguna burbuja
+                if (isChatOpen) return;
+
+                // FIX BUG-03 mantenimiento: cerrar con el mismo delegado de click (no listener separado)
+                proactiveBubble.addEventListener('click', (e) => {
+                    if (e.target.id === 'bubble-close-btn') {
+                        e.stopPropagation();
+                        proactiveBubble.remove();
+                        proactiveBubble = null;
+                        _bubbleDismissCount++;
+                        _saveDismissCount();
+                    }
                 });
                 return;
             }
@@ -3042,6 +3048,7 @@
                     proactiveBubble.remove();
                     proactiveBubble = null;
                     _bubbleDismissCount++;
+                    _saveDismissCount(); // FIX BUG-09: persistir
                     return;
                 }
                 proactiveBubble.remove();
