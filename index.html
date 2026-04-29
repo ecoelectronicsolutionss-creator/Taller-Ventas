@@ -1,1416 +1,574 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Electronic Solutions | Reparación y Refacciones en Cholula</title>
+    <title>Reparación de Electrónicos en San Andrés Cholula | Eco-Electronic Solutions</title>
+    <meta name="description" content="Taller de reparación de electrodomésticos, consolas, PCs, impresoras y movilidad eléctrica en San Andrés Cholula, Puebla. Diagnóstico especializado por $200 MXN. WhatsApp: 222 316 7820.">
 
-    <!-- SEO: Meta Description y Robots -->
-    <meta name="description" content="Taller de reparación de electrónicos en San Andrés Cholula, Puebla. Reparamos microondas, laptops, consolas, impresoras y más. Refacciones originales. WhatsApp: 222 316 7820.">
-    <meta name="keywords" content="reparación electrónicos Cholula, taller electrónica Cholula, reparar laptop Cholula, refacciones Cholula, Eco-Electronic Solutions">
-    <meta name="robots" content="index, follow">
-
-    <!-- SEO: Open Graph para WhatsApp y redes sociales -->
-    <meta property="og:title" content="Eco-Electronic Solutions | Reparación en Cholula">
-    <meta property="og:description" content="Expertos en reparación de electrónicos en San Andrés Cholula. Laptops, consolas, electrodomésticos y más.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="es_MX">
-
-    <!-- SEO: JSON-LD para Google Maps y Búsqueda Local -->
+    <!-- ============================================================
+         SCHEMA.ORG JSON-LD — Regla 3: Cero Disonancia de Datos
+         Todos los valores coinciden 100% con el texto visible en la página.
+    ============================================================ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ElectronicsRepair",
-      "name": "Eco-Electronic Solutions",
-      "telephone": "+52 222 989 8801",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Av. Camino Real a San Andrés Cholula",
-        "addressLocality": "San Bernardino Tlaxcalancingo",
-        "addressRegion": "Puebla",
-        "postalCode": "72823",
-        "addressCountry": "MX"
-      },
-      "openingHours": ["Mo-Fr 10:00-20:00", "Sa 10:00-18:00", "Su 10:00-16:00"],
-      "sameAs": ["https://wa.me/522223167820"]
+      "@graph": [
+        {
+          "@type": "ElectronicsStore",
+          "@id": "https://www.ecoelectronicsolutions.com.mx/#negocio",
+          "name": "Eco-Electronic Solutions",
+          "alternateName": "Eco-Electronic Solutions Cholula",
+          "description": "Taller de reparación de electrónica, electrodomésticos, cómputo y movilidad eléctrica en San Andrés Cholula, Puebla. Expertos en licuadoras, microondas, consolas, PCs, laptops, pantallas LED, patines y motos eléctricas e impresoras.",
+          "url": "https://www.ecoelectronicsolutions.com.mx",
+          "telephone": ["+522223167820", "+522229898801"],
+          "sameAs": ["https://wa.me/522223167820"],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+522223167820",
+              "contactType": "customer service",
+              "contactOption": "HearingImpairedSupported",
+              "areaServed": "MX",
+              "availableLanguage": "Spanish",
+              "description": "Contacto por WhatsApp"
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+522229898801",
+              "contactType": "customer service",
+              "areaServed": "MX",
+              "availableLanguage": "Spanish",
+              "description": "Línea telefónica directa"
+            }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "A unos pasos del Mercado Municipal de San Andrés Cholula",
+            "addressLocality": "San Andrés Cholula",
+            "addressRegion": "Puebla",
+            "addressCountry": "MX"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "addressCountry": "MX",
+            "addressLocality": "San Andrés Cholula, Puebla"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Reparación y Refacciones",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Diagnóstico especializado de consolas, PCs, impresoras y movilidad eléctrica",
+                  "description": "Diagnóstico técnico profesional para consolas de videojuegos, computadoras de escritorio, laptops, impresoras y vehículos eléctricos como patines y motos."
+                },
+                "price": "200.00",
+                "priceCurrency": "MXN"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Reparación de electrodomésticos de hogar y cocina",
+                  "description": "Reparación de licuadoras, planchas, microondas y ollas exprés."
+                },
+                "areaServed": "San Andrés Cholula, Puebla"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Reparación de audio y video",
+                  "description": "Reparación de pantallas LED, bocinas Bluetooth y equipos de sonido de alta fidelidad."
+                },
+                "areaServed": "San Andrés Cholula, Puebla"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Programa Eco-Canje",
+                  "description": "El cliente entrega equipos electrónicos viejos o irreparables. El taller los recicla responsablemente y entrega cupones de descuento aplicables en reparaciones o compra de accesorios."
+                },
+                "price": "0",
+                "priceCurrency": "MXN"
+              }
+            ]
+          },
+          "makesOffer": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Product",
+                "name": "Cargadores y baterías para dispositivos electrónicos",
+                "description": "Cargadores originales y genéricos, baterías para múltiples dispositivos."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Product",
+                "name": "Refacciones para electrodomésticos",
+                "description": "Aspas, vasos de licuadora, empaques para olla exprés y más refacciones de electrodomésticos."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Product",
+                "name": "Componentes electrónicos",
+                "description": "Cables de audio, cables de video y componentes electrónicos para proyectos propios."
+              }
+            }
+          ],
+          "slogan": "Expertos en electrónica, comprometidos con el planeta.",
+          "foundingDate": "2026",
+          "priceRange": "$$",
+          "currenciesAccepted": "MXN",
+          "paymentAccepted": "Cash, Card",
+          "areaServed": {
+            "@type": "City",
+            "name": "San Andrés Cholula",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "Puebla"
+            }
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.ecoelectronicsolutions.com.mx/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué aparatos reparan en Eco-Electronic Solutions en Cholula?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Reparamos electrodomésticos de hogar y cocina (licuadoras, planchas, microondas, ollas exprés), equipos de audio y video (pantallas LED, bocinas Bluetooth), cómputo y gaming (consolas, PCs, laptops), movilidad eléctrica (patines y motos eléctricas) e impresoras."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta el diagnóstico en Eco-Electronic Solutions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El diagnóstico especializado de consolas, PCs, impresoras y movilidad eléctrica tiene un costo de $200.00 MXN. Este costo cubre la evaluación técnica completa del equipo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué es el Programa Eco-Canje de Eco-Electronic Solutions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El Programa Eco-Canje permite traer equipos electrónicos viejos o sin posibilidad de reparación al taller. Eco-Electronic Solutions los recicla responsablemente y el cliente recibe cupones de descuento para usarse en reparaciones o compra de accesorios."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dónde está ubicado el taller Eco-Electronic Solutions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El taller está ubicado a unos pasos del Mercado Municipal de San Andrés Cholula, Puebla, México. Puede contactarnos por WhatsApp al 222 316 7820 o por teléfono al 222 989 8801."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Venden refacciones y accesorios en Eco-Electronic Solutions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Vendemos cargadores originales y genéricos, baterías para múltiples dispositivos, refacciones de electrodomésticos (aspas, vasos de licuadora, empaques para olla exprés) y componentes electrónicos como cables de audio y video."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* ============================================
-           DESIGN SYSTEM — ECO-ELECTRONIC SOLUTIONS
-           ============================================ */
         :root {
-            /* Primary Palette */
-            --primary: #2ecc71;
-            --primary-dark: #27ae60;
-            --primary-light: #a3f5c5;
-            --primary-glow: rgba(46, 204, 113, 0.25);
-
-            /* Accent */
-            --accent: #f39c12;
-            --accent-light: #fdebd0;
-
-            /* Neutrals — Light Mode */
-            --bg-page: #f0f2f5;
-            --bg-surface: #ffffff;
-            --bg-surface-alt: #f8f9fa;
-            --bg-elevated: #ffffff;
-            --text-primary: #1a1a2e;
-            --text-secondary: #555e6b;
-            --text-muted: #8e99a4;
-            --border-color: rgba(0,0,0,0.06);
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
-            --shadow-glow: 0 0 30px var(--primary-glow);
-
-            /* Dark header */
-            --nav-bg: #0f0f1a;
-            --nav-bg-2: #1a1a2e;
-
-            /* Glass */
-            --glass-bg: rgba(255,255,255,0.7);
-            --glass-border: rgba(255,255,255,0.3);
-            --glass-blur: 20px;
-
-            /* Spacing — usa padding seguro con min() para evitar overflow */
-            --section-padding: 80px clamp(16px, 5%, 80px);
-            --container-max: 1300px;
-
-            /* Transition */
-            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-            /* Border radius */
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --radius-full: 50%;
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --tech-dark: #1a1a2e;
+            --accent-orange: #f39c12;
+            --bg-light: #f4f6f7;
+            --text-dark: #2c3e50;
         }
 
-        /* ============================================
-           DARK MODE
-           ============================================ */
-        [data-theme="dark"] {
-            --bg-page: #0d0d15;
-            --bg-surface: #161625;
-            --bg-surface-alt: #1c1c30;
-            --bg-elevated: #1f1f35;
-            --text-primary: #eef0f4;
-            --text-secondary: #a0a8b4;
-            --text-muted: #6b7280;
-            --border-color: rgba(255,255,255,0.06);
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
-            --glass-bg: rgba(22,22,37,0.8);
-            --glass-border: rgba(255,255,255,0.08);
-        }
-
-        /* ============================================
-           RESET & GLOBALS
-           ============================================ */
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            /* Prevenir overflow horizontal en TODOS los dispositivos */
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: var(--bg-page);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            overflow-x: hidden;
-            /* Asegurar que el body no exceda el ancho del viewport */
-            max-width: 100vw;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
         }
 
-        /* Prevenir que CUALQUIER elemento cause overflow horizontal */
-        *, *::before, *::after {
-            max-width: 100%;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        /* ============================================
-           SCROLL REVEAL (JS adds .revealed)
-           ============================================ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
-        }
-        .reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* ============================================
-           TOP BANNER — URGENCY
-           ============================================ */
         .top-banner {
-            background: linear-gradient(90deg, var(--accent), #e67e22);
+            background-color: var(--accent-orange);
             color: white;
             text-align: center;
-            padding: 10px 20px;
-            font-weight: 600;
-            font-size: 0.88rem;
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 1001;
-            line-height: 1.3;
-        }
-        .top-banner i { margin-right: 6px; }
-
-        /* ============================================
-           STATUS BADGE (ABIERTO / CERRADO)
-           ============================================ */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-left: 12px;
-            vertical-align: middle;
-        }
-        .status-badge.open {
-            background: rgba(46,204,113,0.15);
-            color: #2ecc71;
-        }
-        .status-badge.closed {
-            background: rgba(231,76,60,0.15);
-            color: #e74c3c;
-        }
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .status-badge.open .status-dot {
-            background: #2ecc71;
-            animation: statusPulse 2s infinite;
-        }
-        .status-badge.closed .status-dot {
-            background: #e74c3c;
-        }
-        @keyframes statusPulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.6); }
-            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(46,204,113,0); }
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
-        /* ============================================
-           NAVBAR
-           ============================================ */
         .navbar {
-            background: var(--nav-bg);
-            padding: 0 5%;
+            background-color: var(--tech-dark);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 70px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .logo {
-            color: var(--primary);
-            font-size: 1.5rem;
+            color: var(--primary-green);
+            font-size: 1.8rem;
             font-weight: 800;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
-            white-space: nowrap;
+            gap: 10px;
         }
-        .logo span { color: white; font-weight: 500; }
-        .logo i { font-size: 1.3rem; }
 
-        /* Search Bar */
+        .logo span {
+            color: white;
+        }
+
         .search-bar {
             flex-grow: 1;
-            margin: 0 30px;
+            margin: 0 40px;
             display: flex;
-            max-width: 520px;
-            position: relative;
         }
+
         .search-bar input {
             width: 100%;
-            padding: 10px 18px;
-            border: 2px solid transparent;
-            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-            font-size: 0.9rem;
-            font-family: inherit;
-            outline: none;
-            background: rgba(255,255,255,0.08);
-            color: white;
-            transition: border-color 0.3s, background 0.3s;
-        }
-        .search-bar input::placeholder { color: rgba(255,255,255,0.4); }
-        .search-bar input:focus {
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.12);
-        }
-        .search-bar button {
-            background: var(--primary);
-            color: white;
+            padding: 12px 20px;
             border: none;
-            padding: 10px 20px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: var(--primary-green);
+            color: var(--tech-dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 0 4px 4px 0;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 1rem;
             transition: background 0.3s;
         }
-        .search-bar button:hover { background: var(--primary-dark); }
 
-        /* Search suggestions dropdown */
-        .search-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 50px;
-            background: var(--bg-elevated);
-            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-            box-shadow: var(--shadow-lg);
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s var(--ease-out);
-            z-index: 100;
+        .search-bar button:hover {
+            background-color: var(--dark-green);
         }
-        .search-suggestions.active { max-height: 300px; }
-        .search-suggestion-item {
-            padding: 10px 18px;
-            cursor: pointer;
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .search-suggestion-item:hover {
-            background: var(--primary-glow);
-            color: var(--primary);
-        }
-        .search-suggestion-item i { width: 18px; text-align: center; opacity: 0.6; }
 
-        /* Nav Actions */
         .nav-actions {
             display: flex;
-            align-items: center;
-            gap: 12px;
+            gap: 20px;
         }
 
-        /* Dark Mode Toggle */
-        .dark-toggle {
-            background: rgba(255,255,255,0.1);
-            border: none;
+        .btn-whatsapp {
+            background-color: #25D366;
             color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-full);
-            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: background 0.3s, transform 0.3s;
+            gap: 8px;
+            transition: transform 0.2s;
         }
-        .dark-toggle:hover { background: rgba(255,255,255,0.2); transform: rotate(20deg); }
 
-        .btn-whatsapp-nav {
-            background: #25D366;
-            color: white;
-            padding: 9px 18px;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            font-size: 0.88rem;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            transition: transform 0.2s, box-shadow 0.3s;
-            white-space: nowrap;
-        }
-        .btn-whatsapp-nav:hover {
+        .btn-whatsapp:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
 
-        /* Hamburger */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 8px;
-            z-index: 1002;
-        }
-
-        /* Mobile Drawer */
-        .mobile-drawer-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        .mobile-drawer-overlay.active { opacity: 1; pointer-events: all; }
-
-        .mobile-drawer {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 280px;
-            max-width: 80vw;
-            height: 100%;
-            background: var(--nav-bg);
-            z-index: 1101;
-            transform: translateX(100%);
-            transition: transform 0.4s var(--ease-out);
-            display: flex;
-            flex-direction: column;
-            padding: 30px 0;
-        }
-        .mobile-drawer.active { transform: translateX(0); }
-
-        .drawer-close {
-            align-self: flex-end;
-            margin: 0 20px 20px 0;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .drawer-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 25px;
-            color: rgba(255,255,255,0.8);
-            font-size: 1rem;
-            font-weight: 500;
-            transition: background 0.2s, color 0.2s, padding-left 0.2s;
-        }
-        .drawer-link:hover {
-            background: rgba(46,204,113,0.1);
-            color: var(--primary);
-            padding-left: 32px;
-        }
-        .drawer-link i { width: 22px; text-align: center; }
-        .drawer-divider {
-            height: 1px;
-            background: rgba(255,255,255,0.08);
-            margin: 10px 25px;
-        }
-
-        /* ============================================
-           TERMS & CONDITIONS MODAL
-           ============================================ */
-        .terms-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            backdrop-filter: blur(4px);
-        }
-        .terms-overlay.active { opacity: 1; pointer-events: all; }
-
-        .terms-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            width: 90%;
-            max-width: 680px;
-            max-height: 85vh;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            z-index: 10001;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s, transform 0.3s var(--ease-out);
-        }
-        .terms-modal.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .terms-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-        .terms-header h2 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-primary);
-        }
-        .terms-header h2 i { color: var(--primary); }
-        .terms-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.6rem;
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: background 0.2s, color 0.2s;
-        }
-        .terms-close:hover { background: rgba(0,0,0,0.08); color: var(--text-primary); }
-        [data-theme="dark"] .terms-close:hover { background: rgba(255,255,255,0.08); }
-
-        .terms-body {
-            padding: 24px;
-            overflow-y: auto;
-            flex: 1;
-            line-height: 1.7;
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-        }
-        .terms-body h3 {
-            font-size: 1.02rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 22px 0 8px;
-        }
-        .terms-body h3:first-of-type { margin-top: 0; }
-        .terms-body p { margin-bottom: 10px; }
-        .terms-body ul {
-            margin: 8px 0 14px 20px;
-            list-style: disc;
-        }
-        .terms-body ul li { margin-bottom: 6px; }
-        .terms-body a { color: var(--primary); font-weight: 600; }
-        .terms-body a:hover { text-decoration: underline; }
-        .terms-updated {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        @media (max-width: 600px) {
-            .terms-modal {
-                width: 100%;
-                max-width: 100%;
-                max-height: 100%;
-                height: 100dvh;
-                border-radius: 0;
-                top: 0; left: 0;
-                transform: translateY(100%);
-            }
-            .terms-modal.active { transform: translateY(0); }
-            .terms-header { padding: 16px 18px; }
-            .terms-body { padding: 18px; }
-        }
-
-        /* ============================================
-           HERO
-           ============================================ */
         .hero {
-            background: linear-gradient(160deg, rgba(15,15,26,0.92), rgba(46,204,113,0.4)),
-                        url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
-            /* NOTA: se removió 'fixed' — causa bug crítico de rendering en iOS Safari */
-            background-attachment: scroll;
-            min-height: 75vh;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(46, 204, 113, 0.6)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding: 60px clamp(16px, 5%, 80px);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 120px;
-            background: linear-gradient(to top, var(--bg-page), transparent);
-            pointer-events: none;
+            padding: 0 20px;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
         .hero-content h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 900;
-            line-height: 1.15;
-            margin-bottom: 18px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        .hero-content h1 .highlight {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+
         .hero-content p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            margin-bottom: 35px;
-            color: rgba(255,255,255,0.85);
-            max-width: 650px;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 300;
         }
 
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--primary);
-            color: white;
-            padding: 16px 36px;
-            border-radius: var(--radius-md);
-            font-size: 1.15rem;
-            font-weight: 700;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 6px 25px rgba(46,204,113,0.4);
-            position: relative;
-            overflow: hidden;
-            max-width: 360px;
-            width: auto;
-        }
-        .hero-cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 35px rgba(46,204,113,0.5);
-        }
-        .hero-cta:hover::before { opacity: 1; }
-
-        /* Floating particles */
-        .hero-particles {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .particle {
-            position: absolute;
-            background: rgba(46,204,113,0.15);
-            border-radius: 50%;
-            animation: float-particle linear infinite;
-        }
-        @keyframes float-particle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        .section-container {
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* ============================================
-           STATS BAR
-           ============================================ */
-        .stats-bar {
-            background: var(--bg-surface);
-            padding: 40px 5%;
-            border-bottom: 1px solid var(--border-color);
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--tech-dark);
+            border-left: 5px solid var(--primary-green);
+            padding-left: 15px;
         }
-        .stats-grid {
+
+        /* Respuesta directa GEO — párrafo de 40-50 palabras bajo cada h2 */
+        .section-lead {
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 2px solid #ddd;
+            line-height: 1.7;
+            max-width: 860px;
+        }
+
+        .grid-container {
             display: grid;
-            /* Fluido: 4 cols en desktop, 2 en tablet, 2 en móvil — sin overflow */
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 20px;
-            max-width: var(--container-max);
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
         }
-        .stat-item {
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
             text-align: center;
-            padding: 20px 10px;
-        }
-        .stat-number {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 900;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        .stat-label {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
         }
 
-        /* ============================================
-           SECTION CONTAINER
-           ============================================ */
-        .section {
-            padding: var(--section-padding);
-            max-width: var(--container-max);
-            margin: 0 auto;
-            /* Garantizar padding mínimo horizontal en cualquier pantalla */
-            padding-left: max(16px, min(5%, 80px));
-            padding-right: max(16px, min(5%, 80px));
-            box-sizing: border-box;
-            width: 100%;
-        }
-        .section-alt {
-            background: var(--bg-surface);
-        }
-        .section-alt .section {
-            padding-top: 60px;
-            padding-bottom: 60px;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-green);
         }
 
-        .section-header {
-            margin-bottom: 45px;
+        .card i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
         }
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--primary);
+
+        .card h3 {
+            font-size: 1.2rem;
             margin-bottom: 10px;
         }
-        .section-label::before {
-            content: '';
-            width: 30px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        .section-title {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 800;
-            color: var(--text-primary);
-            line-height: 1.2;
-        }
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-top: 10px;
-            max-width: 600px;
+
+        .card ul {
+            list-style: none;
+            color: #555;
+            font-size: 0.9rem;
+            text-align: left;
+            padding: 0;
         }
 
-        /* ============================================
-           SERVICE CARDS
-           ============================================ */
-        .grid-services {
-            display: grid;
-            /* minmax con clamp: en móvil pequeño cae a 1 col, tablet 2 col, desktop 3-4 col */
-            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-            gap: 24px;
-        }
-        .service-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 32px 24px;
-            text-align: center;
-            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.3s;
-            cursor: default;
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            transform: scaleX(0);
-            transition: transform 0.4s var(--ease-out);
-            transform-origin: left;
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-            border-color: var(--primary);
-        }
-        .service-card:hover::before { transform: scaleX(1); }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, var(--primary-glow), rgba(46,204,113,0.05));
+        .card ul li {
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 18px;
-            font-size: 1.8rem;
-            color: var(--primary);
-            transition: transform 0.3s var(--ease-bounce);
-        }
-        .service-card:hover .service-icon { transform: scale(1.1) rotate(-5deg); }
-
-        .service-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        .service-card p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
+            gap: 8px;
         }
 
-        /* ============================================
-           ECO-CANJE BANNER
-           ============================================ */
-        .eco-banner {
-            background: linear-gradient(135deg, var(--nav-bg), var(--nav-bg-2));
+        .card ul li::before {
+            content: '✔';
+            color: var(--primary-green);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        /* Tabla de precios */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .pricing-table thead {
+            background-color: var(--tech-dark);
             color: white;
-            margin: 0 5%;
-            border-radius: var(--radius-lg);
-            padding: 50px 45px;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 14px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-table tbody tr:hover {
+            background-color: #f0fdf4;
+        }
+
+        .price-tag {
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+
+        /* Eco-Canje Banner */
+        .eco-banner {
+            background: linear-gradient(135deg, var(--tech-dark), #2c3e50);
+            color: white;
+            margin: 40px 5%;
+            border-radius: 10px;
+            padding: 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 40px;
-            box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.05);
-            border: 1px solid rgba(46,204,113,0.15);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
+            border-left: 8px solid var(--primary-green);
         }
-        .eco-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(46,204,113,0.08), transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .eco-banner-text { flex: 1; position: relative; }
+
         .eco-banner-text h2 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .eco-banner-text p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.8);
-        }
-        .btn-eco-canje {
-            background: white;
-            color: var(--nav-bg);
-            padding: 14px 30px;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            font-size: 1rem;
-            transition: transform 0.2s, box-shadow 0.3s;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .btn-eco-canje:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,255,255,0.2);
-        }
-
-        /* ============================================
-           REFACCIONES CARDS
-           ============================================ */
-        .parts-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 28px 22px;
-            text-align: center;
-            transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
-        }
-        .parts-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-        .parts-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-sm);
-            background: var(--accent-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-        [data-theme="dark"] .parts-icon {
-            background: rgba(243,156,18,0.12);
-        }
-        .parts-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .parts-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* ============================================
-           TESTIMONIALS
-           ============================================ */
-        .testimonials-track-wrapper {
-            overflow: hidden;
-            border-radius: var(--radius-md);
-        }
-        .testimonials-track {
-            display: flex;
-            transition: transform 0.6s var(--ease-out);
-        }
-        .testimonial-slide {
-            min-width: 100%;
-            padding: 0 10px;
-        }
-        .testimonial-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 35px 30px;
-            position: relative;
-        }
-        .testimonial-card::before {
-            content: '\201C';
-            font-size: 5rem;
-            font-family: Georgia, serif;
-            color: var(--primary);
-            opacity: 0.15;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            line-height: 1;
-        }
-        .testimonial-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-style: italic;
-            position: relative;
-        }
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-full);
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        .testimonial-name {
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-        .testimonial-stars {
-            color: var(--accent);
-            font-size: 0.85rem;
-            margin-top: 2px;
-        }
-        .testimonial-controls {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
-        .testimonial-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--border-color);
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            padding: 0;
-        }
-        .testimonial-dot.active {
-            background: var(--primary);
-            transform: scale(1.3);
-        }
-
-        /* ============================================
-           COTIZACIÓN FORM
-           ============================================ */
-        .quote-section {
-            background: linear-gradient(160deg, var(--nav-bg) 0%, var(--nav-bg-2) 100%);
-            padding: 70px 5%;
-            position: relative;
-        }
-        .quote-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--primary-glow), transparent 70%);
-            transform: translateX(-50%) translateY(-50%);
-            pointer-events: none;
-        }
-        .quote-container {
-            max-width: 650px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .quote-section .section-header .section-label {
-            color: var(--primary-light);
-        }
-        .quote-section .section-title {
-            color: white;
-        }
-        .quote-section .section-subtitle {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .quote-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .form-group label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: rgba(255,255,255,0.7);
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 13px 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-sm);
-            background: rgba(255,255,255,0.06);
-            color: white;
-            font-size: 0.95rem;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.3s, background 0.3s;
-        }
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.3);
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.1);
-        }
-        .form-group select option {
-            background: var(--nav-bg);
-            color: white;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 90px;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-        .form-error {
-            font-size: 0.78rem;
-            color: #e74c3c;
-            min-height: 18px;
-        }
-
-        .btn-submit-quote {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: var(--radius-sm);
-            font-size: 1.05rem;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(46,204,113,0.3);
-        }
-        .btn-submit-quote:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(46,204,113,0.4);
-        }
-        .btn-submit-quote:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ============================================
-           GALLERY (Placeholder for user photos)
-           ============================================ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-        }
-        .gallery-item {
-            position: relative;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            background: var(--bg-surface-alt);
-            border: 1px solid var(--border-color);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s var(--ease-out);
-        }
-        .gallery-item:hover img { transform: scale(1.08); }
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
-            display: flex;
-            align-items: flex-end;
-            padding: 18px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-        .gallery-overlay span {
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            background: var(--nav-bg);
-            color: white;
-            padding: 60px 5% 30px;
-            border-top: 4px solid var(--primary);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 40px;
-            max-width: var(--container-max);
-            margin: 0 auto 40px;
-        }
-        .footer-col h4 {
-            color: var(--primary);
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--primary-green);
             margin-bottom: 15px;
         }
-        .footer-col p, .footer-col a {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            padding: 60px 5%;
+        }
+
+        .faq-section .section-container {
+            padding: 0;
+        }
+
+        .faq-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--tech-dark);
             margin-bottom: 8px;
-            display: block;
-            transition: color 0.2s;
-        }
-        .footer-col a:hover { color: var(--primary); }
-        .footer-col .contact-line {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .footer-col .contact-line i {
-            color: var(--primary);
-            width: 18px;
-            text-align: center;
         }
 
-        .footer-map {
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        .footer-map iframe {
-            display: block;
-            width: 100%;
-            height: 250px;
-            border: 0;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
-        .footer-bottom p {
-            color: rgba(255,255,255,0.35);
-            font-size: 0.78rem;
-        }
-
-        .btn-gps {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: white;
-            padding: 10px 22px;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: transform 0.2s, box-shadow 0.3s;
-            margin-top: 8px;
-        }
-        .btn-gps:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(46,204,113,0.3);
-        }
-
-        /* ============================================
-           BACK TO TOP
-           ============================================ */
-        .back-to-top {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 45px;
-            height: 45px;
-            border-radius: var(--radius-full);
-            background: var(--bg-surface);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(10px);
-            transition: opacity 0.3s, transform 0.3s, background 0.2s;
-            z-index: 900;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-        }
-        .back-to-top:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* ============================================
-           CHATBOT WIDGET
-           ============================================ */
-        @keyframes popIn {
-            0%   { opacity: 0; transform: scale(0.7) translateY(10px); }
-            70%  { transform: scale(1.05) translateY(-2px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* Burbuja proactiva sobre el botón del chat */
-        .chat-proactive-bubble {
-            position: fixed;
-            bottom: 115px;
-            right: 24px;
-            background: var(--bg-surface);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 18px 18px 4px 18px;
-            padding: 14px 18px;
+        .faq-answer {
             font-size: 0.95rem;
-            max-width: 270px;
-            box-shadow: var(--shadow-md);
-            z-index: 9998;
-            animation: popIn 0.4s var(--ease-bounce) forwards;
-            line-height: 1.45;
-            cursor: pointer;
-            pointer-events: auto;
+            color: #555;
+            line-height: 1.7;
         }
-        .chat-proactive-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            right: 22px;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid var(--border-color);
+
+        /* Footer */
+        .footer {
+            background-color: var(--tech-dark);
+            color: white;
+            padding: 50px 5%;
+            text-align: center;
+            border-top: 5px solid var(--primary-green);
         }
-        .chat-proactive-bubble .bubble-close {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 20px;
-            height: 20px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
+
+        .footer h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .footer-contact {
+            margin: 20px 0;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 10px;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-        .chat-proactive-bubble .bubble-close:hover { color: var(--text-primary); }
-
-        /* Burbuja de mantenimiento (servidor offline) */
-        .chat-proactive-bubble.maintenance {
-            max-width: 280px;
-            border-color: #f59e0b;
-            border-radius: 16px;
-            cursor: default;
-            padding: 14px 18px;
-        }
-        .chat-proactive-bubble.maintenance::after {
-            border-top-color: #f59e0b;
-        }
-        .chat-proactive-bubble.maintenance a:hover {
-            transform: scale(1.03);
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
+        .market-location {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .eco-banner { flex-direction: column; text-align: center; gap: 20px; }
+            .footer-contact { flex-direction: column; gap: 10px; }
+        }
+
+        /* Chatbot Styles */
         .chatbot-btn {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: var(--radius-full);
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(46,204,113,0.45);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
             z-index: 9999;
-            transition: transform 0.3s var(--ease-bounce);
-            border: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .chatbot-btn::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            opacity: 0;
-            animation: chatPulse 2.5s infinite;
+        .chatbot-btn:hover {
+            transform: scale(1.1) rotate(10deg);
         }
-        @keyframes chatPulse {
-            0% { transform: scale(1); opacity: 0.6; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
-        .chatbot-btn:hover { transform: scale(1.1); }
-
         .chatbot-window {
             position: fixed;
             bottom: 100px;
             right: 30px;
-            width: 380px;
+            width: 350px;
             max-width: calc(100vw - 40px);
-            background: var(--bg-surface);
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             overflow: hidden;
             z-index: 9998;
             display: flex;
@@ -1418,1869 +576,593 @@
             opacity: 0;
             pointer-events: none;
             transform: translateY(20px) scale(0.95);
-            transition: all 0.4s var(--ease-bounce);
-            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.4);
         }
         .chatbot-window.active {
             opacity: 1;
             pointer-events: all;
             transform: translateY(0) scale(1);
         }
-
         .chat-header {
-            background: linear-gradient(135deg, var(--nav-bg), var(--nav-bg-2));
+            background: linear-gradient(135deg, var(--tech-dark), #2c3e50);
             color: white;
-            padding: 18px 20px;
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            position: relative;
         }
-        .chat-header-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-full);
-            border: 2px solid var(--primary);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .chat-header-avatar img {
-            width: 100%;
-            height: 100%;
+        .chat-header img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-green);
             object-fit: cover;
         }
-        .chat-header-info h4 { font-size: 1rem; font-weight: 700; margin: 0; }
-        .chat-header-info p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin: 0; }
+        .chat-header-info h4 { margin: 0; font-size: 1.1rem; }
+        .chat-header-info p { margin: 0; font-size: 0.8rem; color: #ccc; }
         .close-chat {
-            margin-left: auto;
-            background: rgba(255,255,255,0.08);
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: var(--radius-full);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: background 0.3s;
-            font-size: 0.9rem;
         }
-        .close-chat:hover { background: rgba(255,255,255,0.2); }
-
+        .close-chat:hover { background: rgba(255,255,255,0.3); }
         .chat-body {
             height: 350px;
-            padding: 18px;
+            padding: 20px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            background: var(--bg-surface-alt);
+            gap: 15px;
+            background: #f8f9fa;
         }
-
         .chat-bubble {
-            max-width: 82%;
-            padding: 11px 15px;
+            max-width: 80%;
+            padding: 12px 16px;
             border-radius: 18px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            animation: popIn 0.3s var(--ease-bounce) forwards;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             word-wrap: break-word;
         }
         .chat-bot {
-            background: var(--bg-surface);
-            color: var(--text-primary);
+            background: white;
+            color: var(--text-dark);
             align-self: flex-start;
             border-bottom-left-radius: 4px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .chat-user {
-            background: var(--primary);
+            background: var(--primary-green);
             color: white;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
         }
-
-        /* Quick reply buttons */
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            align-self: flex-start;
-            animation: popIn 0.3s var(--ease-bounce) forwards;
-        }
-        .quick-reply-btn {
-            background: var(--bg-surface);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-            font-weight: 500;
-        }
-        .quick-reply-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Typing indicator */
-        .typing-indicator {
-            display: flex;
-            gap: 5px;
-            padding: 14px 18px;
-            align-self: flex-start;
-        }
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            animation: typingBounce 1.4s infinite;
-        }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes typingBounce {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-8px); opacity: 1; }
-        }
-
         .chat-footer {
-            padding: 14px;
-            background: var(--bg-surface);
-            border-top: 1px solid var(--border-color);
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
         .chat-input {
             flex-grow: 1;
-            border: 1px solid var(--border-color);
-            border-radius: 22px;
-            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 15px;
             outline: none;
-            font-size: 0.9rem;
-            font-family: inherit;
-            background: var(--bg-surface-alt);
-            color: var(--text-primary);
+            font-size: 0.95rem;
             transition: border-color 0.3s;
         }
-        .chat-input:focus { border-color: var(--primary); }
+        .chat-input:focus { border-color: var(--primary-green); }
         .chat-send {
-            background: var(--primary);
+            background: var(--primary-green);
             color: white;
             border: none;
             width: 40px;
             height: 40px;
-            border-radius: var(--radius-full);
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background 0.3s;
-            flex-shrink: 0;
         }
-        .chat-send:hover { background: var(--primary-dark); }
-        .chat-send:disabled { background: var(--text-muted); cursor: not-allowed; }
-
+        .chat-send:hover { background: var(--dark-green); }
+        .chat-send:disabled { background: #ccc; cursor: not-allowed; }
+        .chat-rating {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            align-self: center;
+        }
+        .rating-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            filter: grayscale(100%);
+        }
+        .rating-btn:hover { transform: scale(1.2); filter: grayscale(0%); }
+        .rating-btn.selected { transform: scale(1.2); filter: grayscale(0%); }
         @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.8) translateY(8px); }
+            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-
-        .chat-body::-webkit-scrollbar { width: 5px; }
+        .chat-body::-webkit-scrollbar { width: 6px; }
         .chat-body::-webkit-scrollbar-track { background: transparent; }
-        .chat-body::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 5px; }
-
-        /* ============================================
-           SEARCH HIGHLIGHT
-           ============================================ */
-        .search-highlight {
-            outline: 3px solid var(--primary);
-            outline-offset: 6px;
-            border-radius: var(--radius-md);
-            transition: outline-color 0.3s;
-        }
-        .search-dimmed {
-            opacity: 0.2;
-            transition: opacity 0.4s;
-        }
-
-        /* ============================================================
-           RESPONSIVE — COBERTURA COMPLETA MOBILE-FIRST
-           Breakpoints: 1024 / 768 / 600 / 480 / 380
-           ============================================================ */
-
-        /* ── Tablet grande / Laptop pequeña ─────────────────────── */
-        @media (max-width: 1024px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .grid-services { grid-template-columns: repeat(2, 1fr); }
-            .form-row { grid-template-columns: 1fr; }
-        }
-
-        /* ── Tablet ──────────────────────────────────────────────── */
-        @media (max-width: 768px) {
-            /* Navbar */
-            .search-bar { display: none; }
-            .btn-whatsapp-nav span { display: none; }
-            .btn-whatsapp-nav { padding: 9px 12px; }
-            .hamburger { display: flex; }
-            .logo { font-size: 1.15rem; }
-            .logo span { display: none; }
-            .navbar { padding: 0 16px; height: 60px; }
-
-            /* Top banner */
-            .top-banner { font-size: 0.78rem; padding: 8px 12px; line-height: 1.4; }
-
-            /* Hero */
-            .hero {
-                min-height: 55vh;
-                padding: 50px 20px;
-                background-attachment: scroll;
-            }
-            .hero-content h1 { font-size: clamp(1.7rem, 6vw, 2.5rem); }
-            .hero-content p  { font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: 25px; }
-            .hero-cta { padding: 13px 28px; font-size: 1rem; }
-
-            /* Sections */
-            .section {
-                padding-top: 50px;
-                padding-bottom: 50px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-            .section-header { margin-bottom: 30px; }
-            .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
-            .section-subtitle { font-size: 0.9rem; }
-
-            /* Stats */
-            .stats-bar { padding: 30px 20px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .stat-number { font-size: clamp(1.6rem, 5vw, 2.2rem); }
-
-            /* Services */
-            .grid-services { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-            .service-card { padding: 22px 16px; }
-            .service-icon { width: 56px; height: 56px; font-size: 1.5rem; }
-
-            /* Eco-banner */
-            .eco-banner {
-                flex-direction: column;
-                text-align: center;
-                margin: 0 20px;
-                padding: 28px 20px;
-                gap: 18px;
-            }
-            .btn-eco-canje { width: 100%; text-align: center; }
-
-            /* Quote form */
-            .quote-section .section { padding-left: 16px; padding-right: 16px; }
-            .form-row { grid-template-columns: 1fr; }
-
-            /* Testimonials */
-            .testimonial-card { padding: 22px 16px; }
-            .testimonial-card::before { font-size: 3rem; }
-
-            /* Footer */
-            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 24px; }
-            .footer-col .contact-line { justify-content: center; }
-            .footer-map iframe { height: 200px; }
-
-            /* Chat bubble proactiva */
-            .chat-proactive-bubble { max-width: 230px; font-size: 0.88rem; right: 16px; bottom: 108px; }
-        }
-
-        /* ── Móvil mediano ───────────────────────────────────────── */
-        @media (max-width: 600px) {
-            /* Servicios: 1 columna */
-            .grid-services { grid-template-columns: 1fr; gap: 12px; }
-
-            /* Parts grid: 2 cols apretadas o 1 */
-            .parts-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
-
-            /* Stats: 2 cols */
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .stat-number { font-size: 1.8rem; }
-            .stat-item { padding: 14px 6px; }
-
-            /* Hero */
-            .hero { min-height: 50vh; padding: 40px 16px; }
-            .hero-content h1 { font-size: clamp(1.5rem, 7vw, 2rem); }
-
-            /* Sections más compactas */
-            .section { padding: 36px 16px; }
-            .section-header { margin-bottom: 22px; }
-
-            /* Chat fullscreen */
-            .chatbot-window {
-                top: 0; bottom: 0; left: 0; right: 0;
-                width: 100vw; max-width: 100vw;
-                height: 100dvh;
-                border-radius: 0;
-                border: none;
-                transform: translateY(100%);
-            }
-            .chatbot-window.active { transform: translateY(0); }
-            .chat-body { flex-grow: 1; height: auto; min-height: 0; }
-
-            /* Chatbot button */
-            .chatbot-btn { bottom: 16px; right: 16px; width: 62px; height: 62px; font-size: 1.55rem; }
-            .chat-proactive-bubble { bottom: 96px; right: 14px; max-width: 210px; font-size: 0.88rem; }
-
-            /* Back to top */
-            .back-to-top { bottom: 88px; right: 16px; width: 40px; height: 40px; font-size: 1rem; }
-
-            /* Eco-banner */
-            .eco-banner { margin: 0 12px; padding: 22px 16px; }
-
-            /* Service card padding */
-            .service-card { padding: 18px 14px; }
-            .service-icon { width: 50px; height: 50px; font-size: 1.3rem; margin-bottom: 12px; }
-            .service-card h3 { font-size: 1rem; }
-            .service-card p { font-size: 0.82rem; }
-
-            /* Testimonial */
-            .testimonial-card { padding: 18px 14px; }
-
-            /* Footer */
-            .footer { padding: 40px 16px 20px; }
-        }
-
-        /* ── Móvil pequeño (iPhone SE, Galaxy A) ─────────────────── */
-        @media (max-width: 480px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .parts-grid { grid-template-columns: 1fr !important; }
-            .grid-services { grid-template-columns: 1fr; }
-            .hero-cta { width: 100%; justify-content: center; padding: 13px 20px; }
-            .eco-banner { margin: 0 8px; }
-            .section { padding: 30px 14px; }
-            .navbar { padding: 0 12px; }
-        }
-
-        /* ── Móvil muy pequeño (< 380px) ─────────────────────────── */
-        @media (max-width: 380px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .chatbot-btn { width: 56px; height: 56px; font-size: 1.35rem; }
-            .hero-content h1 { font-size: 1.4rem; }
-            .logo { font-size: 1rem; }
-            .section { padding: 24px 12px; }
-        }
+        .chat-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-
 <body>
-    <!-- Top Banner -->
-    <div class="top-banner">
-        <i class="fas fa-tools"></i>
-        Filtro de Calidad: Diagnóstico de Consolas, PCs, Impresoras y Movilidad Eléctrica
-        por solo $200.00 MXN
-        <span id="status-badge" class="status-badge open">
-            <span class="status-dot"></span>
-            ABIERTO
-        </span>
+
+    <!-- Anuncio de urgencia: dato específico visible = $200 MXN (sin ambigüedad) -->
+    <div class="top-banner" role="banner" aria-label="Promoción activa">
+        <i class="fas fa-tools" aria-hidden="true"></i>
+        Diagnóstico Especializado de Consolas, PCs, Impresoras y Movilidad Eléctrica por solo <strong>$200.00 MXN</strong>. ¡Asegura una reparación profesional!
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <a href="#" class="logo">
-            <i class="fas fa-leaf"></i> Eco-Electronic<span>Solutions</span>
+    <!-- Navegación principal -->
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <a href="#" class="logo" aria-label="Ir al inicio de Eco-Electronic Solutions">
+            <i class="fas fa-leaf" aria-hidden="true"></i> Eco-Electronic<span>Solutions</span>
         </a>
 
-        <div class="search-bar" id="search-bar">
-            <input type="text" id="search-input"
-                placeholder="¿Qué necesitas reparar o comprar? Ej: laptop, consola, licuadora..."
-                autocomplete="off">
-            <button id="search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
-            <div class="search-suggestions" id="search-suggestions"></div>
+        <div class="search-bar" role="search">
+            <label for="site-search" class="sr-only" style="position:absolute;opacity:0">Buscar servicio o refacción</label>
+            <input id="site-search" type="search" placeholder="¿Qué necesitas reparar o comprar hoy? Ej. Aspas de licuadora, Pantalla LED..." aria-label="Buscar servicio o refacción">
+            <button aria-label="Ejecutar búsqueda"><i class="fas fa-search" aria-hidden="true"></i></button>
         </div>
 
         <div class="nav-actions">
-            <button class="dark-toggle" id="dark-toggle" aria-label="Cambiar tema">
-                <i class="fas fa-moon"></i>
-            </button>
-            <a href="https://wa.me/522223167820" class="btn-whatsapp-nav" target="_blank">
-                <i class="fab fa-whatsapp"></i> <span>Cotiza Ahora</span>
+            <a href="https://wa.me/522223167820" class="btn-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp al 222 316 7820">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> Cotiza en Taller
             </a>
-            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </nav>
 
-    <!-- Mobile Drawer -->
-    <div class="mobile-drawer-overlay" id="drawer-overlay"></div>
-    <div class="mobile-drawer" id="mobile-drawer">
-        <button class="drawer-close" id="drawer-close" aria-label="Cerrar menú">
-            <i class="fas fa-times"></i>
-        </button>
-        <a href="#servicios" class="drawer-link"><i class="fas fa-wrench"></i> Servicios</a>
-        <a href="#refacciones" class="drawer-link"><i class="fas fa-cogs"></i> Refacciones</a>
-        <a href="#eco-canje" class="drawer-link"><i class="fas fa-recycle"></i> Eco-Canje</a>
-        <a href="#testimonios" class="drawer-link"><i class="fas fa-star"></i> Testimonios</a>
-        <a href="#cotizacion" class="drawer-link"><i class="fas fa-file-alt"></i> Cotización Rápida</a>
-        <div class="drawer-divider"></div>
-        <a href="#contacto" class="drawer-link"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-        <a href="https://wa.me/522223167820" class="drawer-link" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        <a href="tel:+522229898801" class="drawer-link"><i class="fas fa-phone-alt"></i> Llamar</a>
-        <div class="drawer-divider"></div>
-        <a href="#" class="drawer-link" id="open-terms-drawer"><i class="fas fa-shield-alt"></i> Términos y Condiciones</a>
-    </div>
+    <!-- Cuerpo principal semántico -->
+    <main id="contenido-principal">
 
-    <!-- Modal: Términos y Condiciones -->
-    <div class="terms-overlay" id="terms-overlay"></div>
-    <div class="terms-modal" id="terms-modal">
-        <div class="terms-header">
-            <h2><i class="fas fa-shield-alt"></i> Términos y Condiciones</h2>
-            <button class="terms-close" id="terms-close" aria-label="Cerrar">&times;</button>
-        </div>
-        <div class="terms-body">
-            <p class="terms-updated"><i class="fas fa-calendar-alt"></i> Última actualización: Abril 2026</p>
-
-            <h3>1. Información General</h3>
-            <p>Eco-Electronic Solutions es un taller de reparación de electrónicos ubicado en San Andrés Cholula, Puebla, México. Al utilizar nuestros servicios, el cliente acepta los siguientes términos.</p>
-
-            <h3>2. Horarios de Atención</h3>
-            <ul>
-                <li><strong>Lunes a Viernes:</strong> 10:00 AM – 8:00 PM</li>
-                <li><strong>Sábados:</strong> 10:00 AM – 6:00 PM</li>
-                <li><strong>Domingos:</strong> 10:00 AM – 4:00 PM</li>
-                <li><strong>Días festivos:</strong> Cerrado</li>
-            </ul>
-
-            <h3>3. Diagnóstico y Cotización</h3>
-            <p>El diagnóstico tiene un costo de <strong>$200.00 MXN</strong>, aplicable al costo total de la reparación si el cliente acepta el presupuesto. El diagnóstico no es reembolsable si el cliente rechaza la reparación.</p>
-
-            <h3>4. Garantía de Reparaciones</h3>
-            <ul>
-                <li>Las reparaciones tienen garantía de <strong>30 días naturales</strong> a partir de la entrega.</li>
-                <li>La garantía cubre defectos en el trabajo realizado, <strong>no daños posteriores</strong> causados por mal uso, líquidos, golpes o descargas eléctricas.</li>
-                <li>Para hacer válida la garantía, se requiere presentar la nota de servicio original.</li>
-            </ul>
-
-            <h3>5. Refacciones</h3>
-            <ul>
-                <li>Las refacciones utilizadas pueden ser originales o compatibles de alta calidad, según disponibilidad.</li>
-                <li>La garantía de refacciones es de <strong>15 días naturales</strong>.</li>
-                <li>Las refacciones especiales que requieran pedido tienen un tiempo de entrega de 3 a 10 días hábiles.</li>
-            </ul>
-
-            <h3>6. Equipos en Taller</h3>
-            <ul>
-                <li>El equipo no reclamado en un plazo de <strong>60 días naturales</strong> después de la notificación de que está listo, será considerado abandonado.</li>
-                <li>Eco-Electronic Solutions no se responsabiliza por datos almacenados en los equipos. Se recomienda al cliente realizar respaldo previo.</li>
-            </ul>
-
-            <h3>7. Pagos y Facturación</h3>
-            <ul>
-                <li>Aceptamos efectivo, transferencia bancaria y pagos por WhatsApp.</li>
-                <li>El pago total se realiza al momento de la entrega del equipo reparado.</li>
-                <li>Para reparaciones mayores a $2,000 MXN, se requiere un anticipo del 50%.</li>
-            </ul>
-
-            <h3>8. Programa Eco-Canje</h3>
-            <p>El programa de intercambio de aparatos electrónicos usados está sujeto a evaluación del técnico. Los valores de canje son determinados por Eco-Electronic Solutions y no son negociables.</p>
-
-            <h3>9. Uso del Chatbot AI (Dalia)</h3>
-            <p>El asistente virtual Dalia proporciona información orientativa. Las cotizaciones finales deben ser confirmadas directamente con un técnico. Las respuestas de la IA no constituyen un compromiso contractual.</p>
-
-            <h3>10. Privacidad y Datos</h3>
-            <p>Los datos proporcionados por el formulario de cotización y WhatsApp son utilizados exclusivamente para brindar el servicio solicitado. No compartimos información con terceros.</p>
-
-            <h3>11. Contacto</h3>
-            <p>Para cualquier duda sobre estos términos:<br>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/522223167820" target="_blank">222 316 7820</a><br>
-            <strong>Teléfono:</strong> <a href="tel:+522229898801">222 989 8801</a></p>
-        </div>
-    </div>
-
-    <!-- Hero -->
-    <section class="hero" id="inicio">
-        <div class="hero-particles" id="hero-particles"></div>
-        <div class="hero-content reveal">
-            <h1>Expertos en Reparación.<br><span class="highlight">Aliados del Medio Ambiente.</span></h1>
-            <p>Desde el microondas de tu cocina hasta la tarjeta madre de tu PC. Nuestro equipo de especialistas
-               revive tus aparatos y maximiza su vida útil en San Andrés Cholula.</p>
-            <a href="https://wa.me/522223167820" class="hero-cta" target="_blank">
-                <i class="fas fa-bolt"></i> Iniciar Diagnóstico Ahora
-            </a>
-        </div>
-    </section>
-
-    <!-- Stats Bar -->
-    <div class="stats-bar reveal">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number" data-target="500">0</div>
-                <div class="stat-label">Reparaciones Exitosas</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="50">0</div>
-                <div class="stat-label">Clientes Satisfechos</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="3">0</div>
-                <div class="stat-label">Años de Experiencia</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="98">0</div>
-                <div class="stat-label">% Garantía Cumplida</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Servicios -->
-    <section class="section" id="servicios">
-        <div class="section-header reveal">
-            <div class="section-label">Nuestros servicios</div>
-            <h2 class="section-title">Soluciones de Reparación</h2>
-            <p class="section-subtitle">Reparamos, restauramos y damos nueva vida a todos tus dispositivos electrónicos.</p>
-        </div>
-        <div class="grid-services">
-            <div class="service-card reveal reveal-delay-1" data-search="hogar cocina licuadora plancha microondas olla">
-                <div class="service-icon"><i class="fas fa-blender"></i></div>
-                <h3>Hogar y Cocina</h3>
-                <p>Licuadoras, planchas, microondas y ollas exprés. Las dejamos como nuevas.</p>
-            </div>
-            <div class="service-card reveal reveal-delay-2" data-search="audio video pantalla led bocina bluetooth sonido">
-                <div class="service-icon"><i class="fas fa-tv"></i></div>
-                <h3>Audio y Video</h3>
-                <p>Pantallas LED, bocinas Bluetooth y equipos de sonido de alta fidelidad.</p>
-            </div>
-            <div class="service-card reveal reveal-delay-3" data-search="consola control pc laptop computadora geek computo">
-                <div class="service-icon"><i class="fas fa-gamepad"></i></div>
-                <h3>Geek y Cómputo</h3>
-                <p>Consolas, controles, PCs y Laptops. (Diagnóstico especializado: $200.00).</p>
-            </div>
-            <div class="service-card reveal reveal-delay-4" data-search="moto electrica patin impresora movilidad">
-                <div class="service-icon"><i class="fas fa-motorcycle"></i></div>
-                <h3>Movilidad Eléctrica</h3>
-                <p>Patines y motos eléctricas. Impresoras. (Diagnóstico especializado: $200.00).</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Eco-Canje Banner -->
-    <div class="eco-banner reveal" id="eco-canje">
-        <div class="eco-banner-text">
-            <h2><i class="fas fa-recycle"></i> Programa Eco-Canje</h2>
-            <p>¿Tu equipo viejo ya no tiene arreglo o no lo quieres? No lo tires.
-               Tráelo a nuestro taller, nosotros lo reciclamos correctamente y tú te llevas
-               <strong>cupones de descuento</strong> para reparaciones o compra de accesorios.</p>
-        </div>
-        <a href="https://wa.me/522223167820" class="btn-eco-canje" target="_blank">
-            <i class="fas fa-exchange-alt"></i> Canjear Equipo
-        </a>
-    </div>
-
-    <!-- Refacciones -->
-    <div class="section-alt" id="refacciones">
-        <section class="section">
-            <div class="section-header reveal">
-                <div class="section-label">Tienda</div>
-                <h2 class="section-title">Refacciones y Accesorios en Venta</h2>
-                <p class="section-subtitle">Encuentra la pieza que necesitas para tu reparación o proyecto.</p>
-            </div>
-            <div class="grid-services">
-                <div class="parts-card reveal reveal-delay-1" data-search="cargador bateria energia carga">
-                    <div class="parts-icon"><i class="fas fa-battery-full"></i></div>
-                    <h3>Energía y Carga</h3>
-                    <p>Cargadores originales y genéricos, baterías para múltiples dispositivos.</p>
-                </div>
-                <div class="parts-card reveal reveal-delay-2" data-search="refaccion electrodomestico aspa vaso empaque licuadora olla">
-                    <div class="parts-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Refacciones de Electrodomésticos</h3>
-                    <p>Aspas, vasos de licuadora, empaques para olla exprés y más.</p>
-                </div>
-                <div class="parts-card reveal reveal-delay-3" data-search="cable audio video componente electronico microchip">
-                    <div class="parts-icon"><i class="fas fa-microchip"></i></div>
-                    <h3>Componentes Electrónicos</h3>
-                    <p>Cables de audio, video, y componentes para tus propios proyectos.</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Testimonios — Reseñas reales de Google Maps -->
-    <section class="section" id="testimonios">
-        <div class="section-header reveal">
-            <div class="section-label"><i class="fab fa-google"></i> Reseñas verificadas de Google Maps</div>
-            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
-            <p class="section-subtitle" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <span style="color:var(--accent);font-size:1.1rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                <strong>5.0</strong> — 16 reseñas en Google Maps
-                <a href="https://maps.app.goo.gl/5MztN6VXMfi7YozE6" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;font-size:0.85rem;margin-left:5px;">Ver todas →</a>
-            </p>
-        </div>
-        <div class="reveal">
-            <div class="testimonials-track-wrapper">
-                <div class="testimonials-track" id="testimonials-track">
-                    <!-- 1. Sara T. -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente servicio!!!! Y atención a clientes muy recomendable</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">ST</div>
-                                <div>
-                                    <div class="testimonial-name">Sara T.</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 2. Rafa Munguia -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente atención, fui a dejar una powerbank que tenía la pila inflada. Muy amables</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">RM</div>
-                                <div>
-                                    <div class="testimonial-name">Rafa Munguia</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 3. Ricardo Flores -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Compusieron mi equipo de sonido Sony rápido y bien, hasta la fecha todo bien y adaptaron un Bluetooth y lo modernizaron. Muy buenos. 🔥</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">RF</div>
-                                <div>
-                                    <div class="testimonial-name">Ricardo Flores</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 4. Enrique Pimentel -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Muy buena atención y servicio</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">EP</div>
-                                <div>
-                                    <div class="testimonial-name">Enrique Pimentel</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 5. Mary Morales -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Recomiendo este lugar para reparar sus equipos, la verdad el servicio es muy bueno y son amables, también si desconozco del tema me explicaron y dejaron mis aparatos trabajando bien. Buen lugar de reparación.</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">MM</div>
-                                <div>
-                                    <div class="testimonial-name">Mary Morales</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 6. Jorge Gonzalez -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Exelente lugar, confiables y honestos. Me gustó las forma de trabajar. Los recomiendo</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">JG</div>
-                                <div>
-                                    <div class="testimonial-name">Jorge Gonzalez</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 7. Laurencio Hernandez M -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente lugar para reparación, buen trabajo y atención</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">LH</div>
-                                <div>
-                                    <div class="testimonial-name">Laurencio Hernandez M</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 8. AleK Black -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente lugar, super confiables, amables y accesibles, si buscan Calidad-Precio, este lugar es el indicado, 100% recomendado 👍👍👍</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">AB</div>
-                                <div>
-                                    <div class="testimonial-name">AleK Black</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 9. Maca Torres -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Recomendable!! Muy anestos</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">MT</div>
-                                <div>
-                                    <div class="testimonial-name">Maca Torres</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 10. Ignacio Sanchez -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Exelente trabajo, muy buenos trabajando los recomiendo 100%</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">IS</div>
-                                <div>
-                                    <div class="testimonial-name">Ignacio Sanchez</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 11. Carlos Macias -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelentes atención y servicio a un precio muy razonable</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">CM</div>
-                                <div>
-                                    <div class="testimonial-name">Carlos Macias</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 12. Dector Dector Sanchez -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Reparación muy buena y exelente atención</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">DD</div>
-                                <div>
-                                    <div class="testimonial-name">Dector Dector Sanchez</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 13. Angel Guillen -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente servicio y atención</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">AG</div>
-                                <div>
-                                    <div class="testimonial-name">Angel Guillen</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 14. Andresjavier Cuaya Coatl -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente trabajo</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">AC</div>
-                                <div>
-                                    <div class="testimonial-name">Andresjavier Cuaya Coatl</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 15. Marco Malo -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente servicio, lo recomiendo ampliamente</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar" style="background:linear-gradient(135deg,#27ae60,#2ecc71);">MM</div>
-                                <div>
-                                    <div class="testimonial-name">Marco Malo</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 16. Erika Daniela Mejia -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-text">Excelente servicio ✨</p>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">ED</div>
-                                <div>
-                                    <div class="testimonial-name">Erika Daniela Mejia</div>
-                                    <div class="testimonial-stars">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-controls" id="testimonial-controls"></div>
-        </div>
-    </section>
-
-    <!-- Cotización Rápida -->
-    <section class="quote-section" id="cotizacion">
-        <div class="quote-container">
-            <div class="section-header reveal">
-                <div class="section-label">Sin compromiso</div>
-                <h2 class="section-title">Cotización Rápida</h2>
-                <p class="section-subtitle">Describe tu problema y te contactamos por WhatsApp con una cotización.</p>
-            </div>
-            <form class="quote-form reveal" id="quote-form" novalidate>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="q-name">Tu nombre</label>
-                        <input type="text" id="q-name" placeholder="Ej. Carlos García" required>
-                        <div class="form-error" id="err-name"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="q-phone">Tu WhatsApp</label>
-                        <input type="tel" id="q-phone" placeholder="222 123 4567" required>
-                        <div class="form-error" id="err-phone"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="q-type">Tipo de equipo</label>
-                    <select id="q-type" required>
-                        <option value="">— Selecciona una categoría —</option>
-                        <option value="Laptop / PC">💻 Laptop / PC</option>
-                        <option value="Consola / Videojuegos">🎮 Consola / Videojuegos</option>
-                        <option value="Electrodoméstico (Cocina)">🍳 Electrodoméstico (Cocina)</option>
-                        <option value="Audio / Video">🔊 Audio / Video</option>
-                        <option value="Movilidad Eléctrica">🛴 Movilidad Eléctrica</option>
-                        <option value="Impresora">🖨️ Impresora</option>
-                        <option value="Otro">📦 Otro</option>
-                    </select>
-                    <div class="form-error" id="err-type"></div>
-                </div>
-                <div class="form-group">
-                    <label for="q-desc">Describe el problema</label>
-                    <textarea id="q-desc" placeholder="Ej. Mi laptop no enciende, solo parpadea la luz del cargador..." required></textarea>
-                    <div class="form-error" id="err-desc"></div>
-                </div>
-                <button type="submit" class="btn-submit-quote" id="btn-submit-quote">
-                    <i class="fab fa-whatsapp"></i> Enviar Cotización por WhatsApp
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" id="contacto">
-        <div class="footer-grid reveal">
-            <div class="footer-col">
-                <h4><i class="fas fa-leaf"></i> Eco-Electronic Solutions</h4>
-                <p>Expertos en electrónica, comprometidos con el planeta. Reparamos, vendemos refacciones y reciclamos equipos electrónicos en San Andrés Cholula.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Contacto Directo</h4>
-                <div class="contact-line">
-                    <i class="fab fa-whatsapp"></i>
-                    <a href="https://wa.me/522223167820" target="_blank">WhatsApp: 222 316 7820</a>
-                </div>
-                <div class="contact-line">
-                    <i class="fas fa-phone-alt"></i>
-                    <a href="tel:+522229898801">Teléfono: 222 989 8801</a>
-                </div>
-                <div class="contact-line">
-                    <i class="fas fa-clock"></i>
-                    <span>L-V: 10:00-20:00 · S: 10:00-18:00 · D: 10:00-16:00</span>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Ubicación</h4>
-                <p>A unos pasos del Mercado Malintzi Municipal de San Andrés Cholula</p>
-                <a href="https://maps.app.goo.gl/5MztN6VXMfi7YozE6" class="btn-gps" target="_blank" rel="noopener">
-                    <i class="fas fa-route"></i> Iniciar Ruta GPS
+        <!-- Hero: entidad principal + intención de búsqueda en H1 -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">
+                    Reparación de Electrónicos en San Andrés Cholula — Expertos en Hogar, Cómputo y Movilidad Eléctrica
+                </h1>
+                <p>
+                    Desde el microondas de tu cocina hasta la tarjeta madre de tu PC. Nuestro equipo de especialistas en San Andrés Cholula, Puebla, revive tus aparatos y maximiza su vida útil, con un diagnóstico especializado por solo <strong>$200.00 MXN</strong>.
+                </p>
+                <a href="https://wa.me/522223167820" class="btn-whatsapp" style="display: inline-flex; font-size: 1.2rem; padding: 15px 30px;" target="_blank" rel="noopener noreferrer" aria-label="Iniciar diagnóstico ahora por WhatsApp">
+                    <i class="fas fa-bolt" aria-hidden="true"></i> Iniciar Diagnóstico Ahora
                 </a>
             </div>
+        </section>
+
+        <!-- ===================================================================
+             SECCIÓN 1: Servicios de Reparación
+             Regla 1: H2 como intención de búsqueda + respuesta directa ≤50 palabras
+             Regla 2: Listas semánticas en lugar de párrafos narrativos
+             Regla 5: <section> + <article> correctos
+        =================================================================== -->
+        <section class="section-container" aria-labelledby="servicios-heading">
+            <h2 class="section-title" id="servicios-heading">¿Qué aparatos reparan en Eco-Electronic Solutions en Cholula?</h2>
+            <p class="section-lead">
+                Reparamos electrodomésticos de hogar, equipos de audio y video, cómputo y gaming, movilidad eléctrica e impresoras en San Andrés Cholula. El diagnóstico especializado tiene un costo de <strong>$200.00 MXN</strong> para consolas, PCs, impresoras y vehículos eléctricos.
+            </p>
+
+            <div class="grid-container">
+
+                <article class="card" aria-label="Reparación de hogar y cocina">
+                    <i class="fas fa-blender" aria-hidden="true"></i>
+                    <h3>Hogar y Cocina</h3>
+                    <ul aria-label="Electrodomésticos de hogar y cocina que reparamos">
+                        <li>Licuadoras</li>
+                        <li>Planchas</li>
+                        <li>Microondas</li>
+                        <li>Ollas exprés</li>
+                    </ul>
+                </article>
+
+                <article class="card" aria-label="Reparación de audio y video">
+                    <i class="fas fa-tv" aria-hidden="true"></i>
+                    <h3>Audio y Video</h3>
+                    <ul aria-label="Equipos de audio y video que reparamos">
+                        <li>Pantallas LED</li>
+                        <li>Bocinas Bluetooth</li>
+                        <li>Equipos de sonido de alta fidelidad</li>
+                    </ul>
+                </article>
+
+                <article class="card" aria-label="Reparación de cómputo y gaming">
+                    <i class="fas fa-gamepad" aria-hidden="true"></i>
+                    <h3>Geek y Cómputo</h3>
+                    <ul aria-label="Equipos de cómputo y gaming que reparamos">
+                        <li>Consolas de videojuegos</li>
+                        <li>Controles de consola</li>
+                        <li>PCs de escritorio</li>
+                        <li>Laptops</li>
+                    </ul>
+                </article>
+
+                <article class="card" aria-label="Reparación de movilidad eléctrica e impresoras">
+                    <i class="fas fa-motorcycle" aria-hidden="true"></i>
+                    <h3>Movilidad Eléctrica e Impresoras</h3>
+                    <ul aria-label="Movilidad eléctrica e impresoras que reparamos">
+                        <li>Patines eléctricos</li>
+                        <li>Motos eléctricas</li>
+                        <li>Impresoras</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <!-- Regla 2: Tabla de precios — matriz bidimensional clara para RAG -->
+            <h3 style="margin-top: 40px; margin-bottom: 12px; font-size: 1.3rem; color: var(--tech-dark);">
+                ¿Cuánto cuesta el diagnóstico técnico?
+            </h3>
+            <table class="pricing-table" aria-label="Tabla de precios de diagnóstico por categoría de equipo">
+                <thead>
+                    <tr>
+                        <th scope="col">Categoría de Equipo</th>
+                        <th scope="col">Servicio</th>
+                        <th scope="col">Costo (MXN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Consolas de videojuegos</td>
+                        <td>Diagnóstico especializado</td>
+                        <td class="price-tag">$200.00</td>
+                    </tr>
+                    <tr>
+                        <td>PCs y Laptops</td>
+                        <td>Diagnóstico especializado</td>
+                        <td class="price-tag">$200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Impresoras</td>
+                        <td>Diagnóstico especializado</td>
+                        <td class="price-tag">$200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Movilidad Eléctrica (patines y motos)</td>
+                        <td>Diagnóstico especializado</td>
+                        <td class="price-tag">$200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Electrodomésticos de hogar (licuadoras, microondas, etc.)</td>
+                        <td>Diagnóstico y reparación</td>
+                        <td class="price-tag">Cotizar en taller</td>
+                    </tr>
+                    <tr>
+                        <td>Audio y Video (pantallas LED, bocinas)</td>
+                        <td>Diagnóstico y reparación</td>
+                        <td class="price-tag">Cotizar en taller</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===================================================================
+             SECCIÓN 2: Programa Eco-Canje
+             Regla 1: H2 como pregunta; Regla 4: Ganancia de información (programa único)
+        =================================================================== -->
+        <aside class="eco-banner" aria-labelledby="ecocanje-heading">
+            <div class="eco-banner-text">
+                <h2 id="ecocanje-heading" style="font-size: 2.2rem; color: var(--primary-green); margin-bottom: 15px;">
+                    <i class="fas fa-recycle" aria-hidden="true"></i>
+                    ¿Qué hago con mi equipo electrónico viejo o irreparable en Cholula?
+                </h2>
+                <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 10px;">
+                    <strong>Programa Eco-Canje:</strong> No lo tires. Tráelo a nuestro taller en San Andrés Cholula: nosotros lo reciclamos correctamente y tú recibes <strong>cupones de descuento</strong> aplicables en reparaciones o compra de accesorios.
+                </p>
+                <ul style="list-style: none; padding: 0; color: #ccc; font-size: 0.95rem; line-height: 2;">
+                    <li>✔ Reciclaje electrónico responsable</li>
+                    <li>✔ Sin costo para el cliente</li>
+                    <li>✔ Cupones de descuento como recompensa</li>
+                    <li>✔ Válido para cualquier equipo electrónico en desuso</li>
+                </ul>
+            </div>
+            <div>
+                <a href="https://wa.me/522223167820" class="btn-whatsapp" style="background-color: white; color: var(--tech-dark); font-size: 1.1rem;" target="_blank" rel="noopener noreferrer" aria-label="Canjear equipo electrónico viejo por WhatsApp">
+                    Canjear Equipo
+                </a>
+            </div>
+        </aside>
+
+        <!-- ===================================================================
+             SECCIÓN 3: Refacciones y Accesorios
+             Regla 1: H2 como pregunta; Regla 2: listas semánticas
+        =================================================================== -->
+        <section class="section-container" style="background-color: white; padding-top: 40px; padding-bottom: 60px;" aria-labelledby="refacciones-heading">
+            <h2 class="section-title" id="refacciones-heading">¿Venden refacciones y accesorios electrónicos en Cholula?</h2>
+            <p class="section-lead">
+                Sí. Contamos con refacciones de electrodomésticos, componentes electrónicos y accesorios de energía en venta directa en nuestro taller de San Andrés Cholula.
+            </p>
+            <div class="grid-container">
+
+                <article class="card" aria-label="Energía y carga para dispositivos electrónicos">
+                    <i class="fas fa-battery-full" aria-hidden="true"></i>
+                    <h3>Energía y Carga</h3>
+                    <ul aria-label="Accesorios de energía disponibles en venta">
+                        <li>Cargadores originales</li>
+                        <li>Cargadores genéricos</li>
+                        <li>Baterías para múltiples dispositivos</li>
+                    </ul>
+                </article>
+
+                <article class="card" aria-label="Refacciones para electrodomésticos del hogar">
+                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                    <h3>Refacciones de Electrodomésticos</h3>
+                    <ul aria-label="Refacciones de electrodomésticos disponibles en venta">
+                        <li>Aspas de licuadora</li>
+                        <li>Vasos de licuadora</li>
+                        <li>Empaques para olla exprés</li>
+                    </ul>
+                </article>
+
+                <article class="card" aria-label="Componentes electrónicos para proyectos propios">
+                    <i class="fas fa-microchip" aria-hidden="true"></i>
+                    <h3>Componentes Electrónicos</h3>
+                    <ul aria-label="Componentes electrónicos disponibles en venta">
+                        <li>Cables de audio</li>
+                        <li>Cables de video</li>
+                        <li>Componentes para proyectos electrónicos</li>
+                    </ul>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             SECCIÓN 4: FAQ Semántico
+             Regla 1 + Regla 3: Coherencia con JSON-LD FAQPage
+             Regla 4: Ganancia de información (respuestas específicas del negocio)
+        =================================================================== -->
+        <section class="faq-section" aria-labelledby="faq-heading">
+            <div class="section-container">
+                <h2 class="section-title" id="faq-heading">Preguntas Frecuentes — Reparación de Electrónicos en San Andrés Cholula</h2>
+                <p class="section-lead">
+                    Respuestas directas a las dudas más comunes sobre nuestros servicios, precios, ubicación y el Programa Eco-Canje.
+                </p>
+
+                <ul class="faq-list">
+
+                    <li class="faq-item">
+                        <p class="faq-question">¿Cuánto cuesta el diagnóstico para consolas, PCs e impresoras?</p>
+                        <div class="faq-answer">
+                            <p>El diagnóstico especializado de consolas de videojuegos, PCs, laptops, impresoras y movilidad eléctrica tiene un costo de <strong>$200.00 MXN</strong>. Este costo cubre la evaluación técnica completa y el reporte de fallas antes de aprobar la reparación.</p>
+                        </div>
+                    </li>
+
+                    <li class="faq-item">
+                        <p class="faq-question">¿Dónde está ubicado Eco-Electronic Solutions?</p>
+                        <div class="faq-answer">
+                            <p>Estamos ubicados a unos pasos del <strong>Mercado Municipal de San Andrés Cholula, Puebla</strong>. Puede contactarnos por WhatsApp al <strong>222 316 7820</strong> o por teléfono al <strong>222 989 8801</strong>.</p>
+                        </div>
+                    </li>
+
+                    <li class="faq-item">
+                        <p class="faq-question">¿Qué es el Programa Eco-Canje y cómo funciona?</p>
+                        <div class="faq-answer">
+                            <p>El Programa Eco-Canje es gratuito para el cliente. Usted trae su equipo electrónico viejo o irreparable al taller, nosotros lo reciclamos de forma responsable y usted recibe <strong>cupones de descuento</strong> aplicables en reparaciones o compra de accesorios en Eco-Electronic Solutions.</p>
+                        </div>
+                    </li>
+
+                    <li class="faq-item">
+                        <p class="faq-question">¿Reparan pantallas LED y bocinas Bluetooth en Cholula?</p>
+                        <div class="faq-answer">
+                            <p>Sí. Nuestra sección de Audio y Video atiende reparaciones de pantallas LED, bocinas Bluetooth y equipos de sonido de alta fidelidad. Contáctenos por WhatsApp al <strong>222 316 7820</strong> para una cotización.</p>
+                        </div>
+                    </li>
+
+                    <li class="faq-item">
+                        <p class="faq-question">¿Venden refacciones de electrodomésticos en el taller?</p>
+                        <div class="faq-answer">
+                            <p>Sí. Contamos con refacciones de venta directa: aspas y vasos de licuadora, empaques para olla exprés, cargadores originales y genéricos, baterías, cables de audio y video, y componentes electrónicos para proyectos propios.</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+    </main><!-- /main -->
+
+    <!-- Footer semántico -->
+    <footer class="footer" role="contentinfo">
+        <h3>Eco-Electronic Solutions</h3>
+        <p>Expertos en electrónica, comprometidos con el planeta.</p>
+
+        <address class="footer-contact" style="font-style: normal;">
+            <p>
+                <i class="fab fa-whatsapp" style="color: #25D366;" aria-hidden="true"></i>
+                WhatsApp: <a href="https://wa.me/522223167820" style="color: white;" aria-label="Contactar por WhatsApp al 222 316 7820"><strong>222 316 7820</strong></a>
+            </p>
+            <p>
+                <i class="fas fa-phone-alt" style="color: var(--accent-orange);" aria-hidden="true"></i>
+                Teléfono: <a href="tel:+522229898801" style="color: white;" aria-label="Llamar al 222 989 8801"><strong>222 989 8801</strong></a>
+            </p>
+        </address>
+
+        <div class="market-location">
+            <i class="fas fa-map-marker-alt" style="color: var(--primary-green);" aria-hidden="true"></i>
+            A unos pasos del Mercado Municipal de San Andrés Cholula, Puebla, México
         </div>
 
-        <div class="footer-map reveal">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.469976556298!2d-98.2885728258168!3d19.04306335300765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc91a84b0a1ff%3A0xb8db94f02bddf8b7!2sEco%20Electr%C3%B3nic%20Solutions!5e0!3m2!1ses-419!2smx!4v1776340715374!5m2!1ses-419!2smx"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Ubicación de Eco-Electronic Solutions en Google Maps">
-            </iframe>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026-2027 Eco-Electronic Solutions. Todos los derechos reservados.<br>
-            Web creada por Eco-Networks Solutions, una subdivisión de Eco-Electronic Solutions.</p>
-        </div>
+        <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">
+            &copy; 2026 Eco-Electronic Solutions. Todos los derechos reservados.
+        </p>
     </footer>
 
-    <!-- Back to Top -->
-    <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <!-- Chatbot Widget -->
-    <button class="chatbot-btn" id="chatbot-toggle" aria-label="Abrir chat">
-        <i class="fas fa-comment-dots"></i>
-    </button>
+    <div class="chatbot-btn" id="chatbot-toggle" role="button" tabindex="0" aria-label="Abrir chat con asesora Daniela de Eco-Electronic Solutions">
+        <i class="fas fa-comment-dots" aria-hidden="true"></i>
+    </div>
 
-    <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-window" id="chatbot-window" role="dialog" aria-labelledby="chatbot-title" aria-modal="true">
         <div class="chat-header">
-            <div class="chat-header-avatar">
-                <img src="https://ui-avatars.com/api/?name=Dalia&background=2ecc71&color=fff&size=150" alt="Asesora Dalia">
-            </div>
+            <img src="https://ui-avatars.com/api/?name=Daniela&background=2ecc71&color=fff&size=150"
+                 alt="Avatar de Daniela, asesora de atención al cliente de Eco-Electronic Solutions en San Andrés Cholula">
             <div class="chat-header-info">
-                <h4>Dalia</h4>
-                <p>Asesora AI de Eco-Electronic</p>
+                <h4 id="chatbot-title">Daniela</h4>
+                <p>Asesora Eco-Electronic Solutions</p>
             </div>
-            <button class="close-chat" id="close-chat" aria-label="Cerrar chat"><i class="fas fa-times"></i></button>
+            <button class="close-chat" id="close-chat" aria-label="Cerrar chat">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
         </div>
-        <div class="chat-body" id="chat-body">
-            <!-- Messages injected by JS -->
+        <div class="chat-body" id="chat-body" aria-live="polite" aria-label="Conversación con asesora Daniela">
+            <!-- Messages go here -->
         </div>
         <div class="chat-footer">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Escribe aquí..." autocomplete="off">
-            <button id="chat-send" class="chat-send" aria-label="Enviar"><i class="fas fa-paper-plane"></i></button>
+            <input type="text" id="chat-input" class="chat-input" placeholder="Escribe aquí..." autocomplete="off" aria-label="Escribe tu mensaje">
+            <button id="chat-send" class="chat-send" aria-label="Enviar mensaje">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
 
-    <!-- ============================================
-         JAVASCRIPT — ALL REACTIVE LOGIC
-         ============================================ -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('chatbot-toggle');
+            const chatWindow = document.getElementById('chatbot-window');
+            const closeBtn = document.getElementById('close-chat');
+            const chatBody = document.getElementById('chat-body');
+            const chatInput = document.getElementById('chat-input');
+            const chatSendBtn = document.getElementById('chat-send');
 
-        // =============================================
-        // 1. DARK MODE TOGGLE
-        // =============================================
-        const darkToggle = document.getElementById('dark-toggle');
-        const savedTheme = localStorage.getItem('eco-theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateDarkIcon(savedTheme);
-        }
-        darkToggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('eco-theme', next);
-            updateDarkIcon(next);
-        });
-        function updateDarkIcon(theme) {
-            darkToggle.innerHTML = theme === 'dark'
-                ? '<i class="fas fa-sun"></i>'
-                : '<i class="fas fa-moon"></i>';
-        }
-
-        // =============================================
-        // 2. MOBILE DRAWER
-        // =============================================
-        const hamburger = document.getElementById('hamburger');
-        const drawer = document.getElementById('mobile-drawer');
-        const drawerOverlay = document.getElementById('drawer-overlay');
-        const drawerClose = document.getElementById('drawer-close');
-
-        function openDrawer() { drawer.classList.add('active'); drawerOverlay.classList.add('active'); }
-        function closeDrawer() { drawer.classList.remove('active'); drawerOverlay.classList.remove('active'); }
-
-        hamburger.addEventListener('click', openDrawer);
-        drawerClose.addEventListener('click', closeDrawer);
-        drawerOverlay.addEventListener('click', closeDrawer);
-
-        // Close drawer on link click
-        drawer.querySelectorAll('.drawer-link').forEach(link => {
-            link.addEventListener('click', closeDrawer);
-        });
-
-        // =============================================
-        // 3. SCROLL REVEAL (IntersectionObserver)
-        // =============================================
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // =============================================
-        // 4. ANIMATED COUNTERS
-        // =============================================
-        const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-        let countersStarted = false;
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !countersStarted) {
-                    countersStarted = true;
-                    animateCounters();
-                }
-            });
-        }, { threshold: 0.4 });
-
-        const statsBar = document.querySelector('.stats-bar');
-        if (statsBar) statsObserver.observe(statsBar);
-
-        function animateCounters() {
-            statNumbers.forEach(el => {
-                const target = parseInt(el.dataset.target);
-                const duration = 2000;
-                const start = performance.now();
-                const suffix = el.closest('.stat-item').querySelector('.stat-label').textContent.startsWith('%') ? '%' : '+';
-
-                function update(now) {
-                    const elapsed = now - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    // Ease-out cubic
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    const current = Math.round(eased * target);
-                    el.textContent = current + (progress >= 1 ? suffix : '');
-                    if (progress < 1) requestAnimationFrame(update);
-                }
-                requestAnimationFrame(update);
-            });
-        }
-
-        // =============================================
-        // 5. STATUS BADGE (ABIERTO/CERRADO)
-        // =============================================
-        function updateStatus() {
-            const badge = document.getElementById('status-badge');
-            const now = new Date();
-            const day = now.getDay(); // 0=domingo, 1=lunes...6=sábado
-            const hour = now.getHours();
-            const minute = now.getMinutes();
-            const t = hour + minute / 60;
-
-            // Horario actualizado:
-            // L-V (1-5): 10:00 - 20:00
-            // S   (6):   10:00 - 18:00
-            // D   (0):   10:00 - 16:00
-            // Festivos: cerrado (se ajusta manualmenre si aplica)
             let isOpen = false;
-            if (day >= 1 && day <= 5) isOpen = t >= 10 && t < 20;       // L-V
-            else if (day === 6)       isOpen = t >= 10 && t < 18;       // Sábado
-            else if (day === 0)       isOpen = t >= 10 && t < 16;       // Domingo
+            let currentStep = 0;
+            let userData = {};
+            let isTyping = false;
 
-            if (isOpen) {
-                badge.className = 'status-badge open';
-                badge.innerHTML = '<span class="status-dot"></span> ABIERTO';
-            } else {
-                badge.className = 'status-badge closed';
-                let nextOpen = '';
-                // Calcular cuándo abre
-                if (day >= 1 && day <= 5) {
-                    // L-V
-                    nextOpen = t >= 20 ? 'Mañana 10:00 AM' : 'Hoy 10:00 AM';
-                } else if (day === 6) {
-                    // Sábado
-                    nextOpen = t >= 18 ? 'Dom 10:00 AM' : 'Hoy 10:00 AM';
-                } else {
-                    // Domingo
-                    nextOpen = t >= 16 ? 'Lun 10:00 AM' : 'Hoy 10:00 AM';
-                }
-                badge.innerHTML = `<span class="status-dot"></span> CERRADO — Abre ${nextOpen}`;
-            }
-        }
-        updateStatus();
-        setInterval(updateStatus, 60000);
-
-        // =============================================
-        // TÉRMINOS Y CONDICIONES — Modal
-        // =============================================
-        const termsModal = document.getElementById('terms-modal');
-        const termsOverlay = document.getElementById('terms-overlay');
-        const termsClose = document.getElementById('terms-close');
-        const openTermsDrawer = document.getElementById('open-terms-drawer');
-
-        function openTerms(e) {
-            if (e) e.preventDefault();
-            termsModal.classList.add('active');
-            termsOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            // Cerrar drawer si está abierto
-            const drawer = document.getElementById('mobile-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            if (drawer) drawer.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-        }
-
-        function closeTerms() {
-            termsModal.classList.remove('active');
-            termsOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        if (openTermsDrawer) openTermsDrawer.addEventListener('click', openTerms);
-        if (termsClose) termsClose.addEventListener('click', closeTerms);
-        if (termsOverlay) termsOverlay.addEventListener('click', closeTerms);
-
-        // =============================================
-        // 6. SEARCH FUNCTIONALITY
-        // =============================================
-        const searchInput = document.getElementById('search-input');
-        const searchSuggestions = document.getElementById('search-suggestions');
-        const searchableCards = document.querySelectorAll('[data-search]');
-
-        const suggestions = [
-            { icon: 'fa-laptop', text: 'Laptop', section: '#servicios' },
-            { icon: 'fa-gamepad', text: 'Consola', section: '#servicios' },
-            { icon: 'fa-blender', text: 'Licuadora', section: '#servicios' },
-            { icon: 'fa-tv', text: 'Pantalla LED', section: '#servicios' },
-            { icon: 'fa-motorcycle', text: 'Moto eléctrica', section: '#servicios' },
-            { icon: 'fa-battery-full', text: 'Cargador / Batería', section: '#refacciones' },
-            { icon: 'fa-microchip', text: 'Componentes', section: '#refacciones' },
-            { icon: 'fa-print', text: 'Impresora', section: '#servicios' },
-        ];
-
-        if (searchInput) {
-            searchInput.addEventListener('focus', () => {
-                if (!searchInput.value.trim()) showAllSuggestions();
-            });
-
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.trim().toLowerCase();
-                if (!query) {
-                    showAllSuggestions();
-                    clearHighlights();
-                    return;
-                }
-                // Filter suggestions
-                const filtered = suggestions.filter(s => s.text.toLowerCase().includes(query));
-                renderSuggestions(filtered);
-                // Highlight matching cards
-                highlightCards(query);
-            });
-
-            searchInput.addEventListener('blur', () => {
-                setTimeout(() => {
-                    searchSuggestions.classList.remove('active');
-                }, 200);
-            });
-
-            document.getElementById('search-btn').addEventListener('click', () => {
-                const query = searchInput.value.trim().toLowerCase();
-                if (query) {
-                    highlightCards(query);
-                    // Scroll to first match
-                    const firstMatch = document.querySelector('[data-search].search-highlight');
-                    if (firstMatch) firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-        }
-
-        function showAllSuggestions() {
-            renderSuggestions(suggestions);
-        }
-
-        function renderSuggestions(items) {
-            if (items.length === 0) {
-                searchSuggestions.innerHTML = '<div class="search-suggestion-item"><i class="fas fa-search"></i>Sin resultados</div>';
-                searchSuggestions.classList.add('active');
-                return;
-            }
-            searchSuggestions.innerHTML = items.map(s =>
-                `<div class="search-suggestion-item" data-section="${s.section}" data-text="${s.text}">
-                    <i class="fas ${s.icon}"></i> ${s.text}
-                </div>`
-            ).join('');
-
-            searchSuggestions.querySelectorAll('.search-suggestion-item[data-section]').forEach(item => {
-                item.addEventListener('mousedown', (e) => {
-                    e.preventDefault();
-                    const text = item.dataset.text;
-                    searchInput.value = text;
-                    highlightCards(text.toLowerCase());
-                    searchSuggestions.classList.remove('active');
-                    const firstMatch = document.querySelector('[data-search].search-highlight');
-                    if (firstMatch) firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                });
-            });
-
-            searchSuggestions.classList.add('active');
-        }
-
-        function highlightCards(query) {
-            searchableCards.forEach(card => {
-                const searchData = card.dataset.search.toLowerCase();
-                if (searchData.includes(query)) {
-                    card.classList.add('search-highlight');
-                    card.classList.remove('search-dimmed');
-                } else {
-                    card.classList.remove('search-highlight');
-                    card.classList.add('search-dimmed');
-                }
-            });
-            // Auto-clear after 4 seconds
-            setTimeout(clearHighlights, 4000);
-        }
-
-        function clearHighlights() {
-            searchableCards.forEach(card => {
-                card.classList.remove('search-highlight', 'search-dimmed');
-            });
-        }
-
-        // =============================================
-        // 7. TESTIMONIALS CAROUSEL
-        // =============================================
-        const track = document.getElementById('testimonials-track');
-        const controlsContainer = document.getElementById('testimonial-controls');
-        if (track) {
-            const slides = track.querySelectorAll('.testimonial-slide');
-            let currentSlide = 0;
-            const total = slides.length;
-
-            // Create dots
-            for (let i = 0; i < total; i++) {
-                const dot = document.createElement('button');
-                dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-                dot.setAttribute('aria-label', `Testimonio ${i + 1}`);
-                dot.addEventListener('click', () => goToSlide(i));
-                controlsContainer.appendChild(dot);
-            }
-
-            function goToSlide(index) {
-                currentSlide = index;
-                track.style.transform = `translateX(-${index * 100}%)`;
-                controlsContainer.querySelectorAll('.testimonial-dot').forEach((d, i) => {
-                    d.classList.toggle('active', i === index);
-                });
-            }
-
-            // Auto-advance
-            setInterval(() => {
-                goToSlide((currentSlide + 1) % total);
-            }, 5000);
-        }
-
-        // =============================================
-        // 8. COTIZACIÓN FORM → WHATSAPP
-        // =============================================
-        const quoteForm = document.getElementById('quote-form');
-        if (quoteForm) {
-            quoteForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const name = document.getElementById('q-name').value.trim();
-                const phone = document.getElementById('q-phone').value.trim();
-                const type = document.getElementById('q-type').value;
-                const desc = document.getElementById('q-desc').value.trim();
-
-                // Validate
-                let valid = true;
-                document.getElementById('err-name').textContent = name ? '' : 'Ingresa tu nombre';
-                document.getElementById('err-phone').textContent = phone ? '' : 'Ingresa tu WhatsApp';
-                document.getElementById('err-type').textContent = type ? '' : 'Selecciona una categoría';
-                document.getElementById('err-desc').textContent = desc ? '' : 'Describe el problema';
-
-                if (!name || !phone || !type || !desc) return;
-
-                // Build WhatsApp URL
-                const msg = `🔧 *Cotización Rápida — Eco-Electronic Solutions*\n\n` +
-                    `👤 *Nombre:* ${name}\n` +
-                    `📱 *WhatsApp:* ${phone}\n` +
-                    `📦 *Equipo:* ${type}\n` +
-                    `📝 *Problema:* ${desc}\n\n` +
-                    `_Enviado desde ecoelectronicsolutions.com.mx_`;
-
-                const waUrl = `https://wa.me/522223167820?text=${encodeURIComponent(msg)}`;
-                window.open(waUrl, '_blank');
-            });
-
-            // Real-time validation
-            ['q-name', 'q-phone', 'q-type', 'q-desc'].forEach(id => {
-                const el = document.getElementById(id);
-                el.addEventListener('input', () => {
-                    const errEl = document.getElementById('err-' + id.split('-')[1]);
-                    if (el.value.trim()) errEl.textContent = '';
-                });
-            });
-        }
-
-        // =============================================
-        // 9. BACK TO TOP
-        // =============================================
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            backToTop.classList.toggle('visible', window.scrollY > 500);
-        }, { passive: true });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // =============================================
-        // 10. HERO PARTICLES
-        // =============================================
-        const particlesContainer = document.getElementById('hero-particles');
-        if (particlesContainer) {
-            for (let i = 0; i < 15; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = Math.random() * 20 + 5;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                p.style.animationDelay = (Math.random() * 10) + 's';
-                particlesContainer.appendChild(p);
-            }
-        }
-
-        // =============================================
-        // 11. CHATBOT (Preserved + Enhanced)
-        // =============================================
-        const toggleBtn = document.getElementById('chatbot-toggle');
-        const chatWindow = document.getElementById('chatbot-window');
-        const closeBtn = document.getElementById('close-chat');
-        const chatBody = document.getElementById('chat-body');
-        const chatInput = document.getElementById('chat-input');
-        const chatSendBtn = document.getElementById('chat-send');
-
-        let isChatOpen = false;
-        let isTyping = false;
-        let messagesState = [];
-
-        function appendMessage(msg, type, id = null) {
-            let bubble = null;
-            if (id) bubble = document.getElementById(id);
-
-            if (!bubble) {
-                bubble = document.createElement('div');
-                if (id) bubble.id = id;
-                bubble.className = `chat-bubble chat-${type}`;
-                chatBody.appendChild(bubble);
-            }
-
-            bubble.innerHTML = msg.replace(/\n/g, '<br/>');
-            chatBody.scrollTop = chatBody.scrollHeight;
-            return bubble;
-        }
-
-        function showQuickReplies() {
-            const container = document.createElement('div');
-            container.className = 'quick-replies';
-            container.id = 'quick-replies';
-
-            const options = [
-                '💻 Reparar laptop',
-                '🎮 Reparar consola',
-                '🔧 Cotizar refacción',
-                '📍 ¿Dónde están?'
+            const chatFlow = [
+                { bot: "¡Bienvenido a Eco-Electronic Solutions!<br><br>¿Con quién tengo el gusto?", key: "nombre" },
+                { bot: "¿Puede indicarnos su apellido?", key: "apellido" },
+                { bot: "¿Podemos enviarle información por correo electrónico?", key: "permitir_correo" },
+                { bot: "Mucho gusto. ¿En qué servicio está interesado?", key: "servicio" },
+                { bot: "¿Qué producto o servicio desea cotizar?", key: "cotizacion" },
+                { bot: "Para brindarle una atención personalizada, ¿cuál es su número de teléfono?", key: "telefono" },
+                { bot: "¿Cuál es su correo electrónico?", key: "correo" },
+                { bot: "Gracias por contactarnos. En breve un asesor le dará respuesta.", key: "end" }
             ];
 
-            options.forEach(text => {
-                const btn = document.createElement('button');
-                btn.className = 'quick-reply-btn';
-                btn.textContent = text;
-                btn.addEventListener('click', () => {
-                    chatInput.value = text;
-                    const qr = document.getElementById('quick-replies');
-                    if (qr) qr.remove();
-                    handleUserInput();
-                });
-                container.appendChild(btn);
-            });
-
-            chatBody.appendChild(container);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-
-        function showTypingIndicator() {
-            const existing = document.getElementById('typing-indicator');
-            if (existing) return;
-            const indicator = document.createElement('div');
-            indicator.className = 'typing-indicator';
-            indicator.id = 'typing-indicator';
-            indicator.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-            chatBody.appendChild(indicator);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-
-        function hideTypingIndicator() {
-            const indicator = document.getElementById('typing-indicator');
-            if (indicator) indicator.remove();
-        }
-
-        // ── Detección de servidor AI + carga de nombre ──
-        // ✅ FIX v6: Usa /v1/health (público) en vez de /v1/admin/assistant_name (requería API key → 403 siempre)
-        let _assistantName = 'Dalia'; // fallback
-        let _aiServerOnline = true;   // OPTIMISTA: asumir online hasta que el health check diga lo contrario
-        let _flowiseOnline = false;   // ✅ NEW: Track Flowise status para skip inteligente
-        // FIX BUG-09: persistir el contador de cierres en localStorage
-        let _bubbleDismissCount = parseInt(localStorage.getItem('_bubbleDismiss') || '0', 10);
-        const _saveDismissCount = () => localStorage.setItem('_bubbleDismiss', _bubbleDismissCount);
-        let _healthCheckDone = false;
-
-        // FIX BUG-04: abortTimer guardado para limpiarlo en exito
-        // FIX BUG-05: backoff exponencial cuando el servidor está offline
-        let _healthCheckFailCount = 0;
-        let _healthCheckInterval = null;
-
-        async function checkAIServer() {
-            try {
-                const ctrl = new AbortController();
-                const abortTimer = setTimeout(() => ctrl.abort(), 5000); // FIX BUG-04
-                const r = await fetch('https://ai.ecoelectronicsolutions.com.mx/v1/health', { signal: ctrl.signal });
-                clearTimeout(abortTimer); // FIX BUG-04: limpiar timer si fetch termina antes
-                if (r.ok) {
-                    const d = await r.json();
-                    _aiServerOnline = true;
-                    _flowiseOnline = !!d.flowise_online;
-                    _healthCheckFailCount = 0; // FIX BUG-05: reset contador al volver online
-                    if (d.assistant_name) {
-                        _assistantName = d.assistant_name;
-                        const headerName = document.querySelector('.chat-header-info h4');
-                        if (headerName) headerName.textContent = _assistantName;
-                        // FIX BUG-01: actualizar también el saludo inicial si ya está renderizado
-                        const welcomeMsg = chatBody.querySelector('.chat-bot');
-                        if (welcomeMsg && welcomeMsg.innerHTML.includes('Soy <strong>')) {
-                            welcomeMsg.innerHTML = `¡Hola! 👋 Soy <strong>${_assistantName}</strong>, tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy?`;
-                        }
-                        const headerAvatar = document.querySelector('.chat-header-avatar img');
-                        if (headerAvatar) {
-                            headerAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(_assistantName)}&background=2ecc71&color=fff&size=150`;
-                            headerAvatar.alt = `Asesora ${_assistantName}`;
-                        }
+            toggleBtn.addEventListener('click', () => {
+                isOpen = !isOpen;
+                if (isOpen) {
+                    chatWindow.classList.add('active');
+                    toggleBtn.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                    toggleBtn.setAttribute('aria-label', 'Cerrar chat');
+                    if (currentStep === 0 && chatBody.children.length === 0) {
+                        nextBotMessage();
                     }
                 } else {
-                    _aiServerOnline = false; _flowiseOnline = false;
-                    _healthCheckFailCount++;
+                    closeChat();
                 }
-            } catch {
-                _aiServerOnline = false; _flowiseOnline = false;
-                _healthCheckFailCount++;
-            }
-            _healthCheckDone = true;
-
-            // FIX BUG-05: backoff exponencial — cuanto más tiempo offline, menos batería gasta
-            if (_healthCheckInterval) clearInterval(_healthCheckInterval);
-            const nextCheck = _healthCheckFailCount === 0 ? 30000
-                            : _healthCheckFailCount < 3   ? 45000
-                            : _healthCheckFailCount < 6   ? 90000
-                            : 180000; // máximo 3 min entre checks si lleva mucho tiempo offline
-            _healthCheckInterval = setInterval(checkAIServer, nextCheck);
-        }
-        // Check al cargar
-        checkAIServer();
-
-        // ── Mensaje inicial en el chat
-        if (chatBody.children.length === 0) {
-            appendMessage(`¡Hola! 👋 Soy <strong>${_assistantName}</strong>, tu asesora AI de Eco-Electronic Solutions. ¿En qué te puedo ayudar hoy?`, 'bot');
-            showQuickReplies();
-        }
-
-        // ── Audio + Vibración (desbloqueado al primer toque del usuario) ──
-        let _audioCtx = null;
-        let _audioUnlocked = false;
-
-        function unlockAudio() {
-            if (_audioUnlocked) return;
-            try {
-                _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                // Reproducir silencio para desbloquear en iOS/Android
-                const buf = _audioCtx.createBuffer(1, 1, 22050);
-                const src = _audioCtx.createBufferSource();
-                src.buffer = buf;
-                src.connect(_audioCtx.destination);
-                src.start(0);
-                _audioUnlocked = true;
-                // Resumir si está suspendido (Chrome autoplay policy)
-                if (_audioCtx.state === 'suspended') _audioCtx.resume();
-            } catch(e) {}
-        }
-
-        // Desbloquear audio al primer gesto real del usuario (once: true para no repetir)
-        // NO se intenta al cargar la página — los navegadores bloquean eso en móvil
-        ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(evt => {
-            document.addEventListener(evt, unlockAudio, { once: true, passive: true });
-        });
-
-        function playNotificationChime() {
-            if (!_audioCtx) unlockAudio();
-            if (!_audioCtx) return;
-            try {
-                if (_audioCtx.state === 'suspended') _audioCtx.resume();
-                const now = _audioCtx.currentTime;
-                // 🎵 Chime de 3 notas tipo "mensaje recibido" (Do-Mi-Sol)
-                const notes = [523, 659, 784]; // C5, E5, G5 — acorde mayor
-                notes.forEach((freq, i) => {
-                    const osc = _audioCtx.createOscillator();
-                    const gain = _audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, now + i * 0.1);
-                    gain.gain.setValueAtTime(0.14, now + i * 0.1);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.35);
-                    osc.connect(gain).connect(_audioCtx.destination);
-                    osc.start(now + i * 0.1);
-                    osc.stop(now + i * 0.1 + 0.35);
-                });
-            } catch(e) {}
-        }
-
-        function vibrateSubtle() {
-            try { if (navigator.vibrate) navigator.vibrate([50, 30, 50]); } catch {}
-        }
-
-        // ── Burbuja proactiva insistente con rotación de mensajes ──
-        const proactiveMsgs = [
-            '👋 ¡Hola! ¿Tienes algún equipo que reparar?',
-            '💬 Te puedo dar una cotización al instante. ¡Escríbeme!',
-            '🔧 ¿Tu laptop, consola o microondas falló? ¡Puedo ayudarte!',
-            '⚡ Diagnóstico desde $200 MXN. ¿Te interesa?',
-            '📱 ¡Hola! Soy Dalia, tu asesora AI. ¿En qué te ayudo?',
-            '🛠️ Reparamos laptops, pantallas, consolas y más. ¡Pregúntame!',
-            '🖥️ ¿Tu PC va lenta o no enciende? Tenemos la solución.',
-            '🎮 Xbox, PlayStation, Nintendo… ¡las reparamos todas!',
-            '🔌 Microondas, licuadoras, pantallas LED — todo tipo de equipo.',
-            '💡 ¿Sabías que ofrecemos garantía de 60 a 90 días? ¡Pregúntame!',
-        ];
-        let _proactiveMsgIndex = 0;
-
-        let proactiveBubble = null;
-
-        function showProactiveBubble() {
-            // No mostrar si ya está abierto el chat
-            if (isChatOpen) return;
-            // Si ya cerró 5+ veces, dejar de insistir
-            if (_bubbleDismissCount >= 5) return;
-            // Remover burbuja anterior si existe
-            if (proactiveBubble) { proactiveBubble.remove(); proactiveBubble = null; }
-
-            // ✅ Si el servidor está offline: NO mostrar burbuja de mantenimiento molesta.
-            // El usuario verá el mensaje de error cuando intente chatear directamente.
-            if (_healthCheckDone && !_aiServerOnline) return;
-
-            // Si el health check aún no terminó, tampoco mostrar nada todavía
-            if (!_healthCheckDone) return;
-
-            // Servidor online → burbuja normal rotativa
-            const text = proactiveMsgs[_proactiveMsgIndex % proactiveMsgs.length];
-            _proactiveMsgIndex++;
-
-            proactiveBubble = document.createElement('div');
-            proactiveBubble.className = 'chat-proactive-bubble';
-            proactiveBubble.innerHTML = `
-                <span class="bubble-close" id="bubble-close-btn" aria-label="Cerrar">&times;</span>
-                ${text}
-            `;
-            document.body.appendChild(proactiveBubble);
-
-            // 🔔 Notificar al usuario — solo si el audio ya fue desbloqueado por un gesto
-            vibrateSubtle();
-            if (_audioUnlocked) playNotificationChime();
-
-            // Abrir chat al hacer clic en la burbuja
-            proactiveBubble.addEventListener('click', (e) => {
-                if (e.target.id === 'bubble-close-btn') {
-                    proactiveBubble.remove();
-                    proactiveBubble = null;
-                    _bubbleDismissCount++;
-                    _saveDismissCount();
-                    return;
-                }
-                proactiveBubble.remove();
-                proactiveBubble = null;
-                toggleBtn.click();
             });
-        }
 
-        // ✅ Primera burbuja: esperar a que el health check termine (evita race condition en móviles lentos)
-        // + esperar 4s extra para que el usuario ya haya interactuado (desbloquea el audio)
-        function waitForHealthCheckThenShow() {
-            if (_healthCheckDone) {
-                showProactiveBubble();
-            } else {
-                setTimeout(waitForHealthCheckThenShow, 500);
-            }
-        }
-        setTimeout(waitForHealthCheckThenShow, 4000);
+            closeBtn.addEventListener('click', closeChat);
 
-        // Rotación de mensajes proactivos: cada 10s rota al siguiente
-        // Cuando el servidor está offline, no hace nada (guard dentro de showProactiveBubble)
-        const _bubbleInterval = setInterval(() => {
-            // Auto-dismiss la burbuja anterior para rotar al siguiente mensaje
-            if (proactiveBubble) {
-                proactiveBubble.remove();
-                proactiveBubble = null;
-            }
-            // Dejar de insistir si el usuario ya cerró 5 veces
-            if (_bubbleDismissCount >= 5) {
-                clearInterval(_bubbleInterval);
-                return;
-            }
-            if (!isChatOpen) {
-                showProactiveBubble();
-            }
-        }, 10000);
-
-        // Ocultar burbuja al abrir el chat
-        function removeBubbleIfOpen() {
-            if (proactiveBubble) {
-                proactiveBubble.remove();
-                proactiveBubble = null;
-            }
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            isChatOpen = !isChatOpen;
-            if (isChatOpen) {
-                removeBubbleIfOpen();
-                chatWindow.classList.add('active');
-                toggleBtn.style.display = 'none';
-                setTimeout(() => chatInput.focus(), 300);
-            } else {
-                closeChatFn();
-            }
-        });
-
-        closeBtn.addEventListener('click', closeChatFn);
-
-        function closeChatFn() {
-            isChatOpen = false;
-            chatWindow.classList.remove('active');
-            toggleBtn.style.display = 'flex';
-        }
-
-        async function handleUserInput() {
-            const text = chatInput.value.trim();
-            if (!text || isTyping) return;
-
-            // Remove quick replies if present
-            const qr = document.getElementById('quick-replies');
-            if (qr) qr.remove();
-
-            // FIX BUG-02: si el servidor está offline, responder inmediatamente sin hacer fetch
-            if (_healthCheckDone && !_aiServerOnline) {
-                appendMessage(
-                    '⚠️ Dalia está en mantenimiento en este momento. ' +
-                    'Contáctanos directamente por <a href="https://wa.me/522223167820" target="_blank" style="color:#25D366;font-weight:600;">WhatsApp</a> y te atendemos al instante.',
-                    'bot'
-                );
-                return;
+            function closeChat() {
+                isOpen = false;
+                chatWindow.classList.remove('active');
+                toggleBtn.innerHTML = '<i class="fas fa-comment-dots" aria-hidden="true"></i>';
+                toggleBtn.setAttribute('aria-label', 'Abrir chat con asesora Daniela de Eco-Electronic Solutions');
             }
 
-            appendMessage(text, 'user');
-            chatInput.value = '';
-            isTyping = true;
-            chatInput.disabled = true;
-            chatSendBtn.disabled = true;
-
-            messagesState.push({ role: 'user', content: text });
-            // FIX BUG-06: evitar que messagesState crezca sin límite en sesiones largas
-            if (messagesState.length > 30) messagesState = messagesState.slice(-30);
-
-            const botMsgId = "msg-" + Date.now();
-            showTypingIndicator();
-
-            // ── ID de sesión único por usuario (memoria por conversación) ──
-            if (!window._chatSessionId) {
-                window._chatSessionId = 'web-' + Math.random().toString(36).slice(2, 10) + '-' + Date.now();
+            function appendMessage(msg, type) {
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble chat-${type}`;
+                bubble.innerHTML = msg;
+                chatBody.appendChild(bubble);
+                chatBody.scrollTop = chatBody.scrollHeight;
             }
 
-            // ── Endpoints ──
-            const FLOWISE_URL     = 'https://ai.ecoelectronicsolutions.com.mx';
-            const CHATFLOW_ID     = 'c427317f-dbfb-4a48-903e-4cbdf74c50a3';
-            const FLOWISE_API     = `${FLOWISE_URL}/api/v1/prediction/${CHATFLOW_ID}`;
-            const FALLBACK_API    = `${FLOWISE_URL}/v1/chat/completions`;
-
-            // ── Safety timeout: desbloquear chat si ALGO sale mal después de 45s ──
-            const safetyTimer = setTimeout(() => {
-                console.warn('[Chat] Safety timeout — desbloqueando chat');
-                hideTypingIndicator();
-                if (isTyping) {
-                    isTyping = false;
-                    chatInput.disabled = false;
-                    chatSendBtn.disabled = false;
-                    if (!document.getElementById(botMsgId)) {
-                        appendMessage('⏱️ La respuesta está tardando demasiado. Intenta de nuevo o contáctanos por WhatsApp.', 'bot', botMsgId);
-                    }
-                }
-            }, 45000);
-
-            try {
-                let responded = false;
-
-                // ── PASO 1: Intentar Flowise (solo si health check dice que está online) ──
-                if (_flowiseOnline) {
-                    try {
-                        const res = await fetch(FLOWISE_API, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                question: text,
-                                sessionId: window._chatSessionId,
-                                history: messagesState.slice(-7, -1).map(m => ({
-                                    role: m.role === 'assistant' ? 'apiMessage' : 'userMessage',
-                                    content: m.content
-                                }))
-                            }),
-                            signal: AbortSignal.timeout(12000) // ✅ 12s max (antes 30s)
-                        });
-
-                        if (res.ok) {
-                            hideTypingIndicator();
-                            const data = await res.json();
-                            const reply = data.text || data.answer || data.message || '(sin respuesta)';
-                            appendMessage(reply, 'bot', botMsgId);
-                            messagesState.push({ role: 'assistant', content: reply });
-                            playNotificationChime();
-                            responded = true;
+            function nextBotMessage() {
+                if (currentStep < chatFlow.length) {
+                    isTyping = true;
+                    const step = chatFlow[currentStep];
+                    setTimeout(() => {
+                        appendMessage(step.bot, 'bot');
+                        isTyping = false;
+                        if (step.key === "end") {
+                            endConversation();
                         } else {
-                            console.warn('[Chat] Flowise HTTP', res.status, '— usando fallback');
+                            chatInput.focus();
                         }
-                    } catch (flowiseErr) {
-                        console.warn('[Chat] Flowise error:', flowiseErr.message, '— usando fallback');
-                        // FIX BUG-07: no marcar offline permanente al primer fallo
-                        // Solo se marca offline tras 2 fallos consecutivos
-                        if (!window._flowiseFailCount) window._flowiseFailCount = 0;
-                        window._flowiseFailCount++;
-                        if (window._flowiseFailCount >= 2) {
-                            _flowiseOnline = false;
-                            window._flowiseFailCount = 0;
-                        }
-                    }
-                } else {
-                    console.info('[Chat] Flowise offline — saltando directo a fallback');
+                    }, 600);
                 }
-
-                // ── PASO 2: Fallback al backend directo (streaming) ──
-                if (!responded) {
-                    try {
-                        const response = await fetch(FALLBACK_API, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                model: "default",
-                                messages: messagesState,
-                                stream: true,
-                                temperature: 0.7
-                            }),
-                            signal: AbortSignal.timeout(20000) // ✅ 20s max (antes 30s)
-                        });
-
-                        if (!response.ok) throw new Error('HTTP ' + response.status);
-
-                        hideTypingIndicator();
-
-                        const reader = response.body.getReader();
-                        const decoder = new TextDecoder('utf-8');
-                        let fullBotResponse = '';
-
-                        while (true) {
-                            const { value, done } = await reader.read();
-                            if (done) break;
-                            const chunk = decoder.decode(value, { stream: true });
-                            for (const line of chunk.split('\n')) {
-                                if (line.startsWith('data: ')) {
-                                    const dataStr = line.slice(6).trim();
-                                    if (dataStr === '[DONE]') break;
-                                    if (!dataStr) continue;
-                                    try {
-                                        const d = JSON.parse(dataStr);
-                                        if (d.choices?.[0]?.delta?.content) {
-                                            fullBotResponse += d.choices[0].delta.content;
-                                            appendMessage(fullBotResponse, 'bot', botMsgId);
-                                        }
-                                    } catch {}
-                                }
-                            }
-                        }
-
-                        if (fullBotResponse) {
-                            messagesState.push({ role: 'assistant', content: fullBotResponse });
-                            playNotificationChime();
-                            responded = true;
-                        }
-                    } catch (fallbackErr) {
-                        console.error('[Chat] Fallback error:', fallbackErr);
-                    }
-                }
-
-                // ── PASO 3: Si nada funcionó, mostrar mensaje de error ──
-                if (!responded) {
-                    hideTypingIndicator();
-                    appendMessage(
-                        '⚠️ No pude conectar con el servidor de AI en este momento. ' +
-                        'Por favor, intenta en unos minutos o contáctanos por ' +
-                        '<a href="https://wa.me/522223167820" target="_blank" style="color:#25D366;font-weight:600;">WhatsApp</a>.',
-                        'bot', botMsgId
-                    );
-                }
-
-            } catch (fatalError) {
-                // Catch-all: NUNCA dejar el chat bloqueado
-                console.error('[Chat] Error fatal:', fatalError);
-                hideTypingIndicator();
-                appendMessage('⚠️ Ocurrió un error inesperado. Intenta de nuevo.', 'bot', botMsgId);
-            } finally {
-                clearTimeout(safetyTimer);
-                isTyping = false;
-                chatInput.disabled = false;
-                chatSendBtn.disabled = false;
-                setTimeout(() => chatInput.focus(), 100);
             }
-        }
 
-        chatSendBtn.addEventListener('click', handleUserInput);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleUserInput();
+            function handleUserInput() {
+                const text = chatInput.value.trim();
+                if (!text || isTyping || currentStep >= chatFlow.length - 1) return;
+                const currentKey = chatFlow[currentStep].key;
+                userData[currentKey] = text;
+                appendMessage(text, 'user');
+                chatInput.value = '';
+                currentStep++;
+                nextBotMessage();
+            }
+
+            function endConversation() {
+                chatInput.disabled = true;
+                chatSendBtn.disabled = true;
+                chatInput.placeholder = "Chat finalizado";
+                setTimeout(() => {
+                    const ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'chat-rating';
+                    ratingDiv.setAttribute('aria-label', 'Califica tu experiencia');
+                    ratingDiv.innerHTML = `
+                        <button class="rating-btn" data-val="Triste" aria-label="Experiencia mala">😞</button>
+                        <button class="rating-btn" data-val="Neutral" aria-label="Experiencia neutral">😐</button>
+                        <button class="rating-btn" data-val="Feliz" aria-label="Experiencia excelente">😄</button>
+                    `;
+                    chatBody.appendChild(ratingDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                    ratingDiv.querySelectorAll('.rating-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            userData.valoracion = this.getAttribute('data-val');
+                            ratingDiv.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                            this.classList.add('selected');
+                            appendMessage("¡Gracias por tu valoración!", 'bot');
+                            sendDataToServer();
+                        });
+                    });
+                }, 800);
+            }
+
+            function sendDataToServer() {
+                console.log("Lead generado — Eco-Electronic Solutions:", userData);
+                /*
+                fetch('https://tu-api.ecoelectronicsolutions.com.mx/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                }).then(res => console.log('Lead enviado'))
+                  .catch(err => console.error(err));
+                */
+            }
+
+            chatSendBtn.addEventListener('click', handleUserInput);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleUserInput();
+            });
         });
-
-    }); // end DOMContentLoaded
     </script>
-
-    <!-- Móvil: aparecer directamente en el footer (mapa + info taller) -->
-    <script>
-    if (window.innerWidth <= 768) {
-        document.documentElement.style.scrollBehavior = 'auto';
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-    </script>
-
 </body>
-
 </html>
