@@ -522,6 +522,24 @@
             box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
 
+        .btn-software-nav {
+            background: var(--accent);
+            color: white;
+            padding: 9px 18px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: transform 0.2s, box-shadow 0.3s;
+            white-space: nowrap;
+        }
+        .btn-software-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(243,156,18,0.4);
+        }
+
         /* Hamburger */
         .hamburger {
             display: none;
@@ -588,132 +606,15 @@
             padding-left: 32px;
         }
         .drawer-link i { width: 22px; text-align: center; }
+        .drawer-link-highlight { color: var(--accent); font-weight: 700; }
+        .drawer-link-highlight:hover { background: rgba(243,156,18,0.12); color: var(--accent); }
         .drawer-divider {
             height: 1px;
             background: rgba(255,255,255,0.08);
             margin: 10px 25px;
         }
 
-        /* ============================================
-           TERMS & CONDITIONS MODAL
-           ============================================ */
-        .terms-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            backdrop-filter: blur(4px);
-        }
-        .terms-overlay.active { opacity: 1; pointer-events: all; }
 
-        .terms-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            width: 90%;
-            max-width: 680px;
-            max-height: 85vh;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            z-index: 10001;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s, transform 0.3s var(--ease-out);
-        }
-        .terms-modal.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .terms-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-        .terms-header h2 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-primary);
-        }
-        .terms-header h2 i { color: var(--primary); }
-        .terms-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.6rem;
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: background 0.2s, color 0.2s;
-        }
-        .terms-close:hover { background: rgba(0,0,0,0.08); color: var(--text-primary); }
-        [data-theme="dark"] .terms-close:hover { background: rgba(255,255,255,0.08); }
-
-        .terms-body {
-            padding: 24px;
-            overflow-y: auto;
-            flex: 1;
-            line-height: 1.7;
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-        }
-        .terms-body h3 {
-            font-size: 1.02rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 22px 0 8px;
-        }
-        .terms-body h3:first-of-type { margin-top: 0; }
-        .terms-body p { margin-bottom: 10px; }
-        .terms-body ul {
-            margin: 8px 0 14px 20px;
-            list-style: disc;
-        }
-        .terms-body ul li { margin-bottom: 6px; }
-        .terms-body a { color: var(--primary); font-weight: 600; }
-        .terms-body a:hover { text-decoration: underline; }
-        .terms-updated {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        @media (max-width: 600px) {
-            .terms-modal {
-                width: 100%;
-                max-width: 100%;
-                max-height: 100%;
-                height: 100dvh;
-                border-radius: 0;
-                top: 0; left: 0;
-                transform: translateY(100%);
-            }
-            .terms-modal.active { transform: translateY(0); }
-            .terms-header { padding: 16px 18px; }
-            .terms-body { padding: 18px; }
-        }
 
         /* ============================================
            HERO
@@ -1854,6 +1755,8 @@
             .search-bar { display: none; }
             .btn-whatsapp-nav span { display: none; }
             .btn-whatsapp-nav { padding: 9px 12px; }
+            .btn-software-nav span { display: none; }
+            .btn-software-nav { padding: 9px 12px; }
             .hamburger { display: flex; }
             .logo { font-size: 1.15rem; }
             .logo span { display: none; }
@@ -2028,6 +1931,9 @@
             <button class="dark-toggle" id="dark-toggle" aria-label="Cambiar tema">
                 <i class="fas fa-moon"></i>
             </button>
+            <a href="./AIERP-ECOELECTRONICSOLUTIONS.html" class="btn-software-nav" title="Descubre el software para talleres que vendemos">
+                <i class="fas fa-laptop-code"></i> <span>Nuestro Software</span>
+            </a>
             <a href="https://wa.me/522223167820" class="btn-whatsapp-nav" target="_blank">
                 <i class="fab fa-whatsapp"></i> <span>Cotiza Ahora</span>
             </a>
@@ -2054,74 +1960,8 @@
         <a href="https://wa.me/522223167820" class="drawer-link" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         <a href="tel:+522229898801" class="drawer-link"><i class="fas fa-phone-alt"></i> Llamar</a>
         <div class="drawer-divider"></div>
-        <a href="#" class="drawer-link" id="open-terms-drawer"><i class="fas fa-shield-alt"></i> Términos y Condiciones</a>
-    </div>
-
-    <!-- Modal: Términos y Condiciones -->
-    <div class="terms-overlay" id="terms-overlay"></div>
-    <div class="terms-modal" id="terms-modal">
-        <div class="terms-header">
-            <h2><i class="fas fa-shield-alt"></i> Términos y Condiciones</h2>
-            <button class="terms-close" id="terms-close" aria-label="Cerrar">&times;</button>
-        </div>
-        <div class="terms-body">
-            <p class="terms-updated"><i class="fas fa-calendar-alt"></i> Última actualización: Abril 2026</p>
-
-            <h3>1. Información General</h3>
-            <p>Eco-Electronic Solutions es un taller de reparación de electrónicos ubicado en San Andrés Cholula, Puebla, México. Al utilizar nuestros servicios, el cliente acepta los siguientes términos.</p>
-
-            <h3>2. Horarios de Atención</h3>
-            <ul>
-                <li><strong>Lunes a Viernes:</strong> 10:00 AM – 8:00 PM</li>
-                <li><strong>Sábados:</strong> 10:00 AM – 6:00 PM</li>
-                <li><strong>Domingos:</strong> 10:00 AM – 4:00 PM</li>
-                <li><strong>Días festivos:</strong> Cerrado</li>
-            </ul>
-
-            <h3>3. Diagnóstico y Cotización</h3>
-            <p>El diagnóstico tiene un costo de <strong>$200.00 MXN</strong>, aplicable al costo total de la reparación si el cliente acepta el presupuesto. El diagnóstico no es reembolsable si el cliente rechaza la reparación.</p>
-
-            <h3>4. Garantía de Reparaciones</h3>
-            <ul>
-                <li>Las reparaciones tienen garantía de <strong>30 días naturales</strong> a partir de la entrega.</li>
-                <li>La garantía cubre defectos en el trabajo realizado, <strong>no daños posteriores</strong> causados por mal uso, líquidos, golpes o descargas eléctricas.</li>
-                <li>Para hacer válida la garantía, se requiere presentar la nota de servicio original.</li>
-            </ul>
-
-            <h3>5. Refacciones</h3>
-            <ul>
-                <li>Las refacciones utilizadas pueden ser originales o compatibles de alta calidad, según disponibilidad.</li>
-                <li>La garantía de refacciones es de <strong>15 días naturales</strong>.</li>
-                <li>Las refacciones especiales que requieran pedido tienen un tiempo de entrega de 3 a 10 días hábiles.</li>
-            </ul>
-
-            <h3>6. Equipos en Taller</h3>
-            <ul>
-                <li>El equipo no reclamado en un plazo de <strong>60 días naturales</strong> después de la notificación de que está listo, será considerado abandonado.</li>
-                <li>Eco-Electronic Solutions no se responsabiliza por datos almacenados en los equipos. Se recomienda al cliente realizar respaldo previo.</li>
-            </ul>
-
-            <h3>7. Pagos y Facturación</h3>
-            <ul>
-                <li>Aceptamos efectivo, transferencia bancaria y pagos por WhatsApp.</li>
-                <li>El pago total se realiza al momento de la entrega del equipo reparado.</li>
-                <li>Para reparaciones mayores a $2,000 MXN, se requiere un anticipo del 50%.</li>
-            </ul>
-
-            <h3>8. Programa Eco-Canje</h3>
-            <p>El programa de intercambio de aparatos electrónicos usados está sujeto a evaluación del técnico. Los valores de canje son determinados por Eco-Electronic Solutions y no son negociables.</p>
-
-            <h3>9. Uso del Chatbot AI (Dalia)</h3>
-            <p>El asistente virtual Dalia proporciona información orientativa. Las cotizaciones finales deben ser confirmadas directamente con un técnico. Las respuestas de la IA no constituyen un compromiso contractual.</p>
-
-            <h3>10. Privacidad y Datos</h3>
-            <p>Los datos proporcionados por el formulario de cotización y WhatsApp son utilizados exclusivamente para brindar el servicio solicitado. No compartimos información con terceros.</p>
-
-            <h3>11. Contacto</h3>
-            <p>Para cualquier duda sobre estos términos:<br>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/522223167820" target="_blank">222 316 7820</a><br>
-            <strong>Teléfono:</strong> <a href="tel:+522229898801">222 989 8801</a></p>
-        </div>
+        <a href="./AIERP-ECOELECTRONICSOLUTIONS.html" class="drawer-link drawer-link-highlight"><i class="fas fa-laptop-code"></i> Software para tu Taller</a>
+        <a href="./terminos.html" class="drawer-link"><i class="fas fa-shield-alt"></i> Términos y Condiciones</a>
     </div>
 
     <!-- Hero -->
@@ -2680,12 +2520,12 @@
         <div class="footer-bottom">
             <p>&copy; 2026-2027 Eco-Electronic Solutions. Todos los derechos reservados.<br>
             Web creada por Eco-Networks Solutions, una subdivisión de Eco-Electronic Solutions.</p>
-            <button id="open-terms-footer"
-                style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#bbb;padding:9px 20px;border-radius:6px;font-size:0.83rem;font-family:inherit;cursor:pointer;margin-top:14px;transition:background 0.3s,color 0.3s;"
+            <a href="./terminos.html"
+                style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#bbb;padding:9px 20px;border-radius:6px;font-size:0.83rem;font-family:inherit;cursor:pointer;margin-top:14px;transition:background 0.3s,color 0.3s;"
                 onmouseover="this.style.background='rgba(46,204,113,0.15)';this.style.color='#2ecc71';"
                 onmouseout="this.style.background='rgba(255,255,255,0.07)';this.style.color='#bbb';">
                 <i class="fas fa-file-contract"></i> Términos y Condiciones del Servicio
-            </button>
+            </a>
         </div>
     </footer>
 
@@ -2863,37 +2703,7 @@
         updateStatus();
         setInterval(updateStatus, 60000);
 
-        // =============================================
-        // TÉRMINOS Y CONDICIONES — Modal
-        // =============================================
-        const termsModal = document.getElementById('terms-modal');
-        const termsOverlay = document.getElementById('terms-overlay');
-        const termsClose = document.getElementById('terms-close');
-        const openTermsDrawer = document.getElementById('open-terms-drawer');
 
-        function openTerms(e) {
-            if (e) e.preventDefault();
-            termsModal.classList.add('active');
-            termsOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            // Cerrar drawer si está abierto
-            const drawer = document.getElementById('mobile-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            if (drawer) drawer.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-        }
-
-        function closeTerms() {
-            termsModal.classList.remove('active');
-            termsOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        if (openTermsDrawer) openTermsDrawer.addEventListener('click', openTerms);
-        const openTermsFooter = document.getElementById('open-terms-footer');
-        if (openTermsFooter) openTermsFooter.addEventListener('click', openTerms);
-        if (termsClose) termsClose.addEventListener('click', closeTerms);
-        if (termsOverlay) termsOverlay.addEventListener('click', closeTerms);
 
         // =============================================
         // 6. SEARCH FUNCTIONALITY
