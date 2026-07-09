@@ -65,6 +65,32 @@
     }
     .btn-cta:hover { transform:translateY(-2px); box-shadow:0 0 35px var(--glow-orange); }
 
+    /* ─── MOBILE MENU (hamburger) ─── */
+    .nav-toggle {
+      display:none; align-items:center; justify-content:center;
+      background:transparent; border:none; color:var(--text);
+      font-size:1.3rem; cursor:pointer; padding:.4rem .5rem;
+    }
+    .mobile-menu {
+      display:flex; flex-direction:column;
+      position:absolute; top:100%; left:0; right:0;
+      background:rgba(5,10,14,0.98); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      max-height:0; overflow:hidden; padding:0 1.5rem;
+      transition:max-height .35s ease, padding .35s ease;
+    }
+    .mobile-menu.open { max-height:420px; padding:.5rem 1.5rem 1.5rem; }
+    .mobile-menu a {
+      display:flex; align-items:center; gap:.75rem;
+      padding:.9rem .25rem; font-size:.95rem; color:var(--muted);
+      border-bottom:1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom:none; }
+    .mobile-menu a i { width:16px; text-align:center; color:var(--accent); }
+    .mobile-menu .btn-cta {
+      margin-top:.5rem; display:flex; align-items:center; justify-content:center; border-bottom:none;
+    }
+
     /* ─── HERO ─── */
     .hero {
       min-height:100vh; display:flex; flex-direction:column; justify-content:center;
@@ -151,6 +177,7 @@
     .screen-bar-url {
       flex:1; background:rgba(255,255,255,.05); border-radius:6px;
       font-size:.75rem; color:var(--muted); padding:.25rem .8rem;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0;
     }
     .screen-main img { width:100%; display:block; transition: opacity .35s ease, transform .35s ease; }
 
@@ -270,6 +297,15 @@
       background:linear-gradient(135deg,#8b5cf6,#3b82f6); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
     .ai-feat h4 { font-size:1rem; margin-bottom:.5rem; }
     .ai-feat p { font-size:.85rem; color:var(--muted); line-height:1.6; }
+    .ai-ownership-note {
+      margin-top:2.5rem; text-align:left;
+      background:rgba(139,92,246,.06); border:1px solid rgba(139,92,246,.2);
+      border-radius:16px; padding:1.5rem 1.75rem;
+      display:flex; align-items:flex-start; gap:1rem;
+    }
+    .ai-ownership-note i { color:#8b5cf6; font-size:1.3rem; margin-top:.15rem; flex-shrink:0; }
+    .ai-ownership-note p { font-size:.9rem; color:var(--muted); line-height:1.7; }
+    .ai-ownership-note strong { color:var(--text); }
 
     .pricing { padding:7rem 3rem; }
     .pricing-inner { max-width:1200px; margin:0 auto; text-align:center; }
@@ -304,6 +340,7 @@
     .plan-currency { font-size:1.5rem; font-weight:700; color:var(--muted); margin-top:.5rem; }
     .plan-amount { font-family:'Syne',sans-serif; font-size:4rem; font-weight:800; line-height:1;
       background:linear-gradient(180deg,#fff,#94a3b8); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .plan-amount-sub { font-size:3.5rem; }
     .plan-period { font-size:.85rem; color:var(--muted); align-self:flex-end; padding-bottom:.5rem; }
     .plan-alt-price {
       font-size:.85rem; color:var(--muted); margin-bottom:1.5rem;
@@ -431,20 +468,54 @@
     @media(max-width:900px) {
       nav { padding:1rem 1.5rem; }
       .nav-links { display:none; }
+      nav > a.btn-cta { display:none; }
+      .nav-toggle { display:flex; }
       .hero { padding:6rem 1.5rem 3rem; }
+      .hero-title { font-size:clamp(2.4rem,7vw,3.5rem); }
       .screen-floaters { grid-template-columns:1fr 1fr; }
+      .showcase-inner { padding:0 1.5rem; }
+      .features, .screen-feature, .ai-section, .pricing { padding:4.5rem 1.5rem; }
+      .stats-bar { padding:1.5rem; }
       .features-grid { grid-template-columns:1fr 1fr; }
-      .stats-inner { grid-template-columns:1fr 1fr; }
+      .stats-inner { grid-template-columns:1fr 1fr; gap:1.5rem 1rem; }
       .ai-features { grid-template-columns:1fr; }
-      .screen-feature-layout { grid-template-columns:1fr; }
+      .screen-feature-layout { grid-template-columns:1fr; gap:2rem; }
       .pricing-features-grid { grid-template-columns:1fr; }
+      .plans-grid { grid-template-columns:1fr; gap:1.5rem; }
+      .plan-card { padding:2rem; }
+      .screen-tabs {
+        flex-wrap:nowrap; overflow-x:auto; padding-bottom:.5rem;
+        -webkit-overflow-scrolling:touch; scrollbar-width:none;
+      }
+      .screen-tabs::-webkit-scrollbar { display:none; }
+      .tab-btn { flex-shrink:0; }
     }
     @media(max-width:600px) {
       .hero-title { font-size:2.4rem; }
+      .hero-desc { font-size:1.05rem; }
+      .hero-badge { border-radius:14px; font-size:.7rem; letter-spacing:.5px; white-space:normal; text-align:center; }
       .features-grid { grid-template-columns:1fr; }
-      .screen-floaters { grid-template-columns:1fr; }
+      .screen-floaters { grid-template-columns:1fr 1fr; gap:.85rem; }
+      .screen-mini .mini-label { font-size:.68rem; padding:1.25rem .6rem .4rem; }
       .pricing-card { padding:2rem; }
       .price-amount { font-size:4rem; }
+      .plan-card { padding:1.75rem; border-radius:22px; }
+      .plan-amount, .plan-amount-sub { font-size:2.9rem; }
+      .plan-title { font-size:1.35rem; }
+      footer { flex-direction:column; text-align:center; padding:2.5rem 1.5rem; }
+    }
+    @media(max-width:480px) {
+      nav { flex-wrap:wrap; justify-content:center; gap:.5rem; padding:.85rem 1rem; }
+      .nav-logo span { font-size:1rem; }
+      .hero-actions { flex-direction:column; align-items:stretch; }
+      .hero-actions a { width:100%; display:flex; align-items:center; justify-content:center; }
+      .hero-types { justify-content:center; text-align:center; }
+      .features, .screen-feature, .ai-section, .pricing { padding:3.5rem 1.25rem; }
+      .section-title { font-size:1.7rem; }
+      .section-desc { margin-bottom:2.5rem; }
+      .stats-inner { gap:1.25rem .75rem; }
+      .stat-num { font-size:2rem; }
+      .sub-toggle { flex-wrap:wrap; }
     }
   </style>
 </head>
@@ -463,6 +534,16 @@
     <a href="#precio">Precio</a>
   </div>
   <a href="#precio" class="btn-cta">🚀 Oferta de Lanzamiento</a>
+  <button class="nav-toggle" id="nav-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#funciones" onclick="closeMobileMenu()"><i class="fas fa-list-check"></i> Funciones</a>
+    <a href="#modulos" onclick="closeMobileMenu()"><i class="fas fa-desktop"></i> Módulos</a>
+    <a href="#ia" onclick="closeMobileMenu()"><i class="fas fa-brain"></i> Inteligencia Artificial</a>
+    <a href="#precio" onclick="closeMobileMenu()"><i class="fas fa-tag"></i> Precio</a>
+    <a href="#precio" class="btn-cta" onclick="closeMobileMenu()">🚀 Oferta de Lanzamiento</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -772,8 +853,11 @@
   <div class="ai-bg"></div>
   <div class="ai-inner">
     <div class="ai-icon reveal"><i class="fas fa-brain"></i></div>
+    <div class="hero-badge reveal" style="background:rgba(139,92,246,.1); border-color:rgba(139,92,246,.3); color:#c4b5fd;">
+      <div class="dot" style="background:#8b5cf6;"></div>Tecnología propia · Corre sin internet
+    </div>
     <h2 class="reveal">Inteligencia Artificial<br>integrada en tu taller</h2>
-    <p class="reveal">ECO-ELECTRONIC Solutions incluye el motor <strong>Master Logic AI</strong> — un sistema de análisis predictivo que aprende de tus datos para ayudarte a tomar mejores decisiones de negocio.</p>
+    <p class="reveal">ECO-ELECTRONIC Solutions incluye el motor <strong>Master Logic AI</strong>, desarrollado y empaquetado por nosotros con algoritmos matemáticos y diccionarios propios que corren directo en tu computadora — sin depender de un servidor externo ni de internet. Es la razón principal por la que la licencia vale la inversión.</p>
     <div class="ai-features">
       <div class="ai-feat reveal">
         <div class="ai-feat-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
@@ -790,6 +874,11 @@
         <h4>Coach de Ventas IA</h4>
         <p>Sugerencias automáticas de cross-selling y upselling para incrementar el ticket promedio de cada orden de servicio.</p>
       </div>
+    </div>
+    <div class="ai-ownership-note reveal">
+      <i class="fas fa-shield-halved"></i>
+      <p><strong>Master Logic AI es tecnología 100% propietaria de ECO-ELECTRONIC Solutions.</strong>
+      Algoritmos matemáticos y diccionarios propios, empaquetados para ejecutarse localmente en tu equipo — sin servidores externos, sin costos ocultos de nube. <strong>Nadie puede apagar el servidor de tu IA</strong>: no existe, vive en tu computadora, para siempre.</p>
     </div>
   </div>
 </section>
@@ -810,7 +899,7 @@
         <div class="plan-glow" style="background:radial-gradient(circle,rgba(249,115,22,.2),transparent);"></div>
         <span class="plan-badge orange">🔥 Licencia Única</span>
         <h3 class="plan-title">Un pago. Tuyo para siempre.</h3>
-        <p class="plan-desc">Pago único, sin mensualidades obligatorias. El software es tuyo de por vida y tus datos nunca quedan rehenes.</p>
+        <p class="plan-desc">Pago único, sin mensualidades obligatorias. Adquieres una licencia de uso de por vida sobre tu copia del software, y tus datos nunca quedan rehenes.</p>
         <div class="plan-price-main">
           <span class="plan-currency">$</span>
           <span class="plan-amount">2,999</span>
@@ -832,6 +921,7 @@
           <li><i class="fas fa-check-circle inc"></i> Respaldos automáticos locales</li>
           <li><i class="fas fa-check-circle inc"></i> Soporte de instalación incluido</li>
           <li><i class="fas fa-check-circle opt"></i> <span style="color:var(--muted)">Actualizaciones posteriores opcionales</span></li>
+          <li><i class="fas fa-info-circle opt"></i> <span style="color:var(--muted)">Incluye tu copia del software; no incluye código fuente ni cesión de propiedad intelectual</span></li>
           <li><i class="fas fa-clock soon"></i> <span style="color:#f97316">Facturación CFDI 4.0 (próximamente)</span></li>
         </ul>
         <button class="btn-plan primary" onclick="alert('¡Gracias! Contáctanos para completar tu compra de Licencia Única.')">
@@ -844,7 +934,7 @@
         <div class="plan-glow" style="background:radial-gradient(circle,rgba(59,130,246,.15),transparent);"></div>
         <span class="plan-badge blue">&#9889; Suscripción Premium</span>
         <h3 class="plan-title">Siempre actualizado.</h3>
-        <p class="plan-desc">Actualizaciones incluidas mientras tu suscripción esté activa. Si cancelas, el software sigue funcionando en su última versión.</p>
+        <p class="plan-desc">Actualizaciones incluidas mientras tu suscripción esté activa. Al cumplir 12 meses de servicio continuo, el software se queda contigo para siempre en su última versión, incluso si cancelas después. Si cancelas antes de los 12 meses, el uso del software se interrumpe.</p>
 
         <!-- Toggle mensual / anual -->
         <div class="sub-toggle" id="sub-toggle">
@@ -858,7 +948,7 @@
         <div id="price-mensual">
           <div class="plan-price-main">
             <span class="plan-currency">$</span>
-            <span class="plan-amount" style="font-size:3.5rem;">399</span>
+            <span class="plan-amount plan-amount-sub">399</span>
             <span class="plan-period">MXN<br>/mes</span>
           </div>
           <div class="plan-alt-price">O $4,788 al año si pagas mes a mes</div>
@@ -866,7 +956,7 @@
         <div id="price-anual" style="display:none;">
           <div class="plan-price-main">
             <span class="plan-currency">$</span>
-            <span class="plan-amount" style="font-size:3.5rem;">3,999</span>
+            <span class="plan-amount plan-amount-sub">3,999</span>
             <span class="plan-period">MXN<br>/año</span>
           </div>
           <div class="plan-alt-price">
@@ -886,7 +976,7 @@
           <li><i class="fas fa-check-circle inc"></i> Multi-usuario con perfiles</li>
           <li><i class="fas fa-check-circle inc"></i> Respaldos automáticos locales</li>
           <li><i class="fas fa-check-circle soon"></i> <span style="color:#f97316">CFDI 4.0 SAT incluido al liberarse</span></li>
-          <li><i class="fas fa-info-circle opt"></i> <span style="color:var(--muted)">Si cancelas: última versión queda activa</span></li>
+          <li><i class="fas fa-info-circle opt"></i> <span style="color:var(--muted)">Tras 12 meses de servicio, el software es tuyo aunque canceles</span></li>
         </ul>
         <button class="btn-plan secondary" id="btn-sub" onclick="alert('¡Gracias! Contáctanos para activar tu Suscripción Premium.')">
           <i class="fas fa-bolt"></i> <span id="btn-sub-txt">Suscribirse Mensual · $399/mes</span>
@@ -911,7 +1001,7 @@
     ECO-ELECTRONIC Solutions
   </div>
   <div>Software profesional para talleres de servicio técnico · Todos los derechos reservados © 2026</div>
-  <div style="color:var(--muted)">🔒 Licencia Permanente · Sin mensualidades · Datos 100% locales</div>
+  <div style="color:var(--muted)">🔒 IA 100% Propia de ECO-ELECTRONIC Solutions · Sin servidores externos · Datos 100% locales</div>
 </footer>
 
 <script>
@@ -952,6 +1042,23 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── Mobile menu ───
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const toggle = document.getElementById('nav-toggle');
+    const isOpen = menu.classList.toggle('open');
+    toggle.querySelector('i').className = isOpen ? 'fas fa-xmark' : 'fas fa-bars';
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  }
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const toggle = document.getElementById('nav-toggle');
+    menu.classList.remove('open');
+    toggle.querySelector('i').className = 'fas fa-bars';
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMobileMenu(); });
 
   // ─── Nav scroll effect ───
   let navScrollTicking = false;
