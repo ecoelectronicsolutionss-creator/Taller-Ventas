@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECO-ELECTRONIC Solutions | Software Profesional para Talleres</title>
+  <meta name="description" content="ECO-ELECTRONIC Solutions: el software más completo para talleres de línea blanca, marrón, gris, celulares y venta de refacciones. Órdenes de servicio, inventario, reportes, IA y más.">
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #050a0e;
+      --surface: #0d1520;
+      --surface2: #111c2b;
+      --border: rgba(255,255,255,0.07);
+      --accent: #f97316;
+      --accent2: #3b82f6;
+      --accent3: #8b5cf6;
+      --text: #f1f5f9;
+      --muted: #64748b;
+      --glow-orange: rgba(249,115,22,0.25);
+      --glow-blue: rgba(59,130,246,0.2);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.1; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity:0.5;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 1rem 3rem;
+      background: rgba(5,10,14,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display:flex; align-items:center; gap:.75rem; }
+    .nav-logo img { height:36px; border-radius:8px; }
+    .nav-logo span { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:800;
+      background: linear-gradient(90deg,#f97316,#fb923c); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .nav-links { display:flex; gap:2rem; font-size:.9rem; color:var(--muted); }
+    .nav-links a:hover { color:var(--text); }
+    .btn-cta {
+      background: linear-gradient(135deg,#f97316,#ea580c);
+      color:#fff; font-weight:700; font-size:.9rem;
+      padding:.7rem 1.6rem; border-radius:50px; border:none; cursor:pointer;
+      box-shadow: 0 0 20px var(--glow-orange);
+      transition: all .3s ease;
+    }
+    .btn-cta:hover { transform:translateY(-2px); box-shadow:0 0 35px var(--glow-orange); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+      padding: 7rem 3rem 4rem; position:relative; overflow:hidden;
+    }
+    .hero-bg-glow {
+      position:absolute; border-radius:50%; filter:blur(120px); pointer-events:none;
+    }
+    .hero-bg-glow.g1 { width:800px;height:800px;top:-200px;left:-200px; background:radial-gradient(circle,rgba(249,115,22,.15),transparent 70%); }
+    .hero-bg-glow.g2 { width:600px;height:600px;bottom:-100px;right:-100px; background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%); }
+    .hero-bg-glow.g3 { width:400px;height:400px;top:30%;left:40%; background:radial-gradient(circle,rgba(139,92,246,.08),transparent 70%); }
+
+    /* Animated grid background */
+    .grid-bg {
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(249,115,22,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,.04) 1px, transparent 1px);
+      background-size:60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-content { position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background: rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.3);
+      color:#fb923c; font-size:.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+      padding:.4rem 1rem; border-radius:50px; margin-bottom:1.5rem;
+    }
+    .hero-badge .dot { width:6px;height:6px;border-radius:50%;background:#f97316;animation:pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+
+    .hero-title { font-size: clamp(2.8rem,6vw,5.5rem); margin-bottom:1.5rem; }
+    .hero-title .line1 { color:var(--text); display:block; }
+    .hero-title .line2 { display:block;
+      background: linear-gradient(90deg,#f97316,#a855f7,#3b82f6);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      background-size:200% 100%; animation:gradient-shift 4s ease infinite;
+    }
+    @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .hero-desc { font-size:1.2rem; color:var(--muted); max-width:600px; margin-bottom:2.5rem; line-height:1.7; }
+    .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:4rem; }
+    .btn-secondary {
+      background:transparent; color:var(--text); font-weight:600; font-size:.9rem;
+      padding:.7rem 1.6rem; border-radius:50px; border:1px solid var(--border);
+      cursor:pointer; transition:all .3s ease;
+    }
+    .btn-secondary:hover { border-color:rgba(255,255,255,.3); background:rgba(255,255,255,.05); }
+
+    /* Typing text */
+    .hero-types { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+    .hero-types-label { font-size:.85rem; color:var(--muted); }
+    .type-chip {
+      background:var(--surface); border:1px solid var(--border); border-radius:50px;
+      font-size:.8rem; color:var(--text); padding:.3rem .9rem;
+      transition:all .3s; animation:chip-appear .5s ease both;
+    }
+    @keyframes chip-appear { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .type-chip:nth-child(2) {animation-delay:.1s}
+    .type-chip:nth-child(3) {animation-delay:.2s}
+    .type-chip:nth-child(4) {animation-delay:.3s}
+    .type-chip:nth-child(5) {animation-delay:.4s}
+    .type-chip:nth-child(6) {animation-delay:.5s}
+
+    /* ─── SCREENSHOT SHOWCASE ─── */
+    .showcase {
+      padding:2rem 0 6rem; position:relative; z-index:1;
+    }
+    .showcase-inner { max-width:1300px; margin:0 auto; padding:0 3rem; }
+
+    .screen-main {
+      position:relative; border-radius:20px; overflow:hidden;
+      border:1px solid rgba(249,115,22,.2);
+      box-shadow: 0 0 80px rgba(249,115,22,.1), 0 40px 80px rgba(0,0,0,.5);
+    }
+    .screen-main .screen-bar {
+      background:var(--surface); padding:.6rem 1rem; display:flex; align-items:center; gap:.6rem;
+      border-bottom:1px solid var(--border);
+    }
+    .dot-red{width:12px;height:12px;border-radius:50%;background:#ef4444;}
+    .dot-yellow{width:12px;height:12px;border-radius:50%;background:#eab308;}
+    .dot-green{width:12px;height:12px;border-radius:50%;background:#22c55e;}
+    .screen-bar-url {
+      flex:1; background:rgba(255,255,255,.05); border-radius:6px;
+      font-size:.75rem; color:var(--muted); padding:.25rem .8rem;
+    }
+    .screen-main img { width:100%; display:block; transition: opacity .35s ease, transform .35s ease; }
+
+    /* floating mini screens */
+    .screen-floaters {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:1.5rem;
+    }
+    .screen-mini {
+      border-radius:14px; overflow:hidden; border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+      cursor:pointer; transition:all .4s ease; position:relative;
+    }
+    .screen-mini:hover { transform:translateY(-8px) scale(1.02); border-color:rgba(249,115,22,.4);
+      box-shadow:0 20px 50px rgba(249,115,22,.15); }
+    .screen-mini.active { border-color:var(--accent); box-shadow:0 0 0 2px rgba(249,115,22,.3), 0 10px 30px rgba(0,0,0,.4); }
+    .screen-mini.active .mini-label { color:#fb923c; }
+    .screen-mini img { width:100%; display:block; }
+    .screen-mini .mini-label {
+      position:absolute; bottom:0; left:0; right:0;
+      background:linear-gradient(transparent,rgba(5,10,14,.95));
+      padding:1.5rem .75rem .5rem; font-size:.75rem; font-weight:600; color:var(--text);
+    }
+    .screen-mini .mini-icon { color:var(--accent); margin-right:.4rem; }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+      padding:2rem 3rem;
+    }
+    .stats-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; text-align:center; }
+    .stat-num { font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800;
+      background:linear-gradient(90deg,#f97316,#fb923c); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .stat-label { font-size:.85rem; color:var(--muted); margin-top:.25rem; }
+
+    /* ─── FEATURES ─── */
+    .features { padding:7rem 3rem; }
+    .features-inner { max-width:1200px; margin:0 auto; }
+    .section-eyebrow {
+      font-size:.8rem; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+      color:var(--accent); margin-bottom:1rem;
+    }
+    .section-title { font-size: clamp(2rem,4vw,3rem); margin-bottom:1rem; }
+    .section-desc { color:var(--muted); font-size:1.05rem; max-width:600px; line-height:1.7; margin-bottom:4rem; }
+
+    .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .feat-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:20px;
+      padding:2rem; transition:all .4s ease; position:relative; overflow:hidden;
+    }
+    .feat-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,transparent,var(--accent-color,#f97316),transparent);
+      transform:scaleX(0); transition:transform .4s ease;
+    }
+    .feat-card:hover::before { transform:scaleX(1); }
+    .feat-card:hover { border-color:rgba(249,115,22,.2); transform:translateY(-6px);
+      box-shadow:0 20px 50px rgba(0,0,0,.3); }
+    .feat-icon {
+      width:52px;height:52px;border-radius:14px; display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; margin-bottom:1.25rem;
+    }
+    .feat-card h3 { font-size:1.15rem; margin-bottom:.75rem; }
+    .feat-card p { font-size:.9rem; color:var(--muted); line-height:1.6; }
+    .feat-tag {
+      display:inline-block; margin-top:1rem;
+      font-size:.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      padding:.25rem .7rem; border-radius:50px;
+      background:rgba(249,115,22,.1); color:#fb923c; border:1px solid rgba(249,115,22,.2);
+    }
+
+    /* ─── SCREENSHOT FEATURE SECTION ─── */
+    .screen-feature { padding:5rem 3rem; }
+    .screen-feature-inner { max-width:1200px; margin:0 auto; }
+    .screen-tabs { display:flex; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .tab-btn {
+      background:var(--surface); border:1px solid var(--border); color:var(--muted);
+      padding:.6rem 1.4rem; border-radius:50px; font-size:.85rem; font-weight:600;
+      cursor:pointer; transition:all .3s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background:rgba(249,115,22,.1); border-color:rgba(249,115,22,.4); color:var(--accent);
+    }
+    .tab-pane { display:none; }
+    .tab-pane.active { display:block; animation:fade-in .4s ease; }
+    @keyframes fade-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .screen-feature-layout { display:grid; grid-template-columns:1fr 1.6fr; gap:3rem; align-items:center; }
+    .screen-feature-info h3 { font-size:1.8rem; margin-bottom:1rem; }
+    .screen-feature-info p { color:var(--muted); line-height:1.7; margin-bottom:1.5rem; }
+    .feature-bullets { list-style:none; display:flex; flex-direction:column; gap:.75rem; }
+    .feature-bullets li { display:flex; align-items:flex-start; gap:.75rem; font-size:.9rem; }
+    .feature-bullets li::before { content:'✦'; color:var(--accent); font-size:.7rem; margin-top:.25rem; flex-shrink:0; }
+    .screen-feature-img {
+      border-radius:16px; overflow:hidden; border:1px solid var(--border);
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
+    .screen-feature-img img { width:100%; display:block; }
+
+    /* ─── AI SECTION ─── */
+    .ai-section {
+      padding:7rem 3rem; position:relative; overflow:hidden;
+    }
+    .ai-bg {
+      position:absolute; inset:0; z-index:0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(139,92,246,.08), transparent);
+    }
+    .ai-inner { max-width:1000px; margin:0 auto; text-align:center; position:relative; z-index:1; }
+    .ai-icon { font-size:4rem; margin-bottom:1.5rem;
+      background:linear-gradient(135deg,#8b5cf6,#3b82f6); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .ai-inner h2 { font-size:clamp(2rem,4vw,3rem); margin-bottom:1rem; }
+    .ai-inner p { color:var(--muted); font-size:1.1rem; line-height:1.7; max-width:700px; margin:0 auto 3rem; }
+    .ai-features { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; text-align:left; }
+    .ai-feat {
+      background:rgba(139,92,246,.06); border:1px solid rgba(139,92,246,.15);
+      border-radius:16px; padding:1.5rem;
+    }
+    .ai-feat-icon { font-size:1.5rem; margin-bottom:.75rem;
+      background:linear-gradient(135deg,#8b5cf6,#3b82f6); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .ai-feat h4 { font-size:1rem; margin-bottom:.5rem; }
+    .ai-feat p { font-size:.85rem; color:var(--muted); line-height:1.6; }
+
+    .pricing { padding:7rem 3rem; }
+    .pricing-inner { max-width:1200px; margin:0 auto; text-align:center; }
+    .plans-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:3rem; text-align:left;
+    }
+    .plan-card {
+      position:relative; background:var(--surface2);
+      border:1px solid var(--border); border-radius:30px; padding:3rem;
+      overflow:hidden; transition:all .4s ease;
+    }
+    .plan-card:hover { transform:translateY(-8px); box-shadow:0 30px 60px rgba(0,0,0,.4); }
+    .plan-card.featured {
+      border-color:rgba(249,115,22,.4);
+      background:linear-gradient(145deg,rgba(249,115,22,.05),rgba(139,92,246,.05));
+      box-shadow:0 0 40px rgba(249,115,22,.1);
+    }
+    .plan-card.featured:hover { box-shadow:0 30px 60px rgba(249,115,22,.2); }
+    .plan-glow {
+      position:absolute; width:300px; height:300px; border-radius:50%;
+      filter:blur(60px); top:-150px; right:-50px; pointer-events:none;
+    }
+    .plan-badge {
+      display:inline-block; font-size:.7rem; font-weight:800; letter-spacing:2px;
+      text-transform:uppercase; padding:.35rem 1rem; border-radius:50px; margin-bottom:1.5rem;
+    }
+    .plan-badge.orange { background:rgba(249,115,22,.15); color:#f97316; border:1px solid rgba(249,115,22,.3); }
+    .plan-badge.blue { background:rgba(59,130,246,.15); color:#3b82f6; border:1px solid rgba(59,130,246,.3); }
+    .plan-title { font-size:1.6rem; margin-bottom:.5rem; }
+    .plan-desc { color:var(--muted); font-size:.9rem; margin-bottom:1.5rem; line-height:1.5; }
+    .plan-price-main { display:flex; align-items:flex-start; gap:.25rem; margin-bottom:.5rem; }
+    .plan-currency { font-size:1.5rem; font-weight:700; color:var(--muted); margin-top:.5rem; }
+    .plan-amount { font-family:'Syne',sans-serif; font-size:4rem; font-weight:800; line-height:1;
+      background:linear-gradient(180deg,#fff,#94a3b8); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .plan-period { font-size:.85rem; color:var(--muted); align-self:flex-end; padding-bottom:.5rem; }
+    .plan-alt-price {
+      font-size:.85rem; color:var(--muted); margin-bottom:1.5rem;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .plan-alt-price .savings {
+      background:rgba(34,197,94,.1); color:#22c55e; border:1px solid rgba(34,197,94,.3);
+      font-size:.75rem; font-weight:700; padding:.2rem .6rem; border-radius:50px;
+    }
+    .plan-divider { height:1px; background:var(--border); margin:1.5rem 0; }
+    .plan-features { list-style:none; display:flex; flex-direction:column; gap:.7rem; margin-bottom:2rem; }
+    .plan-features li { display:flex; align-items:flex-start; gap:.75rem; font-size:.88rem; }
+    .plan-features i { margin-top:.1rem; flex-shrink:0; }
+    .plan-features .inc { color:#22c55e; }
+    .plan-features .opt { color:#64748b; }
+    .plan-features .soon { color:#f97316; }
+    .btn-plan {
+      width:100%; font-family:'Syne',sans-serif; font-weight:800; font-size:1rem;
+      padding:1rem 2rem; border-radius:50px; border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; gap:.75rem;
+      transition:all .3s ease;
+    }
+    .btn-plan.primary {
+      background:linear-gradient(135deg,#f97316,#ea580c); color:#fff;
+      box-shadow:0 0 30px rgba(249,115,22,.4);
+    }
+    .btn-plan.primary:hover { transform:translateY(-2px); box-shadow:0 0 50px rgba(249,115,22,.6); }
+    .btn-plan.secondary {
+      background:transparent; color:var(--text);
+      border:1px solid rgba(59,130,246,.4);
+    }
+    .btn-plan.secondary:hover { background:rgba(59,130,246,.1); border-color:#3b82f6; }
+    /* Toggle suscripcion */
+    .sub-toggle { display:flex; align-items:center; gap:1rem; justify-content:center; margin-bottom:1.5rem; }
+    .toggle-opt { font-size:.9rem; color:var(--muted); cursor:pointer; transition:.2s; }
+    .toggle-opt.active { color:var(--text); font-weight:600; }
+    .toggle-switch {
+      width:52px; height:28px; background:rgba(59,130,246,.3); border-radius:50px;
+      position:relative; cursor:pointer; transition:background .3s;
+      border:1px solid rgba(59,130,246,.4);
+    }
+    .toggle-switch.annual { background:rgba(59,130,246,.6); }
+    .toggle-knob {
+      position:absolute; width:20px; height:20px; border-radius:50%;
+      background:#fff; top:3px; left:4px; transition:left .3s ease;
+      box-shadow:0 2px 4px rgba(0,0,0,.3);
+    }
+    .toggle-switch.annual .toggle-knob { left:28px; }
+    .coming-soon-note {
+      margin-top:2rem; background:rgba(249,115,22,.05); border:1px solid rgba(249,115,22,.15);
+      border-radius:16px; padding:1.25rem 1.5rem;
+      display:flex; align-items:flex-start; gap:1rem; text-align:left;
+    }
+    .coming-soon-note i { color:#f97316; font-size:1.2rem; margin-top:.1rem; }
+    .coming-soon-note p { font-size:.85rem; color:var(--muted); line-height:1.5; }
+    .coming-soon-note strong { color:var(--text); }
+    .pricing-card {
+      position:relative; margin-top:3rem;
+      background:var(--surface2);
+      border:1px solid rgba(249,115,22,.3);
+      border-radius:30px; padding:3.5rem;
+      overflow:hidden;
+    }
+    .pricing-card::before {
+      content:''; position:absolute; inset:0; z-index:0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(249,115,22,.1), transparent);
+    }
+    .pricing-glow {
+      position:absolute; width:400px; height:400px; border-radius:50%;
+      background:radial-gradient(circle,rgba(249,115,22,.15),transparent);
+      filter:blur(60px); top:-200px; left:50%; transform:translateX(-50%); pointer-events:none;
+    }
+    .pricing-badge-top {
+      position:absolute; top:1.5rem; right:1.5rem;
+      background:linear-gradient(135deg,#f97316,#ea580c); color:#fff;
+      font-size:.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase;
+      padding:.4rem 1rem; border-radius:50px;
+    }
+    .pricing-content { position:relative; z-index:1; }
+    .pricing-content h2 { font-size:2rem; margin-bottom:.5rem; }
+    .pricing-content > p { color:var(--muted); margin-bottom:2rem; }
+    .price-display { display:flex; align-items:flex-start; justify-content:center; gap:.25rem; margin:1.5rem 0 2rem; }
+    .price-currency { font-size:2rem; font-weight:700; margin-top:.75rem; color:var(--muted); }
+    .price-amount { font-family:'Syne',sans-serif; font-size:6rem; font-weight:800; line-height:1;
+      background:linear-gradient(180deg,#fff,#94a3b8); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .price-period { font-size:.9rem; color:var(--muted); align-self:flex-end; padding-bottom:.75rem; }
+
+    .pricing-features-grid { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; text-align:left; margin-bottom:2.5rem; }
+    .pf-item { display:flex; align-items:center; gap:.75rem; font-size:.9rem; }
+    .pf-item i { color:#22c55e; font-size:.9rem; }
+    .pf-highlight { color:var(--accent); font-weight:600; }
+
+    .pricing-separator { height:1px; background:var(--border); margin:2rem 0; }
+    .update-note {
+      background:rgba(59,130,246,.06); border:1px solid rgba(59,130,246,.15);
+      border-radius:12px; padding:1rem 1.5rem;
+      display:flex; align-items:flex-start; gap:1rem; text-align:left; margin-bottom:2rem;
+    }
+    .update-note i { color:var(--accent2); font-size:1.2rem; margin-top:.1rem; }
+    .update-note p { font-size:.85rem; color:var(--muted); line-height:1.5; }
+    .update-note strong { color:var(--text); }
+    .btn-buy {
+      width:100%; background:linear-gradient(135deg,#f97316,#ea580c);
+      color:#fff; font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem;
+      padding:1.1rem 2rem; border-radius:50px; border:none; cursor:pointer;
+      box-shadow:0 0 40px var(--glow-orange); transition:all .3s ease;
+      display:flex; align-items:center; justify-content:center; gap:.75rem;
+    }
+    .btn-buy:hover { transform:translateY(-3px); box-shadow:0 0 60px rgba(249,115,22,.5); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top:1px solid var(--border); padding:3rem;
+      display:flex; align-items:center; justify-content:space-between;
+      color:var(--muted); font-size:.85rem; flex-wrap:wrap; gap:1rem;
+    }
+    .footer-logo { display:flex; align-items:center; gap:.75rem; font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; color:var(--text); }
+    .footer-logo img { height:28px; border-radius:6px; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal { opacity:0; transform:translateY(40px); transition:all .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:900px) {
+      nav { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .hero { padding:6rem 1.5rem 3rem; }
+      .screen-floaters { grid-template-columns:1fr 1fr; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+      .stats-inner { grid-template-columns:1fr 1fr; }
+      .ai-features { grid-template-columns:1fr; }
+      .screen-feature-layout { grid-template-columns:1fr; }
+      .pricing-features-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:600px) {
+      .hero-title { font-size:2.4rem; }
+      .features-grid { grid-template-columns:1fr; }
+      .screen-floaters { grid-template-columns:1fr; }
+      .pricing-card { padding:2rem; }
+      .price-amount { font-size:4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="assets/app-icon.png" alt="ECO Logo">
+    <span>ECO-ELECTRONIC Solutions</span>
+  </div>
+  <div class="nav-links">
+    <a href="#funciones">Funciones</a>
+    <a href="#modulos">Módulos</a>
+    <a href="#ia">Inteligencia Artificial</a>
+    <a href="#precio">Precio</a>
+  </div>
+  <a href="#precio" class="btn-cta">🚀 Oferta de Lanzamiento</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-glow g1"></div>
+  <div class="hero-bg-glow g2"></div>
+  <div class="hero-bg-glow g3"></div>
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="dot"></div>Software 100% Offline · Propiedad de por vida</div>
+    <h1 class="hero-title">
+      <span class="line1">El sistema que tu taller</span>
+      <span class="line2">siempre necesitó.</span>
+    </h1>
+    <p class="hero-desc">
+      ECO-ELECTRONIC Solutions es el software más completo para centros de servicio técnico.
+      Órdenes de servicio, inventario, reportes, ventas, etiquetas, agenda y <strong>Inteligencia Artificial</strong>
+      integrada. Todo en una sola herramienta, sin mensualidades.
+    </p>
+    <div class="hero-actions">
+      <a href="#precio" class="btn-cta">Obtener Licencia — $2,999</a>
+      <a href="#modulos" class="btn-secondary"><i class="fas fa-play-circle"></i>&nbsp; Ver módulos</a>
+    </div>
+    <div class="hero-types">
+      <span class="hero-types-label">Compatible con talleres de:</span>
+      <span class="type-chip">📱 Celulares</span>
+      <span class="type-chip">🧊 Línea Blanca</span>
+      <span class="type-chip">📺 Línea Marrón</span>
+      <span class="type-chip">💻 Línea Gris</span>
+      <span class="type-chip">⚡ Refacciones</span>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOT SHOWCASE -->
+<section class="showcase">
+  <div class="showcase-inner">
+    <div class="screen-main reveal">
+      <div class="screen-bar">
+        <div class="dot-red"></div><div class="dot-yellow"></div><div class="dot-green"></div>
+        <div class="screen-bar-url">🔒 ECO-ELECTRONIC Solutions · v3.5 · Modo Producción</div>
+      </div>
+      <img src="assets/screen_hero_os.png" alt="ECO-ELECTRONIC Solutions - Crear Orden de Servicio" id="main-screen">
+    </div>
+    <div class="screen-floaters">
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_hero_os.png', this)">
+        <img src="assets/screen_hero_os.png" alt="Crear Orden de Servicio">
+        <div class="mini-label"><i class="fas fa-file-invoice mini-icon"></i>Crear Orden de Servicio</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_taller.png', this)">
+        <img src="assets/screen_taller.png" alt="Taller y Seguimiento">
+        <div class="mini-label"><i class="fas fa-screwdriver-wrench mini-icon"></i>Taller y Seguimiento</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_inventario_general.png', this)">
+        <img src="assets/screen_inventario_general.png" alt="Inventario General">
+        <div class="mini-label"><i class="fas fa-warehouse mini-icon"></i>Inventario General</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_hero_dashboard.png', this)">
+        <img src="assets/screen_hero_dashboard.png" alt="Dashboard">
+        <div class="mini-label"><i class="fas fa-gauge-high mini-icon"></i>Dashboard Principal</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_02_ordenes.png', this)">
+        <img src="assets/screen_02_ordenes.png" alt="Consultar Órdenes">
+        <div class="mini-label"><i class="fas fa-list-check mini-icon"></i>Consultar Órdenes</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_03_clientes.png', this)">
+        <img src="assets/screen_03_clientes.png" alt="Clientes">
+        <div class="mini-label"><i class="fas fa-users mini-icon"></i>Directorio de Clientes</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_04_inventario.png', this)">
+        <img src="assets/screen_04_inventario.png" alt="Inventario">
+        <div class="mini-label"><i class="fas fa-boxes-stacked mini-icon"></i>Inventario y Bodega</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_reportes_real.png', this)">
+        <img src="assets/screen_reportes_real.png" alt="Reportes Financieros">
+        <div class="mini-label"><i class="fas fa-chart-bar mini-icon"></i>Reportes Financieros</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_quehagoaqui.png', this)">
+        <img src="assets/screen_quehagoaqui.png" alt="Asistente Contextual">
+        <div class="mini-label"><i class="fas fa-circle-question mini-icon"></i>Asistente Contextual</div>
+      </div>
+      <div class="screen-mini reveal" onclick="changeScreen('assets/screen_07_etiquetas.png', this)">
+        <img src="assets/screen_07_etiquetas.png" alt="Etiquetas">
+        <div class="mini-label"><i class="fas fa-tag mini-icon"></i>Diseñador de Etiquetas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-num">12+</div><div class="stat-label">Módulos integrados</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-label">Offline · Sin internet</div></div>
+    <div><div class="stat-num">∞</div><div class="stat-label">Órdenes de servicio</div></div>
+    <div><div class="stat-num">IA</div><div class="stat-label">Inteligencia Artificial integrada</div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="funciones">
+  <div class="features-inner">
+    <p class="section-eyebrow reveal">¿Qué incluye?</p>
+    <h2 class="section-title reveal">Tecnología de punta,<br>diseñada para talleres reales.</h2>
+    <p class="section-desc reveal">Cada función fue pensada por y para técnicos. No es una solución genérica: es un sistema especializado en centros de reparación y venta de componentes.</p>
+
+    <div class="features-grid">
+      <div class="feat-card reveal" style="--accent-color:#f97316">
+        <div class="feat-icon" style="background:rgba(249,115,22,.1);color:#f97316;">
+          <i class="fas fa-file-invoice"></i>
+        </div>
+        <h3>Órdenes de Servicio Profesionales</h3>
+        <p>Crea órdenes detalladas con múltiples aparatos por cliente, número de folio automático, seguimiento en tiempo real, firma digital y generación de PDF con tu logo.</p>
+        <span class="feat-tag">Impresión instantánea</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#3b82f6">
+        <div class="feat-icon" style="background:rgba(59,130,246,.1);color:#3b82f6;">
+          <i class="fas fa-boxes-stacked"></i>
+        </div>
+        <h3>Inventario y Bodega Inteligente</h3>
+        <p>Controla stock de refacciones y componentes electrónicos. Alertas de bajo inventario, historial de movimientos, precios de costo y venta, y ubicación física de cada pieza.</p>
+        <span class="feat-tag">Multi-categoría</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#22c55e">
+        <div class="feat-icon" style="background:rgba(34,197,94,.1);color:#22c55e;">
+          <i class="fas fa-cash-register"></i>
+        </div>
+        <h3>Punto de Venta (POS)</h3>
+        <p>Módulo de ventas directas al mostrador. Vende refacciones, accesorios y servicios con tickets de caja, corte del día, y control de caja chica integrado.</p>
+        <span class="feat-tag">Compatible con impresoras POS</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#a855f7">
+        <div class="feat-icon" style="background:rgba(168,85,247,.1);color:#a855f7;">
+          <i class="fas fa-tag"></i>
+        </div>
+        <h3>Diseñador Universal de Etiquetas</h3>
+        <p>Crea y personaliza etiquetas con código de barras o QR para identificar equipos en reparación, piezas en bodega, precios y más. motor de alta fidelidad con vista previa en vivo.</p>
+        <span class="feat-tag">Código QR y Barras</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#f97316">
+        <div class="feat-icon" style="background:rgba(249,115,22,.1);color:#f97316;">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Directorio de Clientes</h3>
+        <p>Historial completo de cada cliente: equipos reparados, pagos, anticipo y saldo pendiente. Clasificación automática por frecuencia y lealtad.</p>
+        <span class="feat-tag">Historial completo</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#eab308">
+        <div class="feat-icon" style="background:rgba(234,179,8,.1);color:#eab308;">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <h3>Reportes y Estadísticas</h3>
+        <p>Visualiza ingresos, egresos, ganancias y distribución de servicios con gráficas interactivas. Exporta a PDF o Excel para tu contabilidad.</p>
+        <span class="feat-tag">Exporta a Excel y PDF</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#3b82f6">
+        <div class="feat-icon" style="background:rgba(59,130,246,.1);color:#3b82f6;">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <h3>Agenda y Citas a Domicilio</h3>
+        <p>Gestiona citas para recolección y entrega a domicilio. Calendario visual con alertas, asignación de técnicos y notas de diagnóstico previo.</p>
+        <span class="feat-tag">Alertas automáticas</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#22c55e">
+        <div class="feat-icon" style="background:rgba(34,197,94,.1);color:#22c55e;">
+          <i class="fas fa-circle-question"></i>
+        </div>
+        <h3>Asistente Contextual "¿Qué hago aquí?"</h3>
+        <p>En cada pantalla del sistema hay un botón de ayuda que explica paso a paso qué hacer y cómo hacerlo. Perfecto para capacitar a tu personal en minutos, sin manuales.</p>
+        <span class="feat-tag">Ayuda integrada</span>
+      </div>
+      <div class="feat-card reveal" style="--accent-color:#a855f7">
+        <div class="feat-icon" style="background:rgba(168,85,247,.1);color:#a855f7;">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <h3>Seguridad y Perfiles</h3>
+        <p>Sistema de usuarios con PIN y niveles de acceso (Administrador, Ventas, Técnico). Auditoría completa de acciones y respaldos automáticos de tu base de datos.</p>
+        <span class="feat-tag">Multi-usuario</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOT MODULES SECTION -->
+<section class="screen-feature" id="modulos">
+  <div class="screen-feature-inner">
+    <p class="section-eyebrow reveal">Capturas reales del software</p>
+    <h2 class="section-title reveal">Explora cada módulo</h2>
+
+    <div class="screen-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-os')"><i class="fas fa-wrench"></i> Órdenes</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-taller')"><i class="fas fa-screwdriver-wrench"></i> Taller / POS</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-inv')"><i class="fas fa-warehouse"></i> Inventario</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-clientes')"><i class="fas fa-users"></i> Clientes</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-rep')"><i class="fas fa-chart-bar"></i> Reportes</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-etiq')"><i class="fas fa-tag"></i> Etiquetas</button>
+    </div>
+
+    <div id="tab-os" class="tab-pane active reveal">
+      <div class="screen-feature-layout">
+        <div class="screen-feature-info">
+          <h3>Órdenes de Servicio</h3>
+          <p>El corazón del sistema. Cada orden puede incluir múltiples equipos del mismo cliente, con subfolios individuales, fallas, diagnóstico y precio por aparato.</p>
+          <ul class="feature-bullets">
+            <li>Folio automático con prefijo personalizable</li>
+            <li>Múltiples aparatos por orden (refrigerador + TV + celular)</li>
+            <li>Búsqueda rápida con filtros inteligentes</li>
+            <li>Estado de avance: Recibido, En proceso, Listo, Entregado</li>
+            <li>PDF con firma del cliente listo para imprimir</li>
+          </ul>
+        </div>
+        <div class="screen-feature-img"><img src="assets/screen_hero_os.png" alt="Módulo Órdenes de Servicio"></div>
+      </div>
+    </div>
+
+    <div id="tab-taller" class="tab-pane reveal">
+      <div class="screen-feature-layout">
+        <div class="screen-feature-info">
+          <h3>Taller y Seguimiento (POS)</h3>
+          <p>El centro de operaciones diarias. Desde aquí vendes refacciones, accesorios y servicios al mostrador, cobras reparaciones terminadas y llevas el control de caja en tiempo real.</p>
+          <ul class="feature-bullets">
+            <li>Punto de Venta con scanner de código de barras (F2)</li>
+            <li>Tabs: Taller, Garantías, Agenda, Cobrar Ventas, Reparaciones, Bodega</li>
+            <li>Categorías: Refacciones, Accesorios, Servicios, Mercancía</li>
+            <li>Cobro en efectivo, tarjeta o transferencia</li>
+            <li>Resumen del día y análisis IA integrado</li>
+          </ul>
+        </div>
+        <div class="screen-feature-img"><img src="assets/screen_taller.png" alt="Módulo Taller y Seguimiento"></div>
+      </div>
+    </div>
+
+    <div id="tab-clientes" class="tab-pane reveal">
+      <div class="screen-feature-layout">
+        <div class="screen-feature-info">
+          <h3>Directorio de Clientes</h3>
+          <p>Conoce a fondo a tu clientela. El sistema clasifica automáticamente a tus clientes por frecuencia y gasto, permitiéndote dar una atención personalizada.</p>
+          <ul class="feature-bullets">
+            <li>Historial completo de todas sus reparaciones</li>
+            <li>Clasificación: Excelente, Frecuente, Nuevo, Bloqueado</li>
+            <li>Balance de anticipos y saldos pendientes</li>
+            <li>Búsqueda por nombre, teléfono o equipo</li>
+            <li>Exportación de listados a Excel</li>
+          </ul>
+        </div>
+        <div class="screen-feature-img"><img src="assets/screen_03_clientes.png" alt="Módulo Clientes"></div>
+      </div>
+    </div>
+
+    <div id="tab-inv" class="tab-pane reveal">
+      <div class="screen-feature-layout">
+        <div class="screen-feature-info">
+          <h3>Inventario General</h3>
+          <p>Administra todas tus refacciones, mercancía y servicios desde una sola tabla. SKU, MPN, categorías, stock, costo, precio de venta, proveedor y ubicación física, todo en un vistazo.</p>
+          <ul class="feature-bullets">
+            <li>SKU / MPN personalizable por pieza</li>
+            <li>Stock en tiempo real con indicadores de color</li>
+            <li>Precio costo vs. precio venta con margen automático</li>
+            <li>Proveedores y ubicación física en bodega</li>
+            <li>Nueva Refacción, Nueva Mercancía, Nuevo Servicio</li>
+            <li>Alertas de Stock Bajo y Sin Existencias</li>
+          </ul>
+        </div>
+        <div class="screen-feature-img"><img src="assets/screen_inventario_general.png" alt="Inventario General"></div>
+      </div>
+    </div>
+
+    <div id="tab-rep" class="tab-pane reveal">
+      <div class="screen-feature-layout">
+        <div class="screen-feature-info">
+          <h3>Reportes Financieros</h3>
+          <p>Visualiza en tiempo real cómo va tu negocio. Ingresos, gastos, utilidad y margen — todo con gráficas de tendencia diaria y desglose por fuente de ingreso.</p>
+          <ul class="feature-bullets">
+            <li>Ingresos, gastos y utilidad neta en tiempo real</li>
+            <li>Gráfica de tendencia de ingresos diarios</li>
+            <li>Desglose por fuente: Órdenes, Reparaciones, POS, Citas</li>
+            <li>Filtros: Hoy, 7 días, Mes, Año, Total</li>
+            <li>Exportar a Excel y PDF para tu contador</li>
+            <li>Márgen de ganancia y valor de inventario en vivo</li>
+          </ul>
+        </div>
+        <div class="screen-feature-img"><img src="assets/screen_reportes_real.png" alt="Módulo Reportes Financieros"></div>
+      </div>
+    </div>
+
+    <div id="tab-etiq" class="tab-pane reveal">
+      <div class="screen-feature-layout">
+        <div class="screen-feature-info">
+          <h3>Diseñador Universal de Etiquetas</h3>
+          <p>Genera etiquetas profesionales para equipos en reparación, refacciones en inventario o productos en venta. Compatible con impresoras de etiquetas térmicas.</p>
+          <ul class="feature-bullets">
+            <li>Diseño personalizable con tu logo y datos</li>
+            <li>Códigos de barras (EAN, CODE128, QR)</li>
+            <li>Tecnología de alta resolución</li>
+            <li>Múltiples tamaños de etiqueta</li>
+            <li>Impresión por lote de toda la bodega</li>
+          </ul>
+        </div>
+        <div class="screen-feature-img"><img src="assets/screen_07_etiquetas.png" alt="Módulo Etiquetas"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="ai-section" id="ia">
+  <div class="ai-bg"></div>
+  <div class="ai-inner">
+    <div class="ai-icon reveal"><i class="fas fa-brain"></i></div>
+    <h2 class="reveal">Inteligencia Artificial<br>integrada en tu taller</h2>
+    <p class="reveal">ECO-ELECTRONIC Solutions incluye el motor <strong>Master Logic AI</strong> — un sistema de análisis predictivo que aprende de tus datos para ayudarte a tomar mejores decisiones de negocio.</p>
+    <div class="ai-features">
+      <div class="ai-feat reveal">
+        <div class="ai-feat-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+        <h4>Búsqueda Semántica</h4>
+        <p>Busca órdenes y clientes en lenguaje natural: "iPhone con falla de batería esta semana" y el sistema entiende.</p>
+      </div>
+      <div class="ai-feat reveal">
+        <div class="ai-feat-icon"><i class="fas fa-chart-line"></i></div>
+        <h4>Predicción de Demanda</h4>
+        <p>Anticipa qué refacciones necesitarás comprar antes de que se agoten, basándose en tu historial de reparaciones.</p>
+      </div>
+      <div class="ai-feat reveal">
+        <div class="ai-feat-icon"><i class="fas fa-robot"></i></div>
+        <h4>Coach de Ventas IA</h4>
+        <p>Sugerencias automáticas de cross-selling y upselling para incrementar el ticket promedio de cada orden de servicio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="precio">
+  <div class="pricing-inner">
+    <p class="section-eyebrow reveal">Elige tu plan · Sin letra chica</p>
+    <h2 class="section-title reveal">Invierte una vez.<br>Trabaja para siempre.</h2>
+    <p class="section-desc reveal" style="margin:1rem auto 0;text-align:center;max-width:650px;">
+      Dos formas de acceder a ECO-ELECTRONIC Solutions. Ninguna te deja sin software ni sin tus datos.
+    </p>
+
+    <div class="plans-grid reveal">
+
+      <!-- PLAN LICENCIA NICA -->
+      <div class="plan-card featured">
+        <div class="plan-glow" style="background:radial-gradient(circle,rgba(249,115,22,.2),transparent);"></div>
+        <span class="plan-badge orange">🔥 Licencia Única</span>
+        <h3 class="plan-title">Un pago. Tuyo para siempre.</h3>
+        <p class="plan-desc">Pago único, sin mensualidades obligatorias. El software es tuyo de por vida y tus datos nunca quedan rehenes.</p>
+        <div class="plan-price-main">
+          <span class="plan-currency">$</span>
+          <span class="plan-amount">2,999</span>
+          <span class="plan-period">MXN<br>pago único</span>
+        </div>
+        <div class="plan-alt-price">
+          Incluye <strong style="color:var(--text);margin:0 .25rem;">1 año de actualizaciones gratis</strong>
+        </div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check-circle inc"></i> Licencia de uso vitalicio (nunca vence)</li>
+          <li><i class="fas fa-check-circle inc"></i> <strong>1 año completo de actualizaciones</strong></li>
+          <li><i class="fas fa-check-circle inc"></i> Todos los módulos: OS, POS, Inventario, Reportes</li>
+          <li><i class="fas fa-check-circle inc"></i> IA Master Logic + NLP en Español México</li>
+          <li><i class="fas fa-check-circle inc"></i> Impresión silenciosa + PDF Playwright</li>
+          <li><i class="fas fa-check-circle inc"></i> Diseñador de etiquetas QR / Código de barras</li>
+          <li><i class="fas fa-check-circle inc"></i> Funciona 100% offline · Sin internet</li>
+          <li><i class="fas fa-check-circle inc"></i> Multi-usuario con perfiles y PIN</li>
+          <li><i class="fas fa-check-circle inc"></i> Respaldos automáticos locales</li>
+          <li><i class="fas fa-check-circle inc"></i> Soporte de instalación incluido</li>
+          <li><i class="fas fa-check-circle opt"></i> <span style="color:var(--muted)">Actualizaciones posteriores opcionales</span></li>
+          <li><i class="fas fa-clock soon"></i> <span style="color:#f97316">Facturación CFDI 4.0 (próximamente)</span></li>
+        </ul>
+        <button class="btn-plan primary" onclick="alert('¡Gracias! Contáctanos para completar tu compra de Licencia Única.')">
+          <i class="fas fa-lock"></i> Comprar Licencia Única · $2,999
+        </button>
+      </div>
+
+      <!-- PLAN SUSCRIPCIÓN -->
+      <div class="plan-card">
+        <div class="plan-glow" style="background:radial-gradient(circle,rgba(59,130,246,.15),transparent);"></div>
+        <span class="plan-badge blue">&#9889; Suscripción Premium</span>
+        <h3 class="plan-title">Siempre actualizado.</h3>
+        <p class="plan-desc">Actualizaciones incluidas mientras tu suscripción esté activa. Si cancelas, el software sigue funcionando en su última versión.</p>
+
+        <!-- Toggle mensual / anual -->
+        <div class="sub-toggle" id="sub-toggle">
+          <span class="toggle-opt active" id="lbl-mensual">Mensual</span>
+          <div class="toggle-switch" id="toggle-sw" onclick="togglePlan()">
+            <div class="toggle-knob"></div>
+          </div>
+          <span class="toggle-opt" id="lbl-anual">Anual <span style="color:#22c55e;font-size:.75rem;font-weight:700;">Ahorro $789</span></span>
+        </div>
+
+        <div id="price-mensual">
+          <div class="plan-price-main">
+            <span class="plan-currency">$</span>
+            <span class="plan-amount" style="font-size:3.5rem;">399</span>
+            <span class="plan-period">MXN<br>/mes</span>
+          </div>
+          <div class="plan-alt-price">O $4,788 al año si pagas mes a mes</div>
+        </div>
+        <div id="price-anual" style="display:none;">
+          <div class="plan-price-main">
+            <span class="plan-currency">$</span>
+            <span class="plan-amount" style="font-size:3.5rem;">3,999</span>
+            <span class="plan-period">MXN<br>/año</span>
+          </div>
+          <div class="plan-alt-price">
+            Equivale a $333/mes
+            <span class="savings">↓ Ahorras $789</span>
+          </div>
+        </div>
+
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check-circle inc"></i> Todos los módulos completos</li>
+          <li><i class="fas fa-check-circle inc"></i> <strong>Actualizaciones ilimitadas incluidas</strong></li>
+          <li><i class="fas fa-check-circle inc"></i> IA Master Logic + mejoras continuas</li>
+          <li><i class="fas fa-check-circle inc"></i> Nuevas funciones en cuanto se liberan</li>
+          <li><i class="fas fa-check-circle inc"></i> Soporte prioritario</li>
+          <li><i class="fas fa-check-circle inc"></i> Funciona offline entre sesiones</li>
+          <li><i class="fas fa-check-circle inc"></i> Multi-usuario con perfiles</li>
+          <li><i class="fas fa-check-circle inc"></i> Respaldos automáticos locales</li>
+          <li><i class="fas fa-check-circle soon"></i> <span style="color:#f97316">CFDI 4.0 SAT incluido al liberarse</span></li>
+          <li><i class="fas fa-info-circle opt"></i> <span style="color:var(--muted)">Si cancelas: última versión queda activa</span></li>
+        </ul>
+        <button class="btn-plan secondary" id="btn-sub" onclick="alert('¡Gracias! Contáctanos para activar tu Suscripción Premium.')">
+          <i class="fas fa-bolt"></i> <span id="btn-sub-txt">Suscribirse Mensual · $399/mes</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="coming-soon-note reveal">
+      <i class="fas fa-file-invoice"></i>
+      <p><strong>Facturación electrónica CFDI 4.0 (SAT) — Próximamente.</strong>
+      Ya está en desarrollo el módulo de timbrado fiscal con PAC certificado. Los suscriptores y licenciatarios con actualizaciones vigentes recibirán esta función <strong>sin costo adicional</strong> cuando se libere.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/app-icon.png" alt="Logo">
+    ECO-ELECTRONIC Solutions
+  </div>
+  <div>Software profesional para talleres de servicio técnico · Todos los derechos reservados © 2026</div>
+  <div style="color:var(--muted)">🔒 Licencia Permanente · Sin mensualidades · Datos 100% locales</div>
+</footer>
+
+<script>
+  // ─── Screen switcher ───
+  let screenChangeTimer = null;
+  function changeScreen(src, el) {
+    const main = document.getElementById('main-screen');
+    if (main.getAttribute('src') === src) return; // ya se está mostrando esta captura
+
+    clearTimeout(screenChangeTimer); // cancela un cambio anterior aún pendiente (evita parpadeos al hacer clic rápido)
+    main.style.opacity = '0';
+    main.style.transform = 'scale(0.98)';
+    screenChangeTimer = setTimeout(() => {
+      main.src = src;
+      main.style.opacity = '1';
+      main.style.transform = 'scale(1)';
+    }, 200);
+
+    document.querySelectorAll('.screen-mini').forEach(m => m.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+
+  // ─── Tab switcher ───
+  function switchTab(btn, tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const pane = document.getElementById(tabId);
+    pane.classList.add('active');
+    pane.classList.add('visible'); // asegura que el contenido se muestre siempre, sin depender del scroll
+  }
+
+  // ─── Scroll reveal ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── Nav scroll effect ───
+  let navScrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (navScrollTicking) return;
+    navScrollTicking = true;
+    requestAnimationFrame(() => {
+      document.querySelector('nav').style.background =
+        window.scrollY > 50 ? 'rgba(5,10,14,0.98)' : 'rgba(5,10,14,0.85)';
+      navScrollTicking = false;
+    });
+  });
+
+  // ─── Estado inicial de la miniatura seleccionada ───
+  const firstScreenMini = document.querySelector('.screen-mini');
+  if (firstScreenMini) firstScreenMini.classList.add('active');
+
+  // ─── Plan pricing toggle ───
+  function togglePlan() {
+    const sw = document.getElementById('toggle-sw');
+    const isAnnual = sw.classList.toggle('annual');
+    
+    document.getElementById('lbl-mensual').classList.toggle('active', !isAnnual);
+    document.getElementById('lbl-anual').classList.toggle('active', isAnnual);
+    
+    document.getElementById('price-mensual').style.display = isAnnual ? 'none' : 'block';
+    document.getElementById('price-anual').style.display = isAnnual ? 'block' : 'none';
+    
+    const btnTxt = document.getElementById('btn-sub-txt');
+    if (isAnnual) {
+      btnTxt.textContent = 'Suscribirse Anual · $3,999/año';
+    } else {
+      btnTxt.textContent = 'Suscribirse Mensual · $399/mes';
+    }
+  }
+
+  function animateCounter(el, target, suffix) {
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { el.textContent = target + suffix; clearInterval(timer); return; }
+      el.textContent = Math.floor(current) + suffix;
+    }, 20);
+  }
+</script>
+</body>
+</html>
