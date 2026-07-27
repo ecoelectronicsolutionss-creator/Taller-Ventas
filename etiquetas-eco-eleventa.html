@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Etiquetas ECO | Etiquetas locales para archivos de Eleventa</title>
+    <meta name="description" content="Importa un archivo XLSX compatible, selecciona productos y cantidades, valida etiquetas Code 128 y prepara impresión local de 56 × 29 mm en Brother QL-800.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b5d3b">
+    <link rel="canonical" href="https://ecoelectronicsolutions.com.mx/etiquetas-eco-eleventa.html">
+    <link rel="icon" type="image/png" href="./assets/app-icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="ECO-ELECTRONIC Solutions">
+    <meta property="og:title" content="Etiquetas ECO | Etiquetas para tu operación de tienda">
+    <meta property="og:description" content="Flujo local para importar XLSX, validar Code 128 y preparar etiquetas de 56 × 29 mm para Brother QL-800.">
+    <meta property="og:url" content="https://ecoelectronicsolutions.com.mx/etiquetas-eco-eleventa.html">
+    <meta property="og:image" content="https://ecoelectronicsolutions.com.mx/assets/app-icon.png">
+    <meta property="og:image:alt" content="Símbolo de Etiquetas ECO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Etiquetas ECO for Eleventa",
+      "alternateName": "Etiquetas ECO",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows 10, Windows 11",
+      "description": "Aplicación local para importar archivos XLSX compatibles, preparar etiquetas Code 128 y usar un perfil de 56 por 29 milímetros con Brother QL-800.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ECO-ELECTRONIC Solutions",
+        "url": "https://ecoelectronicsolutions.com.mx/"
+      },
+      "url": "https://ecoelectronicsolutions.com.mx/etiquetas-eco-eleventa.html",
+      "image": "https://ecoelectronicsolutions.com.mx/assets/app-icon.png"
+    }
+    </script>
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #050a0e;
+            --surface: #0d1720;
+            --surface-2: #12222a;
+            --surface-3: #172d32;
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #f7faf9;
+            --muted: #b9c8c2;
+            --green: #35d07f;
+            --green-dark: #0b7546;
+            --orange: #ff8a1e;
+            --orange-dark: #c84c00;
+            --focus: #ffd166;
+            --danger: #ff8176;
+            --max: 1180px;
+            --radius: 22px;
+            --shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-width: 280px;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(53, 208, 127, 0.13), transparent 30rem),
+                radial-gradient(circle at 88% 2%, rgba(255, 138, 30, 0.12), transparent 28rem),
+                var(--bg);
+            color: var(--text);
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .skip-link {
+            position: fixed;
+            z-index: 100;
+            top: 12px;
+            left: 12px;
+            transform: translateY(-160%);
+            border-radius: 10px;
+            background: var(--focus);
+            color: #17120a;
+            padding: 10px 14px;
+            font-weight: 800;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--focus);
+            outline-offset: 4px;
+        }
+
+        .shell {
+            width: min(calc(100% - 32px), var(--max));
+            margin-inline: auto;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid var(--border);
+            background: rgba(5, 10, 14, 0.9);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            min-width: max-content;
+        }
+
+        .brand img {
+            width: 46px;
+            height: 46px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 18px rgba(53, 208, 127, 0.2));
+        }
+
+        .brand strong,
+        .brand span {
+            display: block;
+        }
+
+        .brand strong {
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .brand span {
+            color: var(--muted);
+            font-size: 0.76rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            border-radius: 10px;
+            padding: 9px 11px;
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text);
+        }
+
+        .nav-links .contact-link {
+            background: var(--orange);
+            color: #181006;
+        }
+
+        .hero {
+            padding: clamp(68px, 9vw, 120px) 0 76px;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+            align-items: center;
+            gap: clamp(38px, 6vw, 82px);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 18px;
+            border: 1px solid rgba(53, 208, 127, 0.35);
+            border-radius: 999px;
+            background: rgba(53, 208, 127, 0.09);
+            color: #8cf0b9;
+            padding: 7px 12px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 5px rgba(53, 208, 127, 0.12);
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            max-width: 760px;
+            margin-bottom: 18px;
+            font-size: clamp(3rem, 8vw, 6.4rem);
+            line-height: 0.94;
+            letter-spacing: -0.065em;
+        }
+
+        h1 span {
+            color: var(--orange);
+        }
+
+        .lead {
+            max-width: 670px;
+            color: #d7e2de;
+            font-size: clamp(1.08rem, 2vw, 1.3rem);
+            line-height: 1.65;
+        }
+
+        .independence-inline {
+            max-width: 690px;
+            color: var(--muted);
+            font-size: 0.87rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 28px 0 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 17px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .button-primary {
+            border-color: transparent;
+            background: var(--orange);
+            color: #181006;
+            box-shadow: 0 12px 28px rgba(255, 138, 30, 0.17);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.055);
+            color: var(--text);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-points li {
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--muted);
+            padding: 7px 11px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .preview-stage {
+            position: relative;
+            min-height: 440px;
+            display: grid;
+            place-items: center;
+        }
+
+        .preview-stage::before,
+        .preview-stage::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .preview-stage::before {
+            width: 320px;
+            height: 320px;
+            background: rgba(53, 208, 127, 0.12);
+        }
+
+        .preview-stage::after {
+            right: 2%;
+            bottom: 7%;
+            width: 190px;
+            height: 190px;
+            background: rgba(255, 138, 30, 0.12);
+        }
+
+        .window {
+            position: relative;
+            z-index: 2;
+            width: min(100%, 520px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(13, 23, 32, 0.96);
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .window-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .preview-device {
+            color: #dce9e4;
+        }
+
+        .label-sheet {
+            position: relative;
+            aspect-ratio: 56 / 29;
+            overflow: hidden;
+            border: 1px solid #050505;
+            border-radius: 2px;
+            background: #fff;
+            color: #050505;
+            padding: 5.35% 5.4%;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24);
+        }
+
+        .label-name {
+            max-width: 100%;
+            overflow: hidden;
+            font-size: clamp(0.85rem, 2.3vw, 1.35rem);
+            font-weight: 900;
+            line-height: 1.05;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .label-dept {
+            margin-top: 2%;
+            color: #333;
+            font-size: clamp(0.55rem, 1.25vw, 0.78rem);
+            font-weight: 650;
+        }
+
+        .label-price {
+            margin: 1% 0 1.2%;
+            color: #000;
+            font-size: clamp(1.3rem, 4vw, 2.5rem);
+            font-weight: 950;
+            line-height: 1;
+        }
+
+        .barcode {
+            width: 88%;
+            height: 26%;
+            display: grid;
+            grid-template-columns: repeat(99, 1fr);
+            grid-template-rows: 1fr;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .barcode span {
+            grid-column: var(--start) / span var(--width);
+            grid-row: 1;
+            background: #000;
+        }
+
+        .barcode-number {
+            width: 88%;
+            margin-top: 1%;
+            text-align: center;
+            font-family: Consolas, monospace;
+            font-size: clamp(0.48rem, 1.2vw, 0.7rem);
+            letter-spacing: 0.12em;
+        }
+
+        .preview-status {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 12px;
+            margin-top: 15px;
+            border-radius: 12px;
+            background: rgba(53, 208, 127, 0.1);
+            color: #aef3c9;
+            padding: 11px 13px;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .preview-status span:last-child {
+            color: var(--orange);
+        }
+
+        section {
+            padding: 82px 0;
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 34px;
+        }
+
+        .kicker {
+            margin-bottom: 8px;
+            color: var(--orange);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin-bottom: 13px;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.06;
+            letter-spacing: -0.04em;
+        }
+
+        .section-heading > p:last-child {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .panel {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, rgba(18, 34, 42, 0.92), rgba(10, 19, 25, 0.92));
+            box-shadow: var(--shadow);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            overflow: hidden;
+        }
+
+        .step {
+            position: relative;
+            min-height: 210px;
+            padding: 26px 22px;
+        }
+
+        .step + .step {
+            border-left: 1px solid var(--border);
+        }
+
+        .step-number {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            margin-bottom: 35px;
+            border-radius: 12px;
+            background: rgba(255, 138, 30, 0.13);
+            color: var(--orange);
+            font-weight: 950;
+        }
+
+        .step:not(:last-child)::after {
+            content: "→";
+            position: absolute;
+            top: 31px;
+            right: -10px;
+            z-index: 2;
+            color: var(--green);
+            font-weight: 900;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .step p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feature {
+            min-height: 210px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.035);
+            padding: 23px;
+        }
+
+        .feature-icon {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            margin-bottom: 28px;
+            border-radius: 13px;
+            background: var(--surface-3);
+            color: var(--green);
+            font-weight: 950;
+        }
+
+        .feature:nth-child(2n) .feature-icon {
+            color: var(--orange);
+        }
+
+        .feature h3 {
+            margin-bottom: 7px;
+            font-size: 1.02rem;
+        }
+
+        .feature p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 0.91rem;
+        }
+
+        .truth-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 18px;
+        }
+
+        .truth-card {
+            padding: clamp(24px, 4vw, 38px);
+        }
+
+        .state-list,
+        .requirements {
+            display: grid;
+            gap: 13px;
+            margin: 24px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .state-list li {
+            display: grid;
+            grid-template-columns: 112px 1fr;
+            gap: 14px;
+            align-items: start;
+            border-top: 1px solid var(--border);
+            padding-top: 13px;
+            color: var(--muted);
+        }
+
+        .state-list strong {
+            color: var(--text);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+        }
+
+        .state-list li:nth-child(1) strong {
+            color: var(--danger);
+        }
+
+        .state-list li:nth-child(2) strong {
+            color: var(--green);
+        }
+
+        .state-list li:nth-child(3) strong {
+            color: var(--orange);
+        }
+
+        .requirements li {
+            position: relative;
+            padding-left: 24px;
+            color: var(--muted);
+        }
+
+        .requirements li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: 950;
+        }
+
+        .privacy-band {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 28px;
+            padding: clamp(28px, 5vw, 48px);
+            border-color: rgba(53, 208, 127, 0.28);
+            background:
+                linear-gradient(110deg, rgba(53, 208, 127, 0.13), rgba(255, 138, 30, 0.07)),
+                var(--surface);
+        }
+
+        .privacy-band h2 {
+            font-size: clamp(1.7rem, 4vw, 2.65rem);
+        }
+
+        .privacy-band p {
+            max-width: 750px;
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        .disclaimer {
+            margin: 0 0 70px;
+            border-left: 4px solid var(--orange);
+            border-radius: 0 16px 16px 0;
+            background: rgba(255, 138, 30, 0.08);
+            padding: 22px 24px;
+            color: #d7dfdc;
+            font-size: 0.9rem;
+        }
+
+        .disclaimer strong {
+            color: var(--text);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: #030609;
+            padding: 40px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .footer-brand img {
+            width: 52px;
+            height: 52px;
+        }
+
+        .footer-brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.83rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 14px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .footer-links a:hover {
+            color: var(--green);
+        }
+
+        @media (max-width: 960px) {
+            .site-header {
+                position: static;
+            }
+
+            .nav {
+                padding: 14px 0;
+                align-items: flex-start;
+            }
+
+            .nav-links a:not(.contact-link):not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero-grid,
+            .truth-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy {
+                max-width: 760px;
+            }
+
+            .preview-stage {
+                min-height: 390px;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .step + .step {
+                border-left: 0;
+            }
+
+            .step {
+                border-top: 1px solid var(--border);
+            }
+
+            .step:first-child,
+            .step:nth-child(2) {
+                border-top: 0;
+            }
+
+            .step:nth-child(2n) {
+                border-left: 1px solid var(--border);
+            }
+
+            .step::after {
+                display: none;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .shell {
+                width: min(calc(100% - 24px), var(--max));
+            }
+
+            .brand span {
+                display: none;
+            }
+
+            .nav-links a[aria-current="page"] {
+                display: none;
+            }
+
+            .nav-links .contact-link {
+                padding-inline: 10px;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding-top: 54px;
+            }
+
+            h1 {
+                font-size: clamp(3.2rem, 20vw, 5rem);
+            }
+
+            .preview-stage {
+                min-height: 300px;
+            }
+
+            .window {
+                padding: 12px;
+            }
+
+            .window-bar {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .steps,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .step,
+            .step:nth-child(2) {
+                border-top: 1px solid var(--border);
+                border-left: 0;
+            }
+
+            .step:first-child {
+                border-top: 0;
+            }
+
+            .privacy-band,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                justify-content: flex-start;
+            }
+
+            .state-list li {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="nav shell" aria-label="Navegación principal">
+            <a class="brand" href="./index.html" aria-label="ECO-ELECTRONIC Solutions, página principal">
+                <img src="./assets/app-icon.png" alt="" width="46" height="46">
+                <span>
+                    <strong>ECO-ELECTRONIC Solutions</strong>
+                    <span>Software local para operaciones reales</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="#flujo">Flujo</a>
+                <a href="#funciones">Funciones</a>
+                <a href="#compatibilidad">Compatibilidad</a>
+                <a href="./etiquetas-eco-eleventa.html" aria-current="page">Etiquetas ECO</a>
+                <a href="./privacidad-etiquetas-eco-eleventa.html">Privacidad</a>
+                <a class="contact-link" href="https://wa.me/522223167820?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Etiquetas%20ECO" target="_blank" rel="noopener">Solicitar información</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="contenido">
+        <section class="hero">
+            <div class="hero-grid shell">
+                <div class="hero-copy">
+                    <p class="eyebrow">Aplicación de escritorio · Windows</p>
+                    <h1>Etiquetas <span>ECO</span></h1>
+                    <p class="lead">Compatible con archivos exportados desde Eleventa. Convierte el catálogo XLSX que tú eliges en un lote claro de etiquetas, con validación previa y control local de la impresión.</p>
+                    <p class="independence-inline">Producto independiente. La compatibilidad se refiere al formato de archivo y al hardware indicado; no implica afiliación, patrocinio ni autorización de sus titulares.</p>
+                    <div class="actions">
+                        <a class="button button-primary" href="#flujo">Conocer el flujo</a>
+                    </div>
+                    <ul class="hero-points" aria-label="Características principales">
+                        <li>Trabajo local y offline</li>
+                        <li>Sin telemetría propia</li>
+                        <li>Code 128</li>
+                        <li>56 × 29 mm</li>
+                        <li>Brother QL-800</li>
+                    </ul>
+                </div>
+
+                <div class="preview-stage" aria-label="Ejemplo ilustrativo de la vista previa de una etiqueta">
+                    <div class="window">
+                        <div class="window-bar">
+                            <span class="preview-device">QL-800 · rollo continuo 29 mm</span>
+                            <span>Vista previa monocromática HD</span>
+                        </div>
+                        <div class="label-sheet">
+                            <div class="label-name">ADAPTADOR HDMI A VGA</div>
+                            <div class="label-dept">Electronic Solutions</div>
+                            <div class="label-price">$350.00</div>
+                            <div class="barcode" role="img" aria-label="Código 128 del producto 48795364">
+                                <span style="--start:11;--width:2"></span>
+                                <span style="--start:14;--width:1"></span>
+                                <span style="--start:17;--width:3"></span>
+                                <span style="--start:22;--width:3"></span>
+                                <span style="--start:26;--width:3"></span>
+                                <span style="--start:30;--width:2"></span>
+                                <span style="--start:33;--width:1"></span>
+                                <span style="--start:37;--width:4"></span>
+                                <span style="--start:42;--width:1"></span>
+                                <span style="--start:44;--width:2"></span>
+                                <span style="--start:47;--width:3"></span>
+                                <span style="--start:51;--width:3"></span>
+                                <span style="--start:55;--width:1"></span>
+                                <span style="--start:57;--width:1"></span>
+                                <span style="--start:62;--width:2"></span>
+                                <span style="--start:66;--width:1"></span>
+                                <span style="--start:70;--width:1"></span>
+                                <span style="--start:73;--width:2"></span>
+                                <span style="--start:77;--width:2"></span>
+                                <span style="--start:82;--width:3"></span>
+                                <span style="--start:86;--width:1"></span>
+                                <span style="--start:88;--width:2"></span>
+                            </div>
+                            <div class="barcode-number">48795364</div>
+                        </div>
+                        <div class="preview-status">
+                            <span>Code 128 exacto · monocromático</span>
+                            <span>Diseño validado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flujo">
+            <div class="shell">
+                <div class="section-heading">
+                    <p class="kicker">De archivo a etiqueta</p>
+                    <h2>Un flujo pensado para la tienda</h2>
+                    <p>El operador conserva el control del archivo, de los productos elegidos, de las cantidades y del momento exacto de imprimir.</p>
+                </div>
+                <div class="steps panel">
+                    <article class="step">
+                        <span class="step-number">01</span>
+                        <h3>Exporta o prepara</h3>
+                        <p>Usa un XLSX exportado desde Eleventa o un archivo compatible con las columnas requeridas.</p>
+                    </article>
+                    <article class="step">
+                        <span class="step-number">02</span>
+                        <h3>Importa y valida</h3>
+                        <p>Elige la hoja correcta. Los códigos se conservan como texto para evitar cambios no deseados.</p>
+                    </article>
+                    <article class="step">
+                        <span class="step-number">03</span>
+                        <h3>Busca y selecciona</h3>
+                        <p>Filtra el catálogo, marca productos y asigna la cantidad exacta de etiquetas.</p>
+                    </article>
+                    <article class="step">
+                        <span class="step-number">04</span>
+                        <h3>Revisa la vista previa</h3>
+                        <p>Confirma nombre, precio, código, simbología y encuadre antes de cualquier envío.</p>
+                    </article>
+                    <article class="step">
+                        <span class="step-number">05</span>
+                        <h3>Imprime o exporta</h3>
+                        <p>Envía localmente a la QL-800 o genera PDF y PNG en la ubicación que elijas.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="funciones">
+            <div class="shell">
+                <div class="section-heading">
+                    <p class="kicker">Herramientas prácticas</p>
+                    <h2>Menos pasos repetitivos, más control</h2>
+                    <p>Funciones concretas para preparar lotes sin ocultar lo que ocurre con cada trabajo.</p>
+                </div>
+                <div class="features">
+                    <article class="feature">
+                        <span class="feature-icon" aria-hidden="true">X</span>
+                        <h3>Importación XLSX</h3>
+                        <p>Selección explícita de archivo y hoja, con códigos tratados como texto y el archivo original sin modificar.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-icon" aria-hidden="true">⌕</span>
+                        <h3>Búsqueda y lotes</h3>
+                        <p>Filtrado por producto o departamento, selección múltiple y cantidades por artículo.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-icon" aria-hidden="true">128</span>
+                        <h3>Code 128 verificable</h3>
+                        <p>Codificación del valor exacto y vista previa para detectar contenido o encuadre incorrectos.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-icon" aria-hidden="true">56</span>
+                        <h3>Formato 56 × 29 mm</h3>
+                        <p>Diseño horizontal ajustado al área imprimible del perfil de rollo continuo de 29 mm.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-icon" aria-hidden="true">QL</span>
+                        <h3>Perfil Brother QL-800</h3>
+                        <p>Comprobación de impresora y medio antes del envío, sin abrir un diálogo de impresión en cada lote.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-icon" aria-hidden="true">⇩</span>
+                        <h3>PDF y PNG</h3>
+                        <p>Exportación local para revisar, archivar o usar el resultado en otro flujo autorizado.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="compatibilidad">
+            <div class="truth-grid shell">
+                <article class="truth-card panel">
+                    <p class="kicker">Estado honesto</p>
+                    <h2>La app no adivina si salió el papel</h2>
+                    <p>Registra evidencia técnica y evita reintentos automáticos que podrían duplicar etiquetas.</p>
+                    <ul class="state-list">
+                        <li><strong>NOT_STARTED</strong><span>Windows no inició el trabajo. Se corrige la causa antes de intentar de nuevo.</span></li>
+                        <li><strong>ACCEPTED</strong><span>La cola aceptó un trabajo identificable. Esto no confirma por sí solo la salida física.</span></li>
+                        <li><strong>UNCERTAIN</strong><span>No existe confirmación suficiente después de un posible envío. El operador revisa y resuelve manualmente.</span></li>
+                    </ul>
+                </article>
+
+                <aside class="truth-card panel">
+                    <p class="kicker">Compatibilidad prevista</p>
+                    <h2>Lo necesario</h2>
+                    <ul class="requirements">
+                        <li>PC x64 con Windows 10 u 11.</li>
+                        <li>Brother QL-800 conectada por USB y con su controlador instalado.</li>
+                        <li>Rollo continuo de 29 mm para corte horizontal de 56 mm.</li>
+                        <li>Archivo XLSX exportado desde Eleventa o con estructura compatible.</li>
+                        <li>Revisión humana de la vista previa y del medio instalado.</li>
+                    </ul>
+                    <p style="margin: 24px 0 0; color: var(--muted); font-size: .88rem;">La disponibilidad de opciones de papel, corte y cola depende también de Windows, del controlador y del consumible instalado.</p>
+                </aside>
+            </div>
+        </section>
+
+        <section>
+            <div class="privacy-band panel shell">
+                <div>
+                    <p class="kicker">Privacidad desde el diseño</p>
+                    <h2>Tu catálogo permanece en tu equipo</h2>
+                    <p>La aplicación no requiere cuenta, anuncios, analítica ni telemetría propia. El archivo seleccionado se procesa localmente y la app conserva en el equipo las preferencias y el historial mínimo necesarios para su operación.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="disclaimer shell" role="note">
+            <strong>Aviso de independencia y marcas.</strong>
+            Eleventa es una marca de su respectivo titular. Etiquetas ECO es un producto independiente y no está afiliado, patrocinado, autorizado ni respaldado por Eleventa o Bambu Code. Brother y QL-800 se mencionan únicamente para identificar compatibilidad de hardware; Brother es una marca de su respectivo titular.
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid shell">
+            <div class="footer-brand">
+                <img src="./assets/app-icon.png" alt="" width="52" height="52">
+                <p><strong style="color: var(--text);">ECO-ELECTRONIC Solutions</strong><br>© 2026. Todos los derechos reservados.<br>Propiedad de Ignacio Alejandro Sánchez Mateo.</p>
+            </div>
+            <nav class="footer-links" aria-label="Enlaces legales y de producto">
+                <a href="./index.html">Sitio principal</a>
+                <a href="./software-eco.html">Software ECO</a>
+                <a href="./privacidad-etiquetas-eco-eleventa.html">Aviso de privacidad</a>
+                <a href="./terminos.html">Términos del sitio</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

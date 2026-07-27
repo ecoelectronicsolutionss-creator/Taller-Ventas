@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software ECO | Aplicaciones de ECO-ELECTRONIC Solutions</title>
+    <meta name="description" content="Catálogo de aplicaciones de ECO-ELECTRONIC Solutions para talleres y comercios: gestión operativa y preparación local de etiquetas en Windows.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ecoelectronicsolutions.com.mx/software-eco.html">
+    <link rel="icon" type="image/png" href="./assets/app-icon.png">
+
+    <meta property="og:title" content="Software ECO | ECO-ELECTRONIC Solutions">
+    <meta property="og:description" content="Aplicaciones locales creadas para operaciones reales de talleres y comercios.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:url" content="https://ecoelectronicsolutions.com.mx/software-eco.html">
+    <meta property="og:image" content="https://ecoelectronicsolutions.com.mx/assets/og-eco-electronic-solutions.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ECO-ELECTRONIC Solutions: reparación, refacciones y software responsable">
+    <meta property="og:site_name" content="ECO-ELECTRONIC Solutions">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "@id": "https://ecoelectronicsolutions.com.mx/software-eco.html#pagina",
+          "url": "https://ecoelectronicsolutions.com.mx/software-eco.html",
+          "name": "Software ECO",
+          "description": "Catálogo de aplicaciones de ECO-ELECTRONIC Solutions para operaciones de talleres y comercios.",
+          "inLanguage": "es-MX",
+          "isPartOf": {
+            "@type": "WebSite",
+            "@id": "https://ecoelectronicsolutions.com.mx/#sitio",
+            "url": "https://ecoelectronicsolutions.com.mx/",
+            "name": "ECO-ELECTRONIC Solutions"
+          },
+          "mainEntity": {
+            "@id": "https://ecoelectronicsolutions.com.mx/software-eco.html#catalogo"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://ecoelectronicsolutions.com.mx/software-eco.html#catalogo",
+          "name": "Aplicaciones disponibles de Software ECO",
+          "numberOfItems": 2,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "SoftwareApplication",
+                "name": "AIERP ECO-ELECTRONIC Solutions",
+                "applicationCategory": "BusinessApplication",
+                "url": "https://ecoelectronicsolutions.com.mx/AIERP-ECOELECTRONICSOLUTIONS.html",
+                "description": "Software de gestión para talleres de servicio técnico con órdenes, clientes, inventario y seguimiento operativo."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "SoftwareApplication",
+                "name": "Etiquetas ECO",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Windows 10, Windows 11",
+                "softwareVersion": "0.1.1",
+                "url": "https://ecoelectronicsolutions.com.mx/etiquetas-eco-eleventa.html",
+                "description": "Aplicación local para preparar, validar, exportar e imprimir etiquetas de 56 por 29 milímetros a partir de archivos XLSX compatibles."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #07110d;
+            --surface: #0d1b15;
+            --surface-strong: #12251c;
+            --line: rgba(255, 255, 255, .12);
+            --text: #f6faf7;
+            --muted: #b9c9bf;
+            --green: #34d27b;
+            --green-dark: #12613a;
+            --orange: #ff8a1f;
+            --orange-dark: #9d3d00;
+            --shadow: 0 24px 64px rgba(0, 0, 0, .28);
+            --radius: 24px;
+            --shell: 1180px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-width: 320px;
+            margin: 0;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 12% 4%, rgba(52, 210, 123, .15), transparent 30rem),
+                radial-gradient(circle at 92% 22%, rgba(255, 138, 31, .13), transparent 28rem),
+                var(--bg);
+            color: var(--text);
+            font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        :focus-visible {
+            outline: 3px solid #ffd39f;
+            outline-offset: 4px;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 100;
+            padding: 10px 14px;
+            transform: translateY(-160%);
+            border-radius: 10px;
+            background: #fff;
+            color: #102218;
+            font-weight: 800;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .shell {
+            width: min(calc(100% - 40px), var(--shell));
+            margin-inline: auto;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid var(--line);
+            background: rgba(7, 17, 13, .92);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav {
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 13px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, .28);
+        }
+
+        .brand-text {
+            display: grid;
+            line-height: 1.18;
+        }
+
+        .brand-text strong {
+            font-size: 1rem;
+            letter-spacing: .01em;
+        }
+
+        .brand-text span {
+            color: var(--muted);
+            font-size: .78rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            padding: 9px 12px;
+            border-radius: 10px;
+            color: var(--muted);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
+            background: rgba(52, 210, 123, .1);
+            color: var(--text);
+        }
+
+        .breadcrumbs {
+            padding-top: 24px;
+            color: var(--muted);
+            font-size: .88rem;
+        }
+
+        .breadcrumbs ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .breadcrumbs li + li::before {
+            margin-right: 8px;
+            color: #6f8879;
+            content: "/";
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--green);
+        }
+
+        .hero {
+            padding: 68px 0 56px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 15px;
+            color: #8af0b8;
+            font-size: .82rem;
+            font-weight: 900;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin-top: 0;
+            line-height: 1.12;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: clamp(2.7rem, 7vw, 5.6rem);
+            letter-spacing: -.055em;
+        }
+
+        h1 span {
+            color: var(--orange);
+        }
+
+        .hero-description {
+            width: min(100%, 760px);
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: clamp(1.05rem, 2vw, 1.28rem);
+        }
+
+        .catalog-section {
+            padding: 10px 0 80px;
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 480px);
+            align-items: end;
+            gap: 30px;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 0;
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .product-card {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(24px, 4vw, 38px);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, rgba(18, 37, 28, .98), rgba(10, 22, 16, .98));
+            box-shadow: var(--shadow);
+        }
+
+        .product-card::before {
+            width: 76px;
+            height: 5px;
+            margin-bottom: 28px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--orange), var(--green));
+            content: "";
+        }
+
+        .product-card[data-product="aierp"]::before {
+            background: linear-gradient(90deg, var(--orange), #ffb45f);
+        }
+
+        .product-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .product-icon {
+            width: 64px;
+            height: 64px;
+            flex: 0 0 64px;
+            padding: 6px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 17px;
+            background: #0b1511;
+        }
+
+        .product-label {
+            margin: 0 0 3px;
+            color: #8af0b8;
+            font-size: .76rem;
+            font-weight: 900;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .product-card[data-product="aierp"] .product-label {
+            color: #ffbd79;
+        }
+
+        .product-card h3 {
+            margin-bottom: 0;
+            font-size: clamp(1.35rem, 3vw, 2rem);
+        }
+
+        .product-purpose {
+            margin: 0 0 22px;
+            color: var(--muted);
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 9px;
+            margin: 0 0 28px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 22px;
+        }
+
+        .feature-list li::before {
+            position: absolute;
+            top: .64em;
+            left: 1px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            content: "";
+        }
+
+        .product-card[data-product="aierp"] .feature-list li::before {
+            background: var(--orange);
+        }
+
+        .product-status {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin: auto 0 25px;
+        }
+
+        .status-item {
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(0, 0, 0, .13);
+        }
+
+        .status-item dt {
+            color: #8fa398;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+
+        .status-item dd {
+            margin: 3px 0 0;
+            font-size: .9rem;
+            font-weight: 750;
+        }
+
+        .card-link {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            align-self: flex-start;
+            padding: 11px 18px;
+            border: 1px solid #5be096;
+            border-radius: 12px;
+            background: var(--green-dark);
+            color: #fff;
+            font-weight: 850;
+            text-decoration: none;
+        }
+
+        .product-card[data-product="aierp"] .card-link {
+            border-color: #ff9d4d;
+            background: var(--orange-dark);
+        }
+
+        .card-link:hover {
+            filter: brightness(1.14);
+            transform: translateY(-1px);
+        }
+
+        .independence-note {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border: 1px solid rgba(255, 138, 31, .34);
+            border-radius: 18px;
+            background: rgba(255, 138, 31, .07);
+            color: #ebd8c7;
+            font-size: .92rem;
+        }
+
+        .independence-note strong {
+            color: #fff;
+        }
+
+        .growth-note {
+            padding: 42px 0 72px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+        }
+
+        .growth-note h2 {
+            margin-bottom: 12px;
+            font-size: clamp(1.55rem, 4vw, 2.2rem);
+        }
+
+        .growth-note p {
+            width: min(100%, 680px);
+            margin: 0 auto;
+            color: var(--muted);
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            background: #050d09;
+        }
+
+        .footer-inner {
+            min-height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .footer-inner p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .86rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px 18px;
+        }
+
+        .footer-links a {
+            color: #d3e2d8;
+            font-weight: 700;
+        }
+
+        .footer-links a:hover {
+            color: var(--green);
+        }
+
+        @media (max-width: 820px) {
+            .nav {
+                min-height: 70px;
+            }
+
+            .brand-text span {
+                display: none;
+            }
+
+            .nav-links a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 52px 0 46px;
+            }
+
+            .section-heading {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                min-height: 160px;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shell {
+                width: min(calc(100% - 28px), var(--shell));
+            }
+
+            .brand img {
+                width: 42px;
+                height: 42px;
+            }
+
+            .brand-text strong {
+                max-width: 190px;
+                font-size: .88rem;
+            }
+
+            .breadcrumbs {
+                padding-top: 18px;
+            }
+
+            .hero {
+                padding-top: 42px;
+            }
+
+            .product-card {
+                border-radius: 20px;
+            }
+
+            .product-top {
+                align-items: flex-start;
+            }
+
+            .product-icon {
+                width: 54px;
+                height: 54px;
+                flex-basis: 54px;
+            }
+
+            .product-status {
+                grid-template-columns: 1fr;
+            }
+
+            .card-link {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="nav shell" aria-label="Navegación principal">
+            <a class="brand" href="./index.html" aria-label="ECO-ELECTRONIC Solutions, página principal">
+                <img src="./assets/app-icon.png" alt="" width="48" height="48" decoding="async">
+                <span class="brand-text">
+                    <strong>ECO-ELECTRONIC Solutions</strong>
+                    <span>Tecnología local para operaciones reales</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="./software-eco.html" aria-current="page">Software ECO</a>
+                <a href="./index.html#contacto">Contacto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="contenido">
+        <nav class="breadcrumbs shell" aria-label="Ruta de navegación">
+            <ol>
+                <li><a href="./index.html">Inicio</a></li>
+                <li aria-current="page">Software ECO</li>
+            </ol>
+        </nav>
+
+        <section class="hero shell" aria-labelledby="titulo-principal">
+            <p class="eyebrow">Ecosistema de aplicaciones</p>
+            <h1 id="titulo-principal">Software <span>ECO</span></h1>
+            <p class="hero-description">Aplicaciones diseñadas para simplificar operaciones reales de talleres y comercios, con información clara sobre el propósito y la disponibilidad de cada producto.</p>
+        </section>
+
+        <section class="catalog-section shell" aria-labelledby="catalogo-titulo">
+            <div class="section-heading">
+                <h2 id="catalogo-titulo">Soluciones disponibles</h2>
+                <p>Cada aplicación mantiene su propia identidad y página de producto. Este catálogo será el punto estable para encontrar nuevas soluciones ECO.</p>
+            </div>
+
+            <ul class="product-grid" aria-label="Catálogo de aplicaciones ECO">
+                <li>
+                    <article class="product-card" data-product="aierp">
+                        <div class="product-top">
+                            <img class="product-icon" src="./assets/app-icon.png" alt="" width="64" height="64" loading="lazy" decoding="async">
+                            <div>
+                                <p class="product-label">Gestión para talleres</p>
+                                <h3>AIERP ECO-ELECTRONIC Solutions</h3>
+                            </div>
+                        </div>
+                        <p class="product-purpose">Software para organizar la operación de talleres de servicio técnico desde una interfaz unificada.</p>
+                        <ul class="feature-list">
+                            <li>Órdenes de servicio y seguimiento operativo</li>
+                            <li>Gestión de clientes e inventario</li>
+                            <li>Información comercial en su página de producto</li>
+                        </ul>
+                        <dl class="product-status">
+                            <div class="status-item">
+                                <dt>Producto</dt>
+                                <dd>Aplicación de gestión</dd>
+                            </div>
+                            <div class="status-item">
+                                <dt>Disponibilidad</dt>
+                                <dd>Consulta comercial</dd>
+                            </div>
+                        </dl>
+                        <a class="card-link" href="./AIERP-ECOELECTRONICSOLUTIONS.html" aria-label="Ver AIERP ECO-ELECTRONIC Solutions">Ver AIERP <span aria-hidden="true">→</span></a>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="product-card" data-product="etiquetas">
+                        <div class="product-top">
+                            <img class="product-icon" src="./assets/app-icon.png" alt="" width="64" height="64" loading="lazy" decoding="async">
+                            <div>
+                                <p class="product-label">Etiquetas para comercio</p>
+                                <h3>Etiquetas ECO</h3>
+                            </div>
+                        </div>
+                        <p class="product-purpose">Aplicación local para convertir un XLSX compatible en etiquetas de 56 × 29 mm, con vista previa, validación y control de cada envío.</p>
+                        <ul class="feature-list">
+                            <li>Códigos preservados como texto y Code 128</li>
+                            <li>Exportación local a PDF y PNG</li>
+                            <li>Compatibilidad de impresión con Brother QL-800</li>
+                        </ul>
+                        <dl class="product-status">
+                            <div class="status-item">
+                                <dt>Estado</dt>
+                                <dd>Versión 0.1.1</dd>
+                            </div>
+                            <div class="status-item">
+                                <dt>Disponibilidad</dt>
+                                <dd>Sin descarga pública</dd>
+                            </div>
+                        </dl>
+                        <a class="card-link" href="./etiquetas-eco-eleventa.html" aria-label="Ver Etiquetas ECO">Ver Etiquetas ECO <span aria-hidden="true">→</span></a>
+                    </article>
+                </li>
+            </ul>
+
+            <aside class="independence-note" aria-label="Aviso de compatibilidad e independencia">
+                <strong>Compatibilidad independiente.</strong> Etiquetas ECO no está afiliado, patrocinado, autorizado ni respaldado por Eleventa, Bambu Code o Brother. Esas denominaciones se mencionan únicamente para identificar interoperabilidad de archivos y compatibilidad de hardware.
+            </aside>
+        </section>
+
+        <section class="growth-note">
+            <div class="shell">
+                <h2>Un catálogo preparado para crecer</h2>
+                <p>Las aplicaciones públicas de ECO se incorporan aquí como nuevas tarjetas. La navegación principal permanece limpia y cada producto conserva su página especializada.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner shell">
+            <p>© 2026 ECO-ELECTRONIC Solutions.<br>Propiedad de Ignacio Alejandro Sánchez Mateo.</p>
+            <nav class="footer-links" aria-label="Enlaces del sitio">
+                <a href="./index.html">Sitio principal</a>
+                <a href="./software-eco.html" aria-current="page">Software ECO</a>
+                <a href="./terminos.html">Términos y condiciones</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

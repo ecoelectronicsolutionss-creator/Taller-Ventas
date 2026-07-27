@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aviso de privacidad | Etiquetas ECO</title>
+    <meta name="description" content="Aviso de privacidad de la aplicación de escritorio Etiquetas ECO: procesamiento local de XLSX, configuración, historial de impresión y controles del usuario.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b5d3b">
+    <link rel="canonical" href="https://ecoelectronicsolutions.com.mx/privacidad-etiquetas-eco-eleventa.html">
+    <link rel="icon" type="image/png" href="./assets/app-icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="ECO-ELECTRONIC Solutions">
+    <meta property="og:title" content="Aviso de privacidad | Etiquetas ECO">
+    <meta property="og:description" content="Cómo procesa y conserva información localmente la aplicación Etiquetas ECO.">
+    <meta property="og:url" content="https://ecoelectronicsolutions.com.mx/privacidad-etiquetas-eco-eleventa.html">
+    <meta property="og:image" content="https://ecoelectronicsolutions.com.mx/assets/app-icon.png">
+    <meta property="og:image:alt" content="Símbolo de Etiquetas ECO">
+
+    <style>
+        :root {
+            color-scheme: light;
+            --page: #f4f7f5;
+            --paper: #ffffff;
+            --paper-soft: #f7fbf8;
+            --ink: #14251e;
+            --muted: #53665e;
+            --green: #0b7546;
+            --green-bright: #1ea864;
+            --orange: #c44e00;
+            --orange-soft: #fff0e3;
+            --amber: #7b3f00;
+            --amber-soft: #fff4ce;
+            --red: #8c2e26;
+            --red-soft: #fff0ee;
+            --border: #d8e1dc;
+            --focus: #7a3df0;
+            --max: 920px;
+            --radius: 18px;
+            --shadow: 0 18px 55px rgba(25, 58, 42, 0.1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-width: 280px;
+            background:
+                linear-gradient(135deg, rgba(30, 168, 100, 0.06), transparent 40%),
+                var(--page);
+            color: var(--ink);
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            line-height: 1.72;
+        }
+
+        a {
+            color: var(--green);
+            text-underline-offset: 3px;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--focus);
+            outline-offset: 4px;
+        }
+
+        .skip-link {
+            position: fixed;
+            z-index: 100;
+            top: 10px;
+            left: 10px;
+            transform: translateY(-160%);
+            border-radius: 9px;
+            background: #fff;
+            color: var(--ink);
+            padding: 10px 14px;
+            font-weight: 800;
+            box-shadow: var(--shadow);
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .shell {
+            width: min(calc(100% - 30px), var(--max));
+            margin-inline: auto;
+        }
+
+        .site-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            background: #07140f;
+            color: #fff;
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 46px;
+            height: 46px;
+            object-fit: contain;
+        }
+
+        .brand strong,
+        .brand span {
+            display: block;
+        }
+
+        .brand strong {
+            font-size: 1rem;
+        }
+
+        .brand span {
+            color: #aec2b8;
+            font-size: 0.78rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            border-radius: 10px;
+            color: #dbe8e1;
+            padding: 8px 10px;
+            font-size: 0.86rem;
+            font-weight: 750;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .hero {
+            border-bottom: 1px solid var(--border);
+            background:
+                radial-gradient(circle at 80% 10%, rgba(223, 91, 0, 0.12), transparent 26rem),
+                var(--paper);
+            padding: clamp(52px, 8vw, 88px) 0 48px;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--orange);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            max-width: 760px;
+            margin-bottom: 16px;
+            font-size: clamp(2.35rem, 7vw, 4.7rem);
+            line-height: 1.02;
+            letter-spacing: -0.05em;
+        }
+
+        .lead {
+            max-width: 760px;
+            color: var(--muted);
+            font-size: clamp(1rem, 2vw, 1.18rem);
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin: 24px 0 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 13px;
+            margin: 36px 0 0;
+        }
+
+        .summary-card {
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--paper-soft);
+            padding: 18px;
+        }
+
+        .summary-card span {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--green);
+            font-size: 0.76rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .summary-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+            gap: 34px;
+            padding: 44px 0 80px;
+        }
+
+        .toc {
+            position: sticky;
+            top: 22px;
+            align-self: start;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--paper);
+            padding: 16px;
+            box-shadow: 0 10px 32px rgba(25, 58, 42, 0.06);
+        }
+
+        .toc strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.84rem;
+        }
+
+        .toc ol {
+            display: grid;
+            gap: 3px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .toc a {
+            display: block;
+            border-radius: 8px;
+            color: var(--muted);
+            padding: 7px 8px;
+            font-size: 0.8rem;
+            line-height: 1.35;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            background: #eef5f1;
+            color: var(--green);
+        }
+
+        .document {
+            min-width: 0;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: var(--paper);
+            padding: clamp(24px, 5vw, 48px);
+            box-shadow: var(--shadow);
+        }
+
+        .document section {
+            scroll-margin-top: 24px;
+        }
+
+        .document section + section {
+            margin-top: 42px;
+            border-top: 1px solid var(--border);
+            padding-top: 38px;
+        }
+
+        h2 {
+            margin-bottom: 14px;
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+        }
+
+        h3 {
+            margin: 24px 0 8px;
+            font-size: 1.02rem;
+        }
+
+        .document p,
+        .document li {
+            color: var(--muted);
+        }
+
+        .document strong {
+            color: var(--ink);
+        }
+
+        .document ul {
+            padding-left: 1.25rem;
+        }
+
+        .document li + li {
+            margin-top: 8px;
+        }
+
+        .identity-card,
+        .note,
+        .warning {
+            margin: 20px 0;
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+
+        .identity-card {
+            border: 1px solid rgba(11, 117, 70, 0.24);
+            background: #eef9f2;
+        }
+
+        .identity-card dl {
+            display: grid;
+            grid-template-columns: 175px minmax(0, 1fr);
+            gap: 8px 16px;
+            margin: 0;
+        }
+
+        .identity-card dt {
+            color: var(--green);
+            font-weight: 850;
+        }
+
+        .identity-card dd {
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .note {
+            border-left: 4px solid var(--green);
+            background: #eff8f3;
+        }
+
+        .warning {
+            border-left: 4px solid var(--orange);
+            background: var(--orange-soft);
+        }
+
+        .note p,
+        .warning p {
+            margin: 0;
+        }
+
+        .data-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid var(--border);
+            padding: 12px 13px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .data-table th {
+            background: #edf5f0;
+            color: var(--ink);
+        }
+
+        .data-table td {
+            color: var(--muted);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .contact-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--paper-soft);
+            padding: 15px;
+        }
+
+        .contact-card span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .contact-card a {
+            font-weight: 850;
+        }
+
+        .legal-source {
+            font-size: 0.86rem;
+        }
+
+        .legal-source a {
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.11);
+            background: #07140f;
+            color: #fff;
+            padding: 38px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+        }
+
+        .footer-brand img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .footer-brand p {
+            margin: 0;
+            color: #b7c8bf;
+            font-size: 0.82rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 14px;
+        }
+
+        .footer-links a {
+            color: #dbe8e1;
+            font-size: 0.84rem;
+            font-weight: 750;
+        }
+
+        @media (max-width: 860px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+            }
+
+            .toc ol {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav {
+                padding: 13px 0;
+                align-items: flex-start;
+            }
+
+            .brand span span {
+                display: none;
+            }
+
+            .nav-links a[aria-current="page"],
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            .summary-grid,
+            .contact-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toc ol {
+                grid-template-columns: 1fr;
+            }
+
+            .identity-card dl {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            .identity-card dd + dt {
+                margin-top: 10px;
+            }
+
+            .data-table,
+            .data-table tbody,
+            .data-table tr,
+            .data-table th,
+            .data-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .data-table thead {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+            }
+
+            .data-table tr + tr {
+                margin-top: 13px;
+            }
+
+            .data-table td {
+                border-top: 0;
+            }
+
+            .data-table td:first-child {
+                border-top: 1px solid var(--border);
+                background: #edf5f0;
+                color: var(--ink);
+                font-weight: 800;
+            }
+
+            .footer-links {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="nav shell" aria-label="Navegación principal">
+            <a class="brand" href="./index.html" aria-label="ECO-ELECTRONIC Solutions, página principal">
+                <img src="./assets/app-icon.png" alt="" width="46" height="46">
+                <span>
+                    <strong>ECO-ELECTRONIC Solutions</strong>
+                    <span>Privacidad de Etiquetas ECO</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="./etiquetas-eco-eleventa.html">Producto</a>
+                <a href="./privacidad-etiquetas-eco-eleventa.html" aria-current="page">Privacidad</a>
+                <a href="./index.html">Sitio principal</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="contenido">
+        <div class="hero">
+            <div class="shell">
+                <p class="eyebrow">Aplicación de escritorio · Aviso específico</p>
+                <h1>Aviso de privacidad de Etiquetas ECO</h1>
+                <p class="lead">Explica qué información puede procesar la aplicación en tu computadora, para qué la usa, qué conserva localmente y qué controles siguen bajo tu responsabilidad.</p>
+                <div class="meta">
+                    <span><strong>Versión del aviso:</strong> 1.0</span>
+                    <span><strong>Última actualización:</strong> 26 de julio de 2026</span>
+                    <span><strong>Ámbito:</strong> aplicación Windows con disponibilidad internacional y página informativa específica</span>
+                </div>
+
+                <div class="summary-grid" aria-label="Resumen de privacidad">
+                    <article class="summary-card">
+                        <span>Procesamiento</span>
+                        <p>El archivo XLSX seleccionado se procesa localmente en el equipo del usuario.</p>
+                    </article>
+                    <article class="summary-card">
+                        <span>Transmisión</span>
+                        <p>La app no integra cuentas, anuncios, analítica, telemetría ni subida automática.</p>
+                    </article>
+                    <article class="summary-card">
+                        <span>Control</span>
+                        <p>El usuario elige archivos, productos, cantidades, exportaciones e impresión.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout shell">
+            <nav class="toc" aria-label="Contenido del aviso">
+                <strong>En este aviso</strong>
+                <ol>
+                    <li><a href="#alcance">1. Alcance</a></li>
+                    <li><a href="#responsable">2. Responsable</a></li>
+                    <li><a href="#datos">3. Información procesada</a></li>
+                    <li><a href="#finalidades">4. Finalidades</a></li>
+                    <li><a href="#local">5. Tratamiento local</a></li>
+                    <li><a href="#terceros">6. Windows y terceros</a></li>
+                    <li><a href="#conservacion">7. Conservación</a></li>
+                    <li><a href="#controles">8. Controles y ARCO</a></li>
+                    <li><a href="#soporte">9. Soporte</a></li>
+                    <li><a href="#seguridad">10. Seguridad y menores</a></li>
+                    <li><a href="#cambios">11. Cambios y contacto</a></li>
+                    <li><a href="#internacional">12. Usuarios internacionales</a></li>
+                    <li><a href="#marcas">13. Independencia</a></li>
+                </ol>
+            </nav>
+
+            <article class="document">
+                <section id="alcance">
+                    <h2>1. Alcance de este aviso</h2>
+                    <p>Este aviso corresponde a la aplicación de escritorio <strong>Etiquetas ECO for Eleventa</strong>, presentada comercialmente como <strong>Etiquetas ECO</strong>, y a su página informativa específica. No sustituye el aviso de privacidad del comercio que usa la aplicación ni las políticas de Windows, del controlador de impresión, de la impresora, del proveedor de hosting o de otros servicios elegidos por el usuario.</p>
+                    <div class="note">
+                        <p><strong>La aplicación y la página web no son lo mismo.</strong> La aplicación funciona localmente y no transmite por sí sola el XLSX ni su contenido. La visita a una página web sí requiere comunicación con el proveedor de hosting.</p>
+                    </div>
+                    <p>La página de producto y este aviso no incluyen formularios, publicidad, analítica ni recursos remotos necesarios para mostrar su contenido. El sitio se sirve mediante GitHub Pages y puede utilizar la red de Cloudflare. Esos proveedores pueden procesar registros técnicos de la visita, como dirección IP, fecha, solicitud, navegador o agente de usuario, para entregar y proteger el sitio conforme a sus propias políticas.</p>
+                </section>
+
+                <section id="responsable">
+                    <h2>2. Identidad del responsable</h2>
+                    <div class="identity-card">
+                        <dl>
+                            <dt>Responsable</dt>
+                            <dd>Ignacio Alejandro Sánchez Mateo, persona física que opera bajo la marca ECO-ELECTRONIC Solutions</dd>
+                            <dt>Marca / editor</dt>
+                            <dd>ECO-ELECTRONIC Solutions</dd>
+                            <dt>Domicilio</dt>
+                            <dd>Avenida Camino Real a San Andrés Cholula, número exterior 1635, colonia San Andrés Cholula, C.P. 72810, Puebla, México</dd>
+                            <dt>Canal ARCO</dt>
+                            <dd><a href="mailto:ecoelectronicsolutionss@gmail.com">ecoelectronicsolutionss@gmail.com</a></dd>
+                        </dl>
+                    </div>
+                    <p>El responsable atiende por correo electrónico las solicitudes de acceso, rectificación, cancelación y oposición, así como otras solicitudes de privacidad previstas por la legislación aplicable.</p>
+                </section>
+
+                <section id="datos">
+                    <h2>3. Información que puede procesar la aplicación</h2>
+                    <p>La aplicación procesa los datos que el propio usuario decide incluir o seleccionar. Un archivo de inventario puede contener datos personales aunque su finalidad principal sea comercial; por ello no debe asumirse que todos los XLSX están libres de información personal.</p>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Grupo</th>
+                                <th>Ejemplos verificables</th>
+                                <th>Ubicación principal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Contenido del XLSX</td>
+                                <td>Códigos, nombres de producto, departamento, precios, costo, mayoreo, existencias, mínimos, máximos y cualquier otro campo presente en la hoja seleccionada.</td>
+                                <td>Memoria local durante el uso y archivo original elegido por el usuario.</td>
+                            </tr>
+                            <tr>
+                                <td>Ruta del archivo</td>
+                                <td>Ubicación del último archivo importado, para facilitar el trabajo posterior.</td>
+                                <td>Configuración local de la aplicación.</td>
+                            </tr>
+                            <tr>
+                                <td>Preferencias y plantillas</td>
+                                <td>Impresora, medio seleccionado, preset, campos, plantilla y simbología elegida.</td>
+                                <td>Archivos locales de configuración y presets.</td>
+                            </tr>
+                            <tr>
+                                <td>Historial de operación</td>
+                                <td>Fecha, impresora, estado del intento, identificadores técnicos, huella digital del artefacto, nombre o número de trabajo de Windows, evidencia y resolución manual.</td>
+                                <td>Historial local de impresión.</td>
+                            </tr>
+                            <tr>
+                                <td>Archivos generados</td>
+                                <td>PDF o PNG con el contenido de las etiquetas.</td>
+                                <td>Carpeta que el usuario elige al exportar.</td>
+                            </tr>
+                            <tr>
+                                <td>Comunicaciones voluntarias</td>
+                                <td>Nombre, correo, contenido de la solicitud, documentos de identidad o representación y archivos que la persona decida enviar para soporte o para ejercer derechos de privacidad.</td>
+                                <td>Buzón de correo del responsable y sistemas del proveedor de correo, sólo cuando la persona inicia el contacto.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="warning">
+                        <p><strong>Datos sensibles.</strong> La aplicación no solicita campos sensibles para crear etiquetas. Si el usuario introduce datos sensibles o personales en un XLSX compatible, será responsable de contar con una base legítima, limitar los campos y proteger el archivo.</p>
+                    </div>
+                </section>
+
+                <section id="finalidades">
+                    <h2>4. Finalidades del tratamiento</h2>
+                    <ul>
+                        <li>Leer la hoja de cálculo elegida y mostrar los productos disponibles.</li>
+                        <li>Buscar, filtrar, seleccionar y asignar cantidades de etiquetas.</li>
+                        <li>Construir y validar una vista previa, incluido el código Code 128.</li>
+                        <li>Guardar preferencias y presets solicitados para usos posteriores.</li>
+                        <li>Preparar la impresión local o exportar PDF y PNG a petición del usuario.</li>
+                        <li>Registrar evidencia técnica mínima para distinguir trabajos no iniciados, aceptados o inciertos y permitir su resolución manual sin reintentos automáticos.</li>
+                        <li>Recibir, verificar y atender solicitudes de privacidad o comunicaciones de soporte enviadas voluntariamente al responsable.</li>
+                    </ul>
+                    <p>La aplicación no utiliza el contenido para perfiles publicitarios, venta de datos, analítica, entrenamiento de modelos, telemetría ni finalidades secundarias propias.</p>
+                    <p>El tratamiento local necesario para importar, validar, exportar o imprimir es iniciado por el usuario y no pone esos datos a disposición del responsable. El envío de una comunicación al responsable es opcional; la información recibida se utiliza para responder la solicitud, prestar el soporte pedido, proteger la operación o cumplir obligaciones legales aplicables. Cuando una norma exija consentimiento expreso, éste se solicitará antes de usar la información para una finalidad adicional.</p>
+                    <p>No se realizan decisiones exclusivamente automatizadas ni perfiles que produzcan efectos jurídicos sobre las personas.</p>
+                </section>
+
+                <section id="local">
+                    <h2>5. Tratamiento local y ausencia de subida automática</h2>
+                    <p>La aplicación funciona de forma local y offline. No requiere una cuenta y no contiene un servicio propio para subir el XLSX, el catálogo, las etiquetas o el historial a ECO-ELECTRONIC Solutions.</p>
+                    <p>Cualquier transmisión al responsable ocurre fuera del funcionamiento automático de la aplicación cuando una persona decide comunicarse voluntariamente por correo electrónico, teléfono, mensajería u otro canal. La aplicación nunca adjunta ni envía el XLSX por sí sola.</p>
+                    <p>Para reducir conflictos con archivos abiertos, el importador puede crear una copia temporal privada dentro del equipo. Al terminar intenta eliminarla. Si Windows impide la limpieza, la aplicación bloquea la continuación y vuelve a intentar la limpieza en una operación posterior; un residuo podría permanecer hasta que Windows o el usuario permitan eliminarlo.</p>
+                    <p>El archivo XLSX original se abre para lectura y la aplicación no lo modifica. Los PDF y PNG permanecen en el lugar elegido hasta que el usuario los elimine o mueva.</p>
+                    <div class="note">
+                        <p><strong>Responsabilidad del comercio.</strong> El comerciante que usa la aplicación sigue siendo responsable de la información de sus clientes, proveedores, empleados u otras personas que incluya en el archivo, así como de entregar sus propios avisos y cumplir sus obligaciones.</p>
+                    </div>
+                </section>
+
+                <section id="terceros">
+                    <h2>6. Windows, sistema de archivos e impresión</h2>
+                    <p>Para abrir, guardar e imprimir, intervienen componentes del equipo que no controla esta aplicación:</p>
+                    <ul>
+                        <li><strong>Windows y el sistema de archivos</strong>, que administran permisos, carpetas, copias temporales, respaldos y datos locales.</li>
+                        <li><strong>La cola de impresión de Windows</strong>, que recibe el documento y registra datos técnicos del trabajo.</li>
+                        <li><strong>El controlador y la impresora</strong>, que reciben la información necesaria para producir la etiqueta.</li>
+                        <li><strong>Software de seguridad, sincronización o respaldo</strong> instalado por el usuario, que podría copiar o inspeccionar archivos según su propia configuración.</li>
+                        <li><strong>GitHub Pages y Cloudflare</strong>, que pueden procesar registros técnicos al entregar y proteger estas páginas.</li>
+                        <li><strong>Google/Gmail</strong>, que interviene únicamente cuando una persona envía voluntariamente un correo al canal de privacidad.</li>
+                    </ul>
+                    <p>Estos componentes y proveedores aplican sus propios términos y prácticas. La app no puede prometer cómo conservan o eliminan los datos.</p>
+                    <p>El responsable no vende los datos procesados por la aplicación ni comparte el XLSX con terceros, porque la aplicación no se lo transmite. Las comunicaciones que reciba voluntariamente sólo se comunicarán a proveedores necesarios para prestar el servicio, a la autoridad cuando exista una obligación legal o a otras personas cuando exista una base jurídica o consentimiento válido.</p>
+                </section>
+
+                <section id="conservacion">
+                    <h2>7. Conservación y eliminación</h2>
+                    <ul>
+                        <li><strong>Preferencias y presets:</strong> permanecen localmente mientras el usuario los conserve, reemplace o elimine mediante los controles de la aplicación o del sistema.</li>
+                        <li><strong>Historial de impresión:</strong> se limita a los 250 registros locales más recientes; no tiene una eliminación automática basada en tiempo.</li>
+                        <li><strong>Copia temporal de importación:</strong> se intenta eliminar al terminar; si falla, la aplicación intenta impedir que pase inadvertida.</li>
+                        <li><strong>PDF y PNG:</strong> permanecen en la carpeta elegida hasta que el usuario los elimine.</li>
+                        <li><strong>XLSX original:</strong> permanece donde el usuario lo guarda y está sujeto a sus propias políticas de conservación y respaldo.</li>
+                        <li><strong>Solicitudes de privacidad o soporte:</strong> permanecen en el buzón del responsable mientras sean necesarias para atender la solicitud, acreditar su seguimiento o cumplir obligaciones legales aplicables. No existe un plazo automático de borrado impuesto por la aplicación.</li>
+                    </ul>
+                    <p>La ubicación exacta de los datos de la aplicación depende del tipo de instalación —portable o paquete MSIX— y de cómo Windows administre el perfil local. No se afirma que desinstalar la aplicación elimine siempre todos los datos, respaldos o archivos exportados.</p>
+                </section>
+
+                <section id="controles">
+                    <h2>8. Controles del usuario y derechos ARCO</h2>
+                    <p>El usuario puede controlar directamente el archivo original, los datos que importa, la selección, los presets y los archivos exportados. Para borrar datos locales que no tengan un control visible dentro de la app, debe cerrar la aplicación y usar las opciones de almacenamiento, restablecimiento o eliminación que ofrezca Windows para la modalidad instalada, verificando previamente si necesita un respaldo.</p>
+                    <p>Las personas titulares pueden solicitar, cuando corresponda, acceso, rectificación, cancelación u oposición respecto de datos en posesión del responsable. También pueden solicitar limitar el uso o divulgación, retirar un consentimiento cuando sea legalmente procedente y ejercer otros derechos reconocidos por la legislación aplicable.</p>
+                    <div class="note">
+                        <p><strong>Procedimiento.</strong> La solicitud debe enviarse a <a href="mailto:ecoelectronicsolutionss@gmail.com">ecoelectronicsolutionss@gmail.com</a> e incluir:</p>
+                        <ul>
+                            <li>nombre completo de la persona titular y un medio para recibir notificaciones;</li>
+                            <li>descripción clara del derecho que desea ejercer y de los datos relacionados;</li>
+                            <li>documentos que permitan acreditar identidad o, en su caso, representación legal; y</li>
+                            <li>cualquier elemento que facilite localizar la información.</li>
+                        </ul>
+                        <p>La recepción, las solicitudes de aclaración y la respuesta se comunicarán por ese mismo correo. En México, la determinación se comunicará en un plazo máximo de veinte días contado desde la recepción y, si resulta procedente, se hará efectiva dentro de los quince días siguientes a la respuesta; los plazos pueden ampliarse cuando la ley lo permita y exista justificación. En otras jurisdicciones se aplicarán los plazos obligatorios que correspondan.</p>
+                    </div>
+                    <p>Para limitar el uso o divulgación de datos que estén en posesión del responsable, la persona puede escribir al mismo correo con el asunto <strong>“Limitación de uso o divulgación”</strong> y describir claramente la restricción solicitada. También puede utilizar ese canal para revocar un consentimiento cuando sea legalmente procedente; la revocación no tendrá efectos retroactivos.</p>
+                    <p>Debido a que la aplicación no transmite automáticamente el XLSX ni los datos guardados en la computadora, el responsable puede no tener posesión de la información local sobre la que se formule una solicitud. En ese caso explicará esta circunstancia y orientará sobre los controles locales disponibles, sin afirmar que puede borrar archivos o respaldos que no controla.</p>
+                </section>
+
+                <section id="soporte">
+                    <h2>9. Soporte y entrega voluntaria de archivos</h2>
+                    <p>La aplicación no envía archivos al soporte. Si el usuario decide compartir voluntariamente una captura, un XLSX, un PDF, un registro o cualquier otro archivo por correo electrónico, teléfono, mensajería u otro canal, esa entrega ocurre fuera del funcionamiento automático de la app.</p>
+                    <p>Antes de compartir, se recomienda hacer una copia, eliminar columnas innecesarias, ocultar datos de clientes o empleados y usar ejemplos ficticios siempre que sea posible. Los metadatos y contenidos enviados por Gmail, WhatsApp u otro servicio también quedan sujetos a las políticas de ese proveedor.</p>
+                </section>
+
+                <section id="seguridad">
+                    <h2>10. Seguridad razonable y uso por menores</h2>
+                    <p>La arquitectura local reduce la exposición a transmisiones innecesarias, pero ningún sistema ofrece seguridad absoluta. La protección depende también de la cuenta de Windows, las contraseñas, permisos, actualizaciones, antivirus, cifrado del dispositivo si el usuario lo habilita, respaldos y acceso físico al equipo.</p>
+                    <p>La aplicación no promete cifrado, anonimización ni borrado seguro propios. El usuario debe aplicar medidas proporcionales a la sensibilidad de su información.</p>
+                    <p>Etiquetas ECO es una herramienta para operaciones comerciales y no está dirigida a menores de edad. No solicita intencionalmente información de menores; el usuario no debe incorporarla salvo que cuente con fundamento y medidas adecuadas conforme a la ley.</p>
+                </section>
+
+                <section id="cambios">
+                    <h2>11. Cambios al aviso y contacto</h2>
+                    <p>Los cambios a este aviso se comunicarán publicando una versión actualizada en esta misma dirección e indicando la fecha de actualización. Si un cambio modifica de forma sustancial las finalidades o el tratamiento, deberá evaluarse si corresponde obtener un consentimiento adicional o comunicarlo por otro medio.</p>
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <span>Privacidad y derechos ARCO</span>
+                            <a href="mailto:ecoelectronicsolutionss@gmail.com">ecoelectronicsolutionss@gmail.com</a>
+                        </div>
+                        <div class="contact-card">
+                            <span>Soporte por WhatsApp</span>
+                            <a href="https://wa.me/522223167820" target="_blank" rel="noopener">222 316 7820</a>
+                        </div>
+                        <div class="contact-card">
+                            <span>Teléfono de soporte</span>
+                            <a href="tel:+522229898801">222 989 8801</a>
+                        </div>
+                    </div>
+                    <p><strong>Importante:</strong> el correo indicado es el canal formal de privacidad y ARCO. WhatsApp y el teléfono se conservan únicamente para soporte general.</p>
+                    <p class="legal-source">Referencia normativa consultada: <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf" target="_blank" rel="noopener">Ley Federal de Protección de Datos Personales en Posesión de los Particulares, texto vigente publicado por la Cámara de Diputados</a>.</p>
+                    <p>Este aviso no sustituye la revisión de un profesional jurídico, especialmente cuando el producto se distribuya en jurisdicciones distintas de México.</p>
+                </section>
+
+                <section id="internacional">
+                    <h2>12. Usuarios internacionales</h2>
+                    <p>La aplicación puede estar disponible en los países y regiones habilitados por Microsoft Store. El responsable está domiciliado en México y las prácticas técnicas descritas en este aviso son las mismas con independencia del país: la aplicación procesa el XLSX localmente y no lo transmite automáticamente al responsable.</p>
+                    <p>Según la legislación aplicable, una persona puede tener derechos adicionales, como solicitar acceso, rectificación, supresión o cancelación, restricción, portabilidad, oposición, retiro del consentimiento o presentar una reclamación ante una autoridad de protección de datos. Las solicitudes dirigidas al responsable pueden enviarse al canal de privacidad indicado en este aviso.</p>
+                    <p>Los proveedores de hosting y correo pueden procesar registros técnicos o comunicaciones en países distintos al de la persona usuaria conforme a su infraestructura y sus propias políticas. La aplicación de escritorio no realiza esa transferencia: sólo intervienen esos servicios cuando se visita el sitio o se envía voluntariamente un correo.</p>
+                    <p>La disponibilidad internacional no limita derechos obligatorios reconocidos por la ley del lugar de residencia de la persona ni significa que ECO-ELECTRONIC Solutions esté afiliada o establecida físicamente en cada país. Cuando una norma local resulte aplicable al responsable, la solicitud será evaluada conforme a esa norma.</p>
+                </section>
+
+                <section id="marcas">
+                    <h2>13. Independencia y marcas de terceros</h2>
+                    <p>Eleventa es una marca de su respectivo titular. Etiquetas ECO es un producto independiente y no está afiliado, patrocinado, autorizado ni respaldado por Eleventa o Bambu Code. Brother y QL-800 se mencionan únicamente para identificar compatibilidad de hardware; Brother es una marca de su respectivo titular.</p>
+                    <p>El usuario es responsable de obtener legalmente Eleventa, si decide usarlo, o de proporcionar un archivo XLSX compatible. Esta aplicación no incluye, vende ni sustituye una licencia de Eleventa.</p>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid shell">
+            <div class="footer-brand">
+                <img src="./assets/app-icon.png" alt="" width="48" height="48">
+                <p><strong style="color:#fff;">ECO-ELECTRONIC Solutions</strong><br>© 2026. Todos los derechos reservados.<br>Propiedad de Ignacio Alejandro Sánchez Mateo.</p>
+            </div>
+            <nav class="footer-links" aria-label="Enlaces legales y de producto">
+                <a href="./index.html">Sitio principal</a>
+                <a href="./etiquetas-eco-eleventa.html">Etiquetas ECO</a>
+                <a href="./privacidad-etiquetas-eco-eleventa.html" aria-current="page">Aviso de privacidad</a>
+                <a href="./terminos.html">Términos del sitio</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
