@@ -287,8 +287,9 @@
 
         html {
             scroll-behavior: smooth;
-            /* Prevenir overflow horizontal en TODOS los dispositivos */
+            /* Recorta desbordes sin crear un contenedor que anule position: sticky. */
             overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
@@ -298,6 +299,7 @@
             line-height: 1.6;
             transition: background-color 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
+            overflow-x: clip;
             /* Asegurar que el body no exceda el ancho del viewport */
             max-width: 100vw;
         }
@@ -421,6 +423,12 @@
         }
         .logo span { color: white; font-weight: 500; }
         .logo i { font-size: 1.3rem; }
+        .logo img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            flex: 0 0 auto;
+        }
 
         /* Search Bar */
         .search-bar {
@@ -502,8 +510,8 @@
             background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-full);
             cursor: pointer;
             display: flex;
@@ -550,6 +558,9 @@
             box-shadow: 0 4px 15px rgba(243,156,18,0.4);
         }
 
+        .btn-digital-nav { background: var(--primary); }
+        .btn-digital-nav:hover { box-shadow: 0 4px 15px rgba(18,138,67,0.4); }
+
         /* Hamburger */
         .hamburger {
             display: none;
@@ -559,6 +570,10 @@
             font-size: 1.5rem;
             cursor: pointer;
             padding: 8px;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
             z-index: 1002;
         }
 
@@ -588,20 +603,29 @@
             display: flex;
             flex-direction: column;
             padding: 30px 0;
+            overflow-y: auto;
+            overscroll-behavior: contain;
         }
         .mobile-drawer.active { transform: translateX(0); }
 
         .drawer-close {
             align-self: flex-end;
+            flex-shrink: 0;
             margin: 0 20px 20px 0;
             background: none;
             border: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .drawer-link {
             display: flex;
+            flex-shrink: 0;
             align-items: center;
             gap: 12px;
             padding: 14px 25px;
@@ -1060,22 +1084,34 @@
         .testimonial-controls {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 0;
             margin-top: 20px;
         }
         .testimonial-dot {
+            width: 44px;
+            height: 44px;
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .testimonial-dot::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: var(--border-color);
-            border: none;
-            cursor: pointer;
+            transform: translate(-50%, -50%);
             transition: background 0.3s, transform 0.2s;
-            padding: 0;
         }
-        .testimonial-dot.active {
+        .testimonial-dot.active::before {
             background: var(--primary);
-            transform: scale(1.3);
+            transform: translate(-50%, -50%) scale(1.3);
         }
 
         /* ============================================
@@ -1424,6 +1460,7 @@
             font-size: 0.9rem;
             transition: transform 0.2s, box-shadow 0.3s;
             margin-top: 8px;
+            min-height: 44px;
         }
         .btn-gps:hover {
             transform: translateY(-2px);
@@ -1628,8 +1665,8 @@
             background: rgba(255,255,255,0.08);
             border: none;
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-full);
             cursor: pointer;
             display: flex;
@@ -1701,6 +1738,7 @@
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
             font-weight: 500;
+            min-height: 44px;
         }
         .quick-reply-btn:hover {
             background: var(--primary);
@@ -1746,14 +1784,15 @@
             background: var(--bg-surface-alt);
             color: var(--text-primary);
             transition: border-color 0.3s;
+            min-height: 44px;
         }
         .chat-input:focus { border-color: var(--primary); }
         .chat-send {
             background: var(--primary);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-full);
             cursor: pointer;
             display: flex;
@@ -1798,18 +1837,25 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .grid-services { grid-template-columns: repeat(2, 1fr); }
             .form-row { grid-template-columns: 1fr; }
+            .navbar { padding-inline: 20px; }
+            .logo { font-size: 1.15rem; }
+            .logo span { display: none; }
+            .search-bar { flex: 1 1 180px; min-width: 0; max-width: 320px; margin: 0 12px; }
+            .nav-actions { gap: 8px; flex: 0 0 auto; }
+            .btn-software-nav,
+            .btn-whatsapp-nav { padding: 9px 12px; }
+            .btn-software-nav span,
+            .btn-whatsapp-nav span { display: none; }
         }
 
         /* ── Tablet ──────────────────────────────────────────────── */
         @media (max-width: 768px) {
             /* Navbar */
             .search-bar { display: none; }
-            .btn-whatsapp-nav span { display: none; }
-            .btn-whatsapp-nav { padding: 9px 12px; }
-            .btn-software-nav span { display: none; }
-            .btn-software-nav { padding: 9px 12px; }
+            .nav-actions > .btn-whatsapp-nav,
+            .nav-actions > .btn-software-nav { display: none; }
             .hamburger { display: flex; }
-            .logo { font-size: 1.15rem; }
+            .logo { font-size: 1.15rem; min-height: 44px; }
             .logo span { display: none; }
             .navbar { padding: 0 16px; height: 60px; }
 
@@ -1912,7 +1958,7 @@
             .chat-proactive-bubble { bottom: 96px; right: 14px; max-width: 210px; font-size: 0.88rem; }
 
             /* Back to top */
-            .back-to-top { bottom: 88px; right: 16px; width: 40px; height: 40px; font-size: 1rem; }
+            .back-to-top { bottom: 88px; right: 16px; width: 44px; height: 44px; font-size: 1rem; }
 
             /* Eco-banner */
             .eco-banner { margin: 0 12px; padding: 22px 16px; }
@@ -1967,7 +2013,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <a href="#" class="logo">
-            <i class="fas fa-leaf"></i> Eco-Electronic<span>Solutions</span>
+            <img src="./assets/app-icon.png" alt="" width="36" height="36"> Eco-Electronic<span>Solutions</span>
         </a>
 
         <div class="search-bar" id="search-bar">
@@ -1985,18 +2031,21 @@
             <a href="./software-eco.html" class="btn-software-nav" title="Conoce las aplicaciones de ECO-ELECTRONIC Solutions">
                 <i class="fas fa-laptop-code"></i> <span>Software ECO</span>
             </a>
-            <a href="https://wa.me/522223167820" class="btn-whatsapp-nav" target="_blank">
+            <a href="./soluciones-digitales.html" class="btn-software-nav btn-digital-nav" title="Conoce nuestras páginas web, soluciones de IA y aplicaciones">
+                <i class="fas fa-globe"></i> <span>Web e IA</span>
+            </a>
+            <a href="https://wa.me/522223167820?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20con%20ECO%20Electronic%20Solutions.%20El%20equipo%2C%20refacci%C3%B3n%20o%20componente%20que%20necesito%20es%3A%20" class="btn-whatsapp-nav" target="_blank">
                 <i class="fab fa-whatsapp"></i> <span>Cotiza Ahora</span>
             </a>
-            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-controls="mobile-drawer" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
     <!-- Mobile Drawer -->
-    <div class="mobile-drawer-overlay" id="drawer-overlay"></div>
-    <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+    <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Menú de navegación" aria-hidden="true" inert>
         <button class="drawer-close" id="drawer-close" aria-label="Cerrar menú">
             <i class="fas fa-times"></i>
         </button>
@@ -2008,9 +2057,10 @@
         <a href="#cotizacion" class="drawer-link"><i class="fas fa-file-alt"></i> Cotización Rápida</a>
         <div class="drawer-divider"></div>
         <a href="#contacto" class="drawer-link"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-        <a href="https://wa.me/522223167820" class="drawer-link" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/522223167820?text=Hola%2C%20visit%C3%A9%20la%20p%C3%A1gina%20de%20ECO%20Electronic%20Solutions%20y%20necesito%20orientaci%C3%B3n%20sobre%3A%20" class="drawer-link" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         <a href="tel:+522229898801" class="drawer-link"><i class="fas fa-phone-alt"></i> Llamar</a>
         <div class="drawer-divider"></div>
+        <a href="./soluciones-digitales.html" class="drawer-link"><i class="fas fa-globe"></i> Web e IA</a>
         <a href="./software-eco.html" class="drawer-link drawer-link-highlight"><i class="fas fa-laptop-code"></i> Software ECO</a>
         <a href="./terminos.html" class="drawer-link"><i class="fas fa-shield-alt"></i> Términos y Condiciones</a>
     </div>
@@ -2022,7 +2072,7 @@
             <h1>Expertos en Reparación.<br><span class="highlight">Aliados del Medio Ambiente.</span></h1>
             <p>Desde el microondas de tu cocina hasta la tarjeta madre de tu PC. Nuestro equipo de especialistas
                revive tus aparatos y maximiza su vida útil en San Andrés Cholula.</p>
-            <a href="https://wa.me/522223167820" class="hero-cta" target="_blank">
+            <a href="https://wa.me/522223167820?text=Hola%2C%20quiero%20iniciar%20un%20diagn%C3%B3stico.%20Mi%20equipo%20es%20%5Btipo%20y%20modelo%5D%20y%20presenta%20esta%20falla%3A%20" class="hero-cta" target="_blank">
                 <i class="fas fa-bolt"></i> Iniciar Diagnóstico Ahora
             </a>
         </div>
@@ -2089,7 +2139,7 @@
                Tráelo a nuestro taller, nosotros lo reciclamos correctamente y tú te llevas
                <strong>cupones de descuento</strong> para reparaciones o compra de accesorios.</p>
         </div>
-        <a href="https://wa.me/522223167820" class="btn-eco-canje" target="_blank">
+        <a href="https://wa.me/522223167820?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20programa%20Eco-Canje.%20El%20equipo%20que%20deseo%20llevar%20es%3A%20" class="btn-eco-canje" target="_blank">
             <i class="fas fa-exchange-alt"></i> Canjear Equipo
         </a>
     </div>
@@ -2538,7 +2588,7 @@
                 <h4>Contacto Directo</h4>
                 <div class="contact-line">
                     <i class="fab fa-whatsapp"></i>
-                    <a href="https://wa.me/522223167820" target="_blank">WhatsApp: 222 316 7820</a>
+                    <a href="https://wa.me/522223167820?text=Hola%2C%20encontr%C3%A9%20su%20contacto%20en%20la%20p%C3%A1gina%20de%20ECO%20Electronic%20Solutions.%20Quiero%20consultar%20sobre%3A%20" target="_blank">WhatsApp: 222 316 7820</a>
                 </div>
                 <div class="contact-line">
                     <i class="fas fa-phone-alt"></i>
@@ -2572,6 +2622,7 @@
             <p>&copy; 2026-2027 Eco-Electronic Solutions. Todos los derechos reservados.<br>
             Web creada por Eco-Networks Solutions, una subdivisión de Eco-Electronic Solutions.</p>
             <nav class="footer-legal-links" aria-label="Productos y documentos legales">
+                <a class="footer-legal-link" href="./soluciones-digitales.html"><i class="fas fa-globe"></i> Web e IA</a>
                 <a class="footer-legal-link" href="./software-eco.html"><i class="fas fa-laptop-code"></i> Software ECO</a>
                 <a class="footer-legal-link" href="./terminos.html"><i class="fas fa-file-contract"></i> Términos y Condiciones</a>
             </nav>
@@ -2584,17 +2635,17 @@
     </button>
 
     <!-- Chatbot Widget -->
-    <button class="chatbot-btn" id="chatbot-toggle" aria-label="Abrir chat">
+    <button class="chatbot-btn" id="chatbot-toggle" aria-label="Abrir chat" aria-controls="chatbot-window" aria-expanded="false">
         <i class="fas fa-comment-dots"></i>
     </button>
 
-    <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-window" id="chatbot-window" role="dialog" aria-modal="true" aria-labelledby="chat-title" aria-hidden="true" inert>
         <div class="chat-header">
             <div class="chat-header-avatar">
                 <img src="./assets/app-icon.png" alt="Asesora Dalia" width="46" height="46">
             </div>
             <div class="chat-header-info">
-                <h4>Dalia</h4>
+                <h4 id="chat-title">Dalia</h4>
                 <p>Asesora AI de Eco-Electronic</p>
             </div>
             <button class="close-chat" id="close-chat" aria-label="Cerrar chat"><i class="fas fa-times"></i></button>
@@ -2645,8 +2696,24 @@
         const drawerOverlay = document.getElementById('drawer-overlay');
         const drawerClose = document.getElementById('drawer-close');
 
-        function openDrawer() { drawer.classList.add('active'); drawerOverlay.classList.add('active'); }
-        function closeDrawer() { drawer.classList.remove('active'); drawerOverlay.classList.remove('active'); }
+        function openDrawer() {
+            drawer.classList.add('active');
+            drawerOverlay.classList.add('active');
+            drawer.removeAttribute('inert');
+            drawer.setAttribute('aria-hidden', 'false');
+            drawerOverlay.setAttribute('aria-hidden', 'false');
+            hamburger.setAttribute('aria-expanded', 'true');
+            drawerClose.focus();
+        }
+        function closeDrawer() {
+            drawer.classList.remove('active');
+            drawerOverlay.classList.remove('active');
+            drawer.setAttribute('inert', '');
+            drawer.setAttribute('aria-hidden', 'true');
+            drawerOverlay.setAttribute('aria-hidden', 'true');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.focus();
+        }
 
         hamburger.addEventListener('click', openDrawer);
         drawerClose.addEventListener('click', closeDrawer);
@@ -2655,6 +2722,9 @@
         // Close drawer on link click
         drawer.querySelectorAll('.drawer-link').forEach(link => {
             link.addEventListener('click', closeDrawer);
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && drawer.classList.contains('active')) closeDrawer();
         });
 
         // =============================================
@@ -3244,6 +3314,9 @@
             if (isChatOpen) {
                 removeBubbleIfOpen();
                 chatWindow.classList.add('active');
+                chatWindow.removeAttribute('inert');
+                chatWindow.setAttribute('aria-hidden', 'false');
+                toggleBtn.setAttribute('aria-expanded', 'true');
                 toggleBtn.style.display = 'none';
                 setTimeout(() => chatInput.focus(), 300);
             } else {
@@ -3256,8 +3329,16 @@
         function closeChatFn() {
             isChatOpen = false;
             chatWindow.classList.remove('active');
+            chatWindow.setAttribute('inert', '');
+            chatWindow.setAttribute('aria-hidden', 'true');
+            toggleBtn.setAttribute('aria-expanded', 'false');
             toggleBtn.style.display = 'flex';
+            toggleBtn.focus();
         }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && isChatOpen) closeChatFn();
+        });
 
         async function handleUserInput() {
             const text = chatInput.value.trim();
