@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://ai.ecoelectronicsolutions.com.mx https://challenges.cloudflare.com; frame-src https://www.google.com https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; upgrade-insecure-requests">
     <title>Reparación de Electrónicos en San Andrés Cholula | Eco-Electronic Solutions</title>
 
     <!-- SEO: Meta Description y Robots -->
@@ -1773,6 +1775,13 @@
             display: flex;
             gap: 8px;
         }
+        .dalia-turnstile {
+            min-height: 0;
+            padding: 0 14px;
+            background: var(--bg-surface);
+            display: flex;
+            justify-content: center;
+        }
         .chat-input {
             flex-grow: 1;
             border: 1px solid var(--border-color);
@@ -2653,6 +2662,7 @@
         <div class="chat-body" id="chat-body" role="log" aria-live="polite" aria-relevant="additions text">
             <!-- Messages injected by JS -->
         </div>
+        <div id="dalia-turnstile" class="dalia-turnstile" aria-label="Verificación de seguridad del chat"></div>
         <div class="chat-footer">
             <input type="text" id="chat-input" class="chat-input" placeholder="Escribe aquí..." autocomplete="off" aria-label="Mensaje para la asesora">
             <button id="chat-send" class="chat-send" aria-label="Enviar"><i class="fas fa-paper-plane"></i></button>
@@ -2663,6 +2673,7 @@
          JAVASCRIPT — ALL REACTIVE LOGIC
          ============================================ -->
     <script src="./assets/safe-dom-renderer.js"></script>
+    <script src="./assets/dalia-chat-client.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -3101,8 +3112,8 @@
         // ── Detección de servidor AI + carga de nombre ──
         // ✅ FIX v6: Usa /v1/health (público) en vez de /v1/admin/assistant_name (requería API key → 403 siempre)
         let _assistantName = 'Dalia'; // fallback
-        let _aiServerOnline = true;   // OPTIMISTA: asumir online hasta que el health check diga lo contrario
-        let _flowiseOnline = false;   // ✅ NEW: Track Flowise status para skip inteligente
+        let _aiServerOnline = false;  // Fail-closed hasta confirmar el health check
+        let _publicChatEnabled = false;
         // FIX BUG-09: persistir el contador de cierres en localStorage
         let _bubbleDismissCount = parseInt(localStorage.getItem('_bubbleDismiss') || '0', 10);
         const _saveDismissCount = () => localStorage.setItem('_bubbleDismiss', _bubbleDismissCount);
@@ -3115,14 +3126,10 @@
 
         async function checkAIServer() {
             try {
-                const ctrl = new AbortController();
-                const abortTimer = setTimeout(() => ctrl.abort(), 5000); // FIX BUG-04
-                const r = await fetch('https://ai.ecoelectronicsolutions.com.mx/v1/health', { signal: ctrl.signal });
-                clearTimeout(abortTimer); // FIX BUG-04: limpiar timer si fetch termina antes
-                if (r.ok) {
-                    const d = await r.json();
+                const d = await window.DaliaChatClient.checkHealth();
+                if (d.status === 'ok') {
                     _aiServerOnline = true;
-                    _flowiseOnline = !!d.flowise_online;
+                    _publicChatEnabled = d.public_chat_enabled === true;
                     _healthCheckFailCount = 0; // FIX BUG-05: reset contador al volver online
                     if (typeof d.assistant_name === 'string') {
                         _assistantName = chatRenderer.normalizeAssistantName(d.assistant_name);
@@ -3135,12 +3142,10 @@
                             headerAvatar.alt = `Asesora ${_assistantName}`;
                         }
                     }
-                } else {
-                    _aiServerOnline = false; _flowiseOnline = false;
-                    _healthCheckFailCount++;
-                }
+                } else throw new Error('Health check inválido');
             } catch {
-                _aiServerOnline = false; _flowiseOnline = false;
+                _aiServerOnline = false;
+                _publicChatEnabled = false;
                 _healthCheckFailCount++;
             }
             _healthCheckDone = true;
@@ -3349,10 +3354,12 @@
             if (qr) qr.remove();
 
             // FIX BUG-02: si el servidor está offline, responder inmediatamente sin hacer fetch
-            if (_healthCheckDone && !_aiServerOnline) {
+            if (_healthCheckDone && (!_aiServerOnline || !_publicChatEnabled)) {
                 chatRenderer.renderContactMessage(
                     chatBody,
-                    '⚠️ Dalia está en mantenimiento en este momento. Contáctanos directamente por '
+                    _aiServerOnline
+                        ? '🔒 Dalia está terminando su configuración segura. Mientras tanto, contáctanos por '
+                        : '⚠️ Dalia está en mantenimiento en este momento. Contáctanos directamente por '
                 );
                 return;
             }
@@ -3375,15 +3382,12 @@
                 window._chatSessionId = 'web-' + Math.random().toString(36).slice(2, 10) + '-' + Date.now();
             }
 
-            // ── Endpoints ──
-            const FLOWISE_URL     = 'https://ai.ecoelectronicsolutions.com.mx';
-            const CHATFLOW_ID     = 'c427317f-dbfb-4a48-903e-4cbdf74c50a3';
-            const FLOWISE_API     = `${FLOWISE_URL}/api/v1/prediction/${CHATFLOW_ID}`;
-            const FALLBACK_API    = `${FLOWISE_URL}/v1/chat/completions`;
+            const chatAbortController = new AbortController();
 
-            // ── Safety timeout: desbloquear chat si ALGO sale mal después de 45s ──
+            // ── Safety timeout: abortar y desbloquear si algo sale mal ──
             const safetyTimer = setTimeout(() => {
                 console.warn('[Chat] Safety timeout — desbloqueando chat');
+                chatAbortController.abort();
                 hideTypingIndicator();
                 if (isTyping) {
                     isTyping = false;
@@ -3393,122 +3397,42 @@
                         appendMessage('⏱️ La respuesta está tardando demasiado. Intenta de nuevo o contáctanos por WhatsApp.', 'bot', botMsgId);
                     }
                 }
-            }, 45000);
+            }, 100000);
 
             try {
-                let responded = false;
-
-                // ── PASO 1: Intentar Flowise (solo si health check dice que está online) ──
-                if (_flowiseOnline) {
-                    try {
-                        const res = await fetch(FLOWISE_API, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                question: text,
-                                sessionId: window._chatSessionId,
-                                history: messagesState.slice(-7, -1).map(m => ({
-                                    role: m.role === 'assistant' ? 'apiMessage' : 'userMessage',
-                                    content: m.content
-                                }))
-                            }),
-                            signal: AbortSignal.timeout(12000) // ✅ 12s max (antes 30s)
-                        });
-
-                        if (res.ok) {
-                            hideTypingIndicator();
-                            const data = await res.json();
-                            const reply = data.text || data.answer || data.message || '(sin respuesta)';
-                            appendMessage(reply, 'bot', botMsgId);
-                            messagesState.push({ role: 'assistant', content: reply });
-                            playNotificationChime();
-                            responded = true;
-                        } else {
-                            console.warn('[Chat] Flowise HTTP', res.status, '— usando fallback');
-                        }
-                    } catch (flowiseErr) {
-                        console.warn('[Chat] Flowise error:', flowiseErr.message, '— usando fallback');
-                        // FIX BUG-07: no marcar offline permanente al primer fallo
-                        // Solo se marca offline tras 2 fallos consecutivos
-                        if (!window._flowiseFailCount) window._flowiseFailCount = 0;
-                        window._flowiseFailCount++;
-                        if (window._flowiseFailCount >= 2) {
-                            _flowiseOnline = false;
-                            window._flowiseFailCount = 0;
-                        }
-                    }
-                } else {
-                    console.info('[Chat] Flowise offline — saltando directo a fallback');
-                }
-
-                // ── PASO 2: Fallback al backend directo (streaming) ──
-                if (!responded) {
-                    try {
-                        const response = await fetch(FALLBACK_API, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                model: "default",
-                                messages: messagesState,
-                                stream: true,
-                                temperature: 0.7
-                            }),
-                            signal: AbortSignal.timeout(20000) // ✅ 20s max (antes 30s)
-                        });
-
-                        if (!response.ok) throw new Error('HTTP ' + response.status);
-
+                let fullBotResponse = '';
+                let handoff = null;
+                const result = await window.DaliaChatClient.streamChat({
+                    messages: messagesState,
+                    sessionId: window._chatSessionId,
+                    signal: chatAbortController.signal,
+                    onDelta: (_delta, accumulated) => {
                         hideTypingIndicator();
+                        fullBotResponse = accumulated;
+                        appendMessage(accumulated, 'bot', botMsgId);
+                    },
+                    onHandoff: data => { handoff = data; }
+                });
+                fullBotResponse = result.text || fullBotResponse;
+                handoff = result.handoff || handoff;
 
-                        const reader = response.body.getReader();
-                        const decoder = new TextDecoder('utf-8');
-                        let fullBotResponse = '';
-
-                        while (true) {
-                            const { value, done } = await reader.read();
-                            if (done) break;
-                            const chunk = decoder.decode(value, { stream: true });
-                            for (const line of chunk.split('\n')) {
-                                if (line.startsWith('data: ')) {
-                                    const dataStr = line.slice(6).trim();
-                                    if (dataStr === '[DONE]') break;
-                                    if (!dataStr) continue;
-                                    try {
-                                        const d = JSON.parse(dataStr);
-                                        if (d.choices?.[0]?.delta?.content) {
-                                            fullBotResponse += d.choices[0].delta.content;
-                                            appendMessage(fullBotResponse, 'bot', botMsgId);
-                                        }
-                                    } catch {}
-                                }
-                            }
-                        }
-
-                        if (fullBotResponse) {
-                            messagesState.push({ role: 'assistant', content: fullBotResponse });
-                            playNotificationChime();
-                            responded = true;
-                        }
-                    } catch (fallbackErr) {
-                        console.error('[Chat] Fallback error:', fallbackErr);
-                    }
-                }
-
-                // ── PASO 3: Si nada funcionó, mostrar mensaje de error ──
-                if (!responded) {
-                    hideTypingIndicator();
-                    chatRenderer.renderContactMessage(
-                        chatBody,
-                        '⚠️ No pude conectar con el servidor de AI en este momento. Por favor, intenta en unos minutos o contáctanos por ',
-                        botMsgId
-                    );
-                }
+                if (!fullBotResponse) throw new Error('Dalia no generó una respuesta.');
+                hideTypingIndicator();
+                appendMessage(fullBotResponse, 'bot', botMsgId);
+                messagesState.push({ role: 'assistant', content: fullBotResponse });
+                if (handoff) chatRenderer.renderHandoffMessage(chatBody, handoff);
+                playNotificationChime();
 
             } catch (fatalError) {
                 // Catch-all: NUNCA dejar el chat bloqueado
                 console.error('[Chat] Error fatal:', fatalError);
                 hideTypingIndicator();
-                appendMessage('⚠️ Ocurrió un error inesperado. Intenta de nuevo.', 'bot', botMsgId);
+                const message = fatalError?.code === 'RATE_LIMITED'
+                    ? '⏳ Hay muchas solicitudes. Espera un minuto e inténtalo de nuevo.'
+                    : fatalError?.code?.startsWith('TURNSTILE')
+                        ? '🔒 No se pudo completar la verificación de seguridad. Recarga la página e inténtalo otra vez.'
+                        : '⚠️ No pude conectar con Dalia. Intenta de nuevo o contáctanos por WhatsApp.';
+                appendMessage(message, 'bot', botMsgId);
             } finally {
                 clearTimeout(safetyTimer);
                 isTyping = false;
