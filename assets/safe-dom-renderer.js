@@ -109,6 +109,19 @@
         return bubble;
     }
 
+    function renderHandoffMessage(chatBody, handoff) {
+        const name = normalizeAssistantName(handoff?.agentName || 'un asesor');
+        const bubble = getOrCreateBubble(chatBody, 'bot');
+        bubble.removeAttribute('data-welcome-message');
+        bubble.replaceChildren(
+            document.createTextNode(`${name} está disponible. `),
+            createSafeExternalLink(`Hablar con ${name} por WhatsApp`, handoff?.url || ''),
+            document.createTextNode('.')
+        );
+        scrollToLatest(chatBody);
+        return bubble;
+    }
+
     function createTypingIndicator() {
         const indicator = document.createElement('div');
         indicator.className = 'typing-indicator';
@@ -145,6 +158,7 @@
         createTypingIndicator,
         normalizeAssistantName,
         renderContactMessage,
+        renderHandoffMessage,
         renderPlainMessage,
         renderWelcomeMessage,
         updateWelcomeMessage
