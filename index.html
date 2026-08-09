@@ -289,6 +289,7 @@
 
         html {
             scroll-behavior: smooth;
+            scrollbar-gutter: stable;
             /* Recorta desbordes sin crear un contenedor que anule position: sticky. */
             overflow-x: hidden;
             overflow-x: clip;
@@ -304,6 +305,11 @@
             overflow-x: clip;
             /* Asegurar que el body no exceda el ancho del viewport */
             max-width: 100vw;
+        }
+        html.chat-open,
+        body.chat-open {
+            overflow: hidden;
+            overscroll-behavior: none;
         }
 
         /* Prevenir que CUALQUIER elemento cause overflow horizontal */
@@ -1546,23 +1552,48 @@
         }
         .chat-proactive-bubble .bubble-close {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 20px;
-            height: 20px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
+            top: -16px;
+            right: -16px;
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: 0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 0;
             font-family: inherit;
             padding: 0;
-            cursor: pointer;
+            cursor: default;
             color: var(--text-secondary);
         }
+        .chat-proactive-bubble .bubble-close::before {
+            content: '×';
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            font-size: 12px;
+        }
         .chat-proactive-bubble .bubble-close:hover { color: var(--text-primary); }
+        .chat-proactive-bubble .bubble-open {
+            all: unset;
+            display: block;
+            color: inherit;
+            font: inherit;
+            line-height: inherit;
+            cursor: pointer;
+        }
+        .chat-proactive-bubble .bubble-open:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 4px;
+            border-radius: 6px;
+        }
 
         /* Burbuja de mantenimiento (servidor offline) */
         .chat-proactive-bubble.maintenance {
@@ -1646,6 +1677,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-shrink: 0;
         }
         .chat-header-avatar {
             width: 42px;
@@ -1660,6 +1692,7 @@
             height: 100%;
             object-fit: cover;
         }
+        .chat-header-info { flex: 1 1 auto; min-width: 0; }
         .chat-header-info h4 { font-size: 1rem; font-weight: 700; margin: 0; }
         .chat-header-info p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin: 0; }
         .close-chat {
@@ -1687,6 +1720,7 @@
             flex-direction: column;
             gap: 12px;
             background: var(--bg-surface-alt);
+            overscroll-behavior: contain;
         }
 
         .chat-bubble {
@@ -1774,6 +1808,7 @@
             border-top: 1px solid var(--border-color);
             display: flex;
             gap: 8px;
+            flex-shrink: 0;
         }
         .dalia-turnstile {
             min-height: 0;
@@ -1781,6 +1816,9 @@
             background: var(--bg-surface);
             display: flex;
             justify-content: center;
+            align-items: center;
+            width: 100%;
+            flex: 0 0 auto;
         }
         .chat-input {
             flex-grow: 1;
@@ -1796,6 +1834,10 @@
             min-height: 44px;
         }
         .chat-input:focus { border-color: var(--primary); }
+        .chat-input:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--primary) 45%, transparent);
+            outline-offset: 2px;
+        }
         .chat-send {
             background: var(--primary);
             color: white;
@@ -1838,14 +1880,11 @@
 
         /* ============================================================
            RESPONSIVE — COBERTURA COMPLETA MOBILE-FIRST
-           Breakpoints: 1024 / 768 / 600 / 480 / 380
+           Breakpoints: 1280 / 1024 / 768 / 600 / 480 / 380
            ============================================================ */
 
-        /* ── Tablet grande / Laptop pequeña ─────────────────────── */
-        @media (max-width: 1024px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .grid-services { grid-template-columns: repeat(2, 1fr); }
-            .form-row { grid-template-columns: 1fr; }
+        /* ── Navegación compacta en laptop ───────────────────────── */
+        @media (max-width: 1280px) {
             .navbar { padding-inline: 20px; }
             .logo { font-size: 1.15rem; }
             .logo span { display: none; }
@@ -1855,6 +1894,13 @@
             .btn-whatsapp-nav { padding: 9px 12px; }
             .btn-software-nav span,
             .btn-whatsapp-nav span { display: none; }
+        }
+
+        /* ── Tablet grande / Laptop pequeña ─────────────────────── */
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-services { grid-template-columns: repeat(2, 1fr); }
+            .form-row { grid-template-columns: 1fr; }
         }
 
         /* ── Tablet ──────────────────────────────────────────────── */
@@ -1952,8 +1998,8 @@
 
             /* Chat fullscreen */
             .chatbot-window {
-                top: 0; bottom: 0; left: 0; right: 0;
-                width: 100vw; max-width: 100vw;
+                inset: 0;
+                width: auto; max-width: none;
                 height: 100dvh;
                 border-radius: 0;
                 border: none;
@@ -1961,6 +2007,14 @@
             }
             .chatbot-window.active { transform: translateY(0); }
             .chat-body { flex-grow: 1; height: auto; min-height: 0; }
+            .chat-header { padding-top: calc(18px + env(safe-area-inset-top)); }
+            .chat-footer { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+            .chat-input,
+            .form-group input,
+            .form-group select,
+            .form-group textarea { font-size: 16px; }
+            body.chat-open { overflow: hidden; touch-action: none; }
+            body.chat-open .chat-body { touch-action: pan-y; }
 
             /* Chatbot button */
             .chatbot-btn { bottom: 16px; right: 16px; width: 62px; height: 62px; font-size: 1.55rem; }
@@ -1994,15 +2048,45 @@
             .eco-banner { margin: 0 8px; }
             .section { padding: 30px 14px; }
             .navbar { padding: 0 12px; }
+            .top-banner { font-size: 0.72rem; padding: 6px 10px; line-height: 1.3; }
+            .status-badge { display: flex; width: max-content; margin: 6px auto 0; }
         }
 
         /* ── Móvil muy pequeño (< 380px) ─────────────────────────── */
         @media (max-width: 380px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .chatbot-btn { width: 56px; height: 56px; font-size: 1.35rem; }
-            .hero-content h1 { font-size: 1.4rem; }
             .logo { font-size: 1rem; }
             .section { padding: 24px 12px; }
+            .dalia-turnstile { padding-inline: 8px; }
+        }
+
+        /* Chat a pantalla completa cuando una ventana apaisada es baja. */
+        @media (max-height: 620px) and (max-width: 900px) {
+            .chatbot-window {
+                inset: 0;
+                width: auto; max-width: none;
+                height: 100dvh;
+                border-radius: 0;
+                border: none;
+                transform: translateY(100%);
+            }
+            .chatbot-window.active { transform: translateY(0); }
+            .chat-body { flex-grow: 1; height: auto; min-height: 0; }
+            .chat-header { padding-top: calc(18px + env(safe-area-inset-top)); }
+            .chat-footer { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+            body.chat-open { overflow: hidden; touch-action: none; }
+            body.chat-open .chat-body { touch-action: pan-y; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
@@ -2037,13 +2121,13 @@
             <button class="dark-toggle" id="dark-toggle" aria-label="Cambiar tema">
                 <i class="fas fa-moon"></i>
             </button>
-            <a href="./software-eco.html" class="btn-software-nav" title="Conoce las aplicaciones de ECO-ELECTRONIC Solutions">
+            <a href="./software-eco.html" class="btn-software-nav" title="Conoce las aplicaciones de ECO-ELECTRONIC Solutions" aria-label="Software ECO">
                 <i class="fas fa-laptop-code"></i> <span>Software ECO</span>
             </a>
-            <a href="./soluciones-digitales.html" class="btn-software-nav btn-digital-nav" title="Conoce nuestras páginas web, soluciones de IA y aplicaciones">
+            <a href="./soluciones-digitales.html" class="btn-software-nav btn-digital-nav" title="Conoce nuestras páginas web, soluciones de IA y aplicaciones" aria-label="Web e IA">
                 <i class="fas fa-globe"></i> <span>Web e IA</span>
             </a>
-            <a href="https://wa.me/522223167820?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20con%20ECO%20Electronic%20Solutions.%20El%20equipo%2C%20refacci%C3%B3n%20o%20componente%20que%20necesito%20es%3A%20" class="btn-whatsapp-nav" target="_blank">
+            <a href="https://wa.me/522223167820?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20con%20ECO%20Electronic%20Solutions.%20El%20equipo%2C%20refacci%C3%B3n%20o%20componente%20que%20necesito%20es%3A%20" class="btn-whatsapp-nav" target="_blank" aria-label="Cotizar por WhatsApp">
                 <i class="fab fa-whatsapp"></i> <span>Cotiza Ahora</span>
             </a>
             <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-controls="mobile-drawer" aria-expanded="false">
@@ -3061,7 +3145,22 @@
         let isChatOpen = false;
         let isTyping = false;
         let messagesState = [];
+        let chatFocusTimer = null;
         const chatRenderer = window.EcoChatRenderer;
+        const inertedForChat = new Set();
+
+        function setChatBackgroundInert(enabled) {
+            if (enabled) {
+                [...document.body.children].forEach(element => {
+                    if (element === chatWindow || element.tagName === 'SCRIPT' || element.hasAttribute('inert')) return;
+                    element.setAttribute('inert', '');
+                    inertedForChat.add(element);
+                });
+                return;
+            }
+            inertedForChat.forEach(element => element.removeAttribute('inert'));
+            inertedForChat.clear();
+        }
 
         function appendMessage(msg, type, id = null) {
             return chatRenderer.renderPlainMessage(chatBody, msg, type, id);
@@ -3264,13 +3363,14 @@
 
             // Abrir chat al hacer clic en la burbuja
             proactiveBubble.addEventListener('click', (e) => {
-                if (e.target.id === 'bubble-close-btn') {
+                if (e.target.closest('#bubble-close-btn')) {
                     proactiveBubble.remove();
                     proactiveBubble = null;
                     _bubbleDismissCount++;
                     _saveDismissCount();
                     return;
                 }
+                if (!e.target.closest('.bubble-open')) return;
                 proactiveBubble.remove();
                 proactiveBubble = null;
                 toggleBtn.click();
@@ -3323,7 +3423,13 @@
                 chatWindow.setAttribute('aria-hidden', 'false');
                 toggleBtn.setAttribute('aria-expanded', 'true');
                 toggleBtn.style.display = 'none';
-                setTimeout(() => chatInput.focus(), 300);
+                document.body.classList.add('chat-open');
+                document.documentElement.classList.add('chat-open');
+                setChatBackgroundInert(true);
+                clearTimeout(chatFocusTimer);
+                chatFocusTimer = setTimeout(() => {
+                    if (isChatOpen) chatInput.focus();
+                }, 300);
             } else {
                 closeChatFn();
             }
@@ -3333,16 +3439,40 @@
 
         function closeChatFn() {
             isChatOpen = false;
+            clearTimeout(chatFocusTimer);
             chatWindow.classList.remove('active');
             chatWindow.setAttribute('inert', '');
             chatWindow.setAttribute('aria-hidden', 'true');
             toggleBtn.setAttribute('aria-expanded', 'false');
             toggleBtn.style.display = 'flex';
+            document.body.classList.remove('chat-open');
+            document.documentElement.classList.remove('chat-open');
+            setChatBackgroundInert(false);
             toggleBtn.focus();
         }
 
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && isChatOpen) closeChatFn();
+            if (event.key === 'Escape' && isChatOpen) {
+                closeChatFn();
+                return;
+            }
+            if (event.key !== 'Tab' || !isChatOpen) return;
+            const focusable = [...chatWindow.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], iframe, [tabindex]:not([tabindex="-1"])')]
+                .filter(element => element.getClientRects().length > 0);
+            if (!focusable.length) {
+                event.preventDefault();
+                closeBtn.focus();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && (document.activeElement === first || !chatWindow.contains(document.activeElement))) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
         });
 
         async function handleUserInput() {
@@ -3369,6 +3499,7 @@
             isTyping = true;
             chatInput.disabled = true;
             chatSendBtn.disabled = true;
+            chatBody.setAttribute('aria-busy', 'true');
 
             messagesState.push({ role: 'user', content: text });
             // FIX BUG-06: evitar que messagesState crezca sin límite en sesiones largas
@@ -3438,24 +3569,22 @@
                 isTyping = false;
                 chatInput.disabled = false;
                 chatSendBtn.disabled = false;
-                setTimeout(() => chatInput.focus(), 100);
+                chatBody.setAttribute('aria-busy', 'false');
+                setTimeout(() => {
+                    if (isChatOpen) chatInput.focus();
+                }, 100);
             }
         }
 
         chatSendBtn.addEventListener('click', handleUserInput);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleUserInput();
+        chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' && !event.isComposing) {
+                event.preventDefault();
+                handleUserInput();
+            }
         });
 
     }); // end DOMContentLoaded
-    </script>
-
-    <!-- Móvil: aparecer directamente en el footer (mapa + info taller) -->
-    <script>
-    if (window.innerWidth <= 768) {
-        document.documentElement.style.scrollBehavior = 'auto';
-        window.scrollTo(0, document.body.scrollHeight);
-    }
     </script>
 
 </body>
