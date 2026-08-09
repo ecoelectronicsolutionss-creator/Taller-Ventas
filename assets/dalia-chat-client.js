@@ -89,6 +89,14 @@
         pending[method](value);
     }
 
+    function chooseTurnstileSize(container) {
+        const styles = window.getComputedStyle(container);
+        const horizontalPadding = Number.parseFloat(styles.paddingLeft || '0')
+            + Number.parseFloat(styles.paddingRight || '0');
+        const availableWidth = Math.max(0, container.clientWidth - horizontalPadding);
+        return availableWidth >= 300 ? 'flexible' : 'compact';
+    }
+
     async function ensureTurnstile(siteKey) {
         if (!siteKey) throw errorWithCode('Dalia todavía no tiene una clave pública Turnstile.', 'PUBLIC_CHAT_DISABLED');
         const turnstile = await loadTurnstileScript();
@@ -101,6 +109,9 @@
         widgetId = turnstile.render(container, {
             sitekey: siteKey,
             action: ACTION,
+            size: chooseTurnstileSize(container),
+            language: 'es',
+            theme: 'auto',
             execution: 'execute',
             appearance: 'interaction-only',
             callback: token => settleChallenge('resolve', token),

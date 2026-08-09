@@ -126,10 +126,13 @@
         const indicator = document.createElement('div');
         indicator.className = 'typing-indicator';
         indicator.id = 'typing-indicator';
+        indicator.setAttribute('role', 'status');
+        indicator.setAttribute('aria-label', 'Dalia está escribiendo');
 
         for (let index = 0; index < 3; index += 1) {
             const dot = document.createElement('div');
             dot.className = 'typing-dot';
+            dot.setAttribute('aria-hidden', 'true');
             indicator.appendChild(dot);
         }
 
@@ -147,8 +150,13 @@
         close.setAttribute('aria-label', 'Cerrar');
         close.textContent = '×';
 
-        bubble.appendChild(close);
-        bubble.appendChild(document.createTextNode(asText(message)));
+        const open = document.createElement('button');
+        open.type = 'button';
+        open.className = 'bubble-open';
+        open.setAttribute('aria-label', `Abrir chat: ${asText(message)}`);
+        open.textContent = asText(message);
+
+        bubble.append(close, open);
         return bubble;
     }
 
