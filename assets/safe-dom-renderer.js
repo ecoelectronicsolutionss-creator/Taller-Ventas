@@ -2,7 +2,15 @@
 (function (global) {
     'use strict';
 
-    const ALLOWED_EXTERNAL_HOSTS = new Set(['wa.me']);
+    const OFFICIAL_SITE_HOSTS = new Set([
+        'ecoelectronicsolutions.com.mx',
+        'www.ecoelectronicsolutions.com.mx'
+    ]);
+    const OFFICIAL_MAP_URL = 'https://maps.app.goo.gl/5MztN6VXMfi7YozE6';
+    const BUSINESS_PHONE_LINKS = new Map([
+        ['2223167820', 'https://wa.me/522223167820'],
+        ['2229898801', 'tel:+522229898801']
+    ]);
 
     function asText(value) {
         if (value === null || value === undefined) return '';
@@ -31,10 +39,132 @@
 
     function replaceWithTextAndBreaks(container, value) {
         container.replaceChildren();
+        appendTextAndBreaks(container, value);
+    }
+
+    function appendTextAndBreaks(container, value) {
         asText(value).split('\n').forEach((line, index) => {
             if (index > 0) container.appendChild(document.createElement('br'));
             container.appendChild(document.createTextNode(line));
         });
+    }
+
+    function normalizeBusinessPhone(value) {
+        let digits = asText(value).replace(/\D/g, '');
+        if (digits.length === 12 && digits.startsWith('52')) digits = digits.slice(2);
+        return BUSINESS_PHONE_LINKS.has(digits) ? digits : '';
+    }
+
+    function parseAllowedLink(rawUrl, options = {}) {
+        const source = asText(rawUrl).trim();
+        if (!source) return null;
+
+        if (/^tel:/i.test(source)) {
+            const localPhone = normalizeBusinessPhone(source.slice(4));
+            if (!localPhone || !BUSINESS_PHONE_LINKS.get(localPhone).startsWith('tel:')) return null;
+            return { href: BUSINESS_PHONE_LINKS.get(localPhone), external: false };
+        }
+
+        if (!/^https:\/\//i.test(source) || /^https:\/\/[^/]+:\d+/i.test(source)) return null;
+
+        let url;
+        try {
+            url = new URL(source);
+        } catch {
+            return null;
+        }
+
+        if (url.protocol !== 'https:' || url.username || url.password || url.port) return null;
+
+        const hostname = url.hostname.toLowerCase();
+        let allowed = OFFICIAL_SITE_HOSTS.has(hostname);
+
+        if (hostname === 'wa.me') {
+            const isManagedAgentLink = options.allowAgentWhatsApp === true && /^\/\d{10,15}\/?$/.test(url.pathname);
+            const isOfficialBusinessLink = /^\/522223167820\/?$/.test(url.pathname);
+            allowed = (isOfficialBusinessLink || isManagedAgentLink)
+                && [...url.searchParams.keys()].every(key => key === 'text')
+                && asText(url.searchParams.get('text')).length <= 500
+                && url.href.length <= 800;
+        } else if (hostname === 'maps.app.goo.gl') {
+            allowed = url.href === OFFICIAL_MAP_URL;
+        }
+
+        return allowed ? { href: url.href, external: true } : null;
+    }
+
+    function appendSafeLink(container, label, rawUrl, fallbackText, options) {
+        const safeUrl = parseAllowedLink(rawUrl, options);
+        if (!safeUrl) {
+            appendTextAndBreaks(container, fallbackText ?? label);
+            return;
+        }
+
+        const link = document.createElement('a');
+        link.href = safeUrl.href;
+        link.className = 'chat-contact-link';
+        link.textContent = asText(label);
+        if (safeUrl.external) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.referrerPolicy = 'no-referrer';
+        }
+        container.appendChild(link);
+    }
+
+    function findNextAssistantToken(value) {
+        const matchers = [
+            {
+                kind: 'markdown-link',
+                regex: /\[([^\]\n]{1,160})\]\((https:\/\/[^)\s]+|tel:[^)\s]+)\)/i
+            },
+            { kind: 'bold', regex: /\*\*([^*\n]{1,300})\*\*/ },
+            { kind: 'url', regex: /https:\/\/[^\s<>"'\])}]+/i },
+            {
+                kind: 'phone',
+                regex: /(?:\+?52[\s.-]?)?222[\s.-]?(?:316[\s.-]?7820|989[\s.-]?8801)/
+            }
+        ];
+
+        return matchers
+            .map((matcher, priority) => {
+                const match = matcher.regex.exec(value);
+                return match ? { ...matcher, match, priority } : null;
+            })
+            .filter(Boolean)
+            .sort((left, right) => left.match.index - right.match.index || left.priority - right.priority)[0] || null;
+    }
+
+    function appendAssistantContent(container, value) {
+        let remaining = asText(value);
+
+        while (remaining) {
+            const token = findNextAssistantToken(remaining);
+            if (!token) {
+                appendTextAndBreaks(container, remaining);
+                return;
+            }
+
+            if (token.match.index > 0) {
+                appendTextAndBreaks(container, remaining.slice(0, token.match.index));
+            }
+
+            const literal = token.match[0];
+            if (token.kind === 'bold') {
+                const strong = document.createElement('strong');
+                strong.textContent = token.match[1];
+                container.appendChild(strong);
+            } else if (token.kind === 'markdown-link') {
+                appendSafeLink(container, token.match[1], token.match[2], literal);
+            } else if (token.kind === 'url') {
+                appendSafeLink(container, literal, literal, literal);
+            } else {
+                const phone = normalizeBusinessPhone(literal);
+                appendSafeLink(container, literal, BUSINESS_PHONE_LINKS.get(phone), literal);
+            }
+
+            remaining = remaining.slice(token.match.index + literal.length);
+        }
     }
 
     function scrollToLatest(chatBody) {
@@ -44,7 +174,9 @@
     function renderPlainMessage(chatBody, message, type, id) {
         const bubble = getOrCreateBubble(chatBody, type, id);
         bubble.removeAttribute('data-welcome-message');
-        replaceWithTextAndBreaks(bubble, message);
+        bubble.replaceChildren();
+        if (type === 'user') appendTextAndBreaks(bubble, message);
+        else appendAssistantContent(bubble, message);
         scrollToLatest(chatBody);
         return bubble;
     }
@@ -71,30 +203,10 @@
         if (bubble) renderWelcomeMessage(chatBody, assistantName, bubble);
     }
 
-    function createSafeExternalLink(label, rawUrl) {
-        let url;
-        try {
-            url = new URL(asText(rawUrl), global.location.origin);
-        } catch {
-            return document.createTextNode(asText(label));
-        }
-
-        const isAllowed =
-            url.protocol === 'https:' &&
-            ALLOWED_EXTERNAL_HOSTS.has(url.hostname) &&
-            !url.username &&
-            !url.password &&
-            !url.port;
-
-        if (!isAllowed) return document.createTextNode(asText(label));
-
-        const link = document.createElement('a');
-        link.href = url.href;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.className = 'chat-contact-link';
-        link.textContent = asText(label);
-        return link;
+    function createSafeExternalLink(label, rawUrl, options) {
+        const fragment = document.createDocumentFragment();
+        appendSafeLink(fragment, label, rawUrl, label, options);
+        return fragment;
     }
 
     function renderContactMessage(chatBody, leadingText, id) {
@@ -115,7 +227,11 @@
         bubble.removeAttribute('data-welcome-message');
         bubble.replaceChildren(
             document.createTextNode(`${name} está disponible. `),
-            createSafeExternalLink(`Hablar con ${name} por WhatsApp`, handoff?.url || ''),
+            createSafeExternalLink(
+                `Hablar con ${name} por WhatsApp`,
+                handoff?.url || '',
+                { allowAgentWhatsApp: true }
+            ),
             document.createTextNode('.')
         );
         scrollToLatest(chatBody);
