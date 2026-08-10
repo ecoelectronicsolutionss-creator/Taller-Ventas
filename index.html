@@ -1750,9 +1750,16 @@
             font-weight: 700;
             text-decoration: underline;
             text-underline-offset: 2px;
+            overflow-wrap: anywhere;
+            touch-action: manipulation;
         }
         [data-theme="dark"] .chat-contact-link {
             color: #7be6aa;
+        }
+        .chat-contact-link:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 3px;
         }
 
         /* Quick reply buttons */
@@ -1822,6 +1829,7 @@
         }
         .chat-input {
             flex-grow: 1;
+            min-width: 0;
             border: 1px solid var(--border-color);
             border-radius: 22px;
             padding: 10px 16px;
@@ -2756,7 +2764,7 @@
     <!-- ============================================
          JAVASCRIPT — ALL REACTIVE LOGIC
          ============================================ -->
-    <script src="./assets/safe-dom-renderer.js"></script>
+    <script src="./assets/safe-dom-renderer.js?v=1.0.1"></script>
     <script src="./assets/dalia-chat-client.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
